@@ -26,11 +26,12 @@ Batallas
 
 Las batallas en la Tierra de Fantasia se realizan de una manera muy ordenada:
 
-1) Se forman ambos ejercitos en linea
-2) Siempre comienza a atacar nuestro ejercito
-3) Se turnan ambos ejercitos para atacarse
-4) Al quedarse con la salud en cero, la unidad se desmaya y queda fuera de combate
-5) Termina el combate cuando un ejercito se queda sin contendientes de pie
+1) Se forman ambos ejercitos en linea. Nuestro ejercito formara primero las unidades aliadas, luego las propias
+2) La unidad que haya quedado herida de la batalla anterior siempre sera la ultima (del grupo al cual pertenece, propio o aliado) en recibir ataques
+3) Siempre comienza a atacar nuestro ejercito
+4) Se turnan ambos ejercitos para atacarse
+5) Al quedarse con la salud en cero, la unidad se desmaya y queda fuera de combate
+6) Termina el combate cuando un ejercito se queda sin contendientes de pie
 
 Poblados
 --------
