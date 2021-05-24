@@ -49,5 +49,6 @@ public class Reralopes extends Personaje {
 	public void setDesconcentrado(boolean desconcentrado) {
 		this.desconcentrado = desconcentrado;
 	}
+	//comentario banana
 
 }
