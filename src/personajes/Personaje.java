@@ -2,53 +2,73 @@ package personajes;
 
 public abstract class Personaje {
 	
-	private int salud;
-	private String tipoAtaque;
-	private int[] rango;
-	private int ataque;
-	private int posicion;
-	private int ataques = 1;
 	private int maxSalud;
+	private int saludInicial;
+	
+	private int[] rangoAtaque;
+	private int posicion;
+	
+	private String tipoAtaque;
+	private int danioAtaque;
+	private int contadorDeAtaques;
 
-	public Personaje(int salud, String tipoAtaque, int[] rango, int ataque) {
-		this.setSalud(salud);
-		this.setTipoAtaque(tipoAtaque);
-		this.setRango(rango);
-		this.setAtaque(ataque);
-		this.setMaxSalud(salud);
+	public Personaje(int saludInicial, String tipoAtaque, int[] rangoAtaque, int danioAtaque) {
+		this.setSalud(saludInicial);
+		this.setMaxSalud(saludInicial);
+		this.tipoAtaque = tipoAtaque;
+		this.rangoAtaque = rangoAtaque;
+		this.setAtaque(danioAtaque);
+		this.contadorDeAtaques = 0;
 	}
 
-	public int getSalud() {
-		return salud;
+	public abstract void atacar(Personaje personaje) throws FueraRangoException;
+	
+	public void recibirAtaque(int ataque) {
+		this.saludInicial -= ataque;
 	}
 
-	public void setSalud(int salud) {
-		this.salud = salud;
+	public abstract void descansar();
+	
+	public int getMaxSalud() {
+		return maxSalud;
+	}
+
+	protected void setMaxSalud(int maxSalud) {
+		this.maxSalud = maxSalud;
+	}
+	
+	public int comprobarSalud() {
+		return saludInicial;
+	}
+
+	protected void setSalud(int salud) {
+		this.saludInicial = salud;
 	}
 
 	public int[] getRango() {
-		return rango;
-	}
-
-	private void setRango(int[] rango) {
-		this.rango = rango;
+		return rangoAtaque;
 	}
 
 	public int getAtaque() {
-		return ataque;
+		return danioAtaque;
 	}
 
-	protected void setAtaque(int ataque) {
-		this.ataque = ataque;
+	protected void setAtaque(int danioAtaque) {
+		this.danioAtaque = danioAtaque;
 	}
 
 	public String getTipoAtaque() {
 		return tipoAtaque;
 	}
 
-	private void setTipoAtaque(String tipoAtaque) {
-		this.tipoAtaque = tipoAtaque;
+	public int getContadorAtaques() {
+		return contadorDeAtaques;
 	}
+	
+	protected void setContadorAtaques(int ataques) {
+		this.contadorDeAtaques = ataques;
+	}
+
 
 	public int getPosicion() {
 		return posicion;
@@ -57,34 +77,4 @@ public abstract class Personaje {
 	public void setPosicion(int posicion) {
 		this.posicion = posicion;
 	}
-
-	public int getAtaques() {
-		return ataques;
-	}
-	
-	public void setAtaques(int ataques) {
-		this.ataques = ataques;
-	}
-
-	public int getMaxSalud() {
-		return maxSalud;
-	}
-
-	protected void setMaxSalud(int maxSalud) {
-		this.maxSalud = maxSalud;
-
-	}
-
-	protected boolean puedeAtacar(Personaje personaje) {
-		return this.getRango()[0] <= personaje.getPosicion() && personaje.getPosicion() <= this.getRango()[1];
-	}
-
-	public void recibirAtaque(int ataque) {
-		this.salud -= ataque;
-	}
-
-	public abstract void atacar(Personaje personaje) throws FueraRangoException;
-	
-	public abstract void descansar();
-
 }
