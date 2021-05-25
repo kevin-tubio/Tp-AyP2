@@ -34,8 +34,8 @@ public class Reralopes extends Personaje {
 
 	@Override
 	public void descansar() {
-		this.desconcentrado = false;
-		super.setAtaque(super.getAtaque() * 2);
+		this.concentrado = true;
+		this.ataquesConcentrados = 3;
 	}
 
 	private boolean aciertaAtaque(int contadorAtaques) {
