@@ -42,7 +42,7 @@ public class Wrives extends Personaje {
 	 * post: si se cumple la precondicion entonces se incrementa
 	 * 		 la salud actual y la maxima en 50 unidades.
 	 * 		 Ademas se adquiere el estado de meditacion.
-	 * 		 Si la precondicion no se comple, no sucede nada.
+	 * 		 Si la precondicion no se cumple, no sucede nada.
 	 */
 	@Override
 	public void descansar() {

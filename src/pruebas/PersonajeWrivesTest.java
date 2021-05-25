@@ -13,8 +13,8 @@ public class PersonajeWrivesTest {
 	
 	@Test
 	public void wrivesAtacaConDobleDanioCada2AtaquesPrueba001() throws FueraRangoException {
-		atacante = new Wrives(); //Wrives: daño de ataque = 113, salud inicial 108;
-		atacado = new Wrives(); //Wrives: daño al recibir ataque = ataque*2
+		atacante = new Wrives(); //Wrives: daño de ataque = 113
+		atacado = new Wrives(); //Wrives: daño al recibir ataque = ataque*2, salud inicial 108
 		atacado.setPosicion(20); // hacer que el atacado este dentro del rango de ataque
 		
 		assertEquals(108, atacado.comprobarSalud());
@@ -24,7 +24,7 @@ public class PersonajeWrivesTest {
 		
 		atacado = new Wrives();
 		atacado.setPosicion(20); // hacer que el atacado este dentro del rango de ataque
-		atacante.atacar(atacado); // atacante ataca con 113
+		atacante.atacar(atacado); // atacante ataca con 226
 		assertEquals(-344, atacado.comprobarSalud()); //atacado sufre 452;
 		
 		atacado = new Wrives();
@@ -34,7 +34,7 @@ public class PersonajeWrivesTest {
 		
 		atacado = new Wrives();
 		atacado.setPosicion(20); // hacer que el atacado este dentro del rango de ataque
-		atacante.atacar(atacado); // atacante ataca con 113
+		atacante.atacar(atacado); // atacante ataca con 226
 		assertEquals(-344, atacado.comprobarSalud()); //atacado sufre 452;
 		
 		atacado = new Wrives();
@@ -44,7 +44,7 @@ public class PersonajeWrivesTest {
 		
 		atacado = new Wrives();
 		atacado.setPosicion(20); // hacer que el atacado este dentro del rango de ataque
-		atacante.atacar(atacado); // atacante ataca con 113
+		atacante.atacar(atacado); // atacante ataca con 226
 		assertEquals(-344, atacado.comprobarSalud()); //atacado sufre 452;
 	}
 
