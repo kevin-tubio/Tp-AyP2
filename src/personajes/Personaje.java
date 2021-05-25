@@ -69,6 +69,14 @@ public abstract class Personaje {
 		this.contadorDeAtaques = ataques;
 	}
 
+	public boolean puedeAtacar(Personaje enemigo) throws FueraRangoException {
+		if(this.getRango()[0] <= enemigo.getPosicion() && enemigo.getPosicion() <= this.getRango()[1]) {
+			return true;
+		}
+		else {
+			throw new FueraRangoException("El enemigo se encuentra fuera de rango");
+		}
+	}
 
 	public int getPosicion() {
 		return posicion;

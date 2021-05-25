@@ -9,20 +9,20 @@ public class Wrives extends Personaje {
 		this.haMeditado = false;
 	}
 
+	/**
+	 * pre : 'enemigo' debe pertenecer al rango de ataque.
+	 * post: reduce la salud del enemigo.
+	 */
 	@Override
-	public void atacar(Personaje personaje) throws FueraRangoException {
-		if (!meditado) {
-			if (super.puedeAtacar(personaje)) {
-				if (super.getAtaques() % 2 == 0 && super.getAtaques() != 0) {
-					personaje.recibirAtaque(super.getAtaque() * 2);
-				} else {
-					personaje.recibirAtaque(super.getAtaque());
-				}
-				super.setAtaques(super.getAtaques() + 1);
+	public void atacar(Personaje enemigo) throws FueraRangoException {
+		if (super.puedeAtacar(enemigo) && !haMeditado) {
+			if (duplicaAtaque(super.getContadorAtaques())) {
+				enemigo.recibirAtaque(super.getAtaque() * 2);
 			} else {
-				throw new FueraRangoException("El personaje se encuentra fuera de rango");
+				enemigo.recibirAtaque(super.getAtaque());
 			}
 		}
+		super.setContadorAtaques(super.getContadorAtaques() + 1);
 	}
 
 	@Override
@@ -43,5 +43,14 @@ public class Wrives extends Personaje {
 	public void descansar() {
 		this.meditado = true;
 	}
-
+	
+	/**
+	 * post: devuelve verdadero si 'contadorAtaques' es inpar.
+	 * @param contadorAtaques
+	 * @return
+	 */
+	private boolean duplicaAtaque(int contadorAtaques) {
+		return !((contadorAtaques % 2) == 0);
+	}
+	
 }
