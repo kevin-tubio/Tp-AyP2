@@ -16,16 +16,9 @@ public class Wrives extends Personaje {
 	@Override
 	public void atacar(Personaje enemigo) throws FueraRangoException {
 		if (super.puedeAtacar(enemigo) && !haMeditado) {
-			if (duplicaAtaque(super.getContadorAtaques())) {
-				enemigo.recibirAtaque(super.getAtaque() * 2);
-			} else {
-				enemigo.recibirAtaque(super.getAtaque());
-			}
+			enemigo.recibirAtaque(super.getAtaque() * (1 + super.getContadorAtaques() % 2));
 		}
 		super.setContadorAtaques(super.getContadorAtaques() + 1);
-		//TODO definir comportamiento del contador de ataques.
-		//Si el wrives ha meditado y no puede atacar
-		//(no inflinje danio) el contador de ataques se incrementa??.
 	}
 
 	/**
@@ -52,14 +45,4 @@ public class Wrives extends Personaje {
 			this.setSalud(comprobarSalud() + 50);
 		}
 	}
-	
-	/**
-	 * post: devuelve verdadero si 'contadorAtaques' es inpar.
-	 * @param contadorAtaques
-	 * @return
-	 */
-	private boolean duplicaAtaque(int contadorAtaques) {
-		return !((contadorAtaques % 2) == 0);
-	}
-	
 }
