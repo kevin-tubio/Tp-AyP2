@@ -25,18 +25,13 @@ public class Wrives extends Personaje {
 		super.setContadorAtaques(super.getContadorAtaques() + 1);
 	}
 
+	/**
+	 * post: reduce la salud del personaje y niega el estado meditativo.
+	 */
 	@Override
 	public void recibirAtaque(int ataque) {
 		super.recibirAtaque(ataque * 2);
-		this.meditado = false;
-	}
-
-	public boolean isMeditado() {
-		return meditado;
-	}
-
-	public void setMeditado(boolean meditado) {
-		this.meditado = meditado;
+		this.haMeditado = false;
 	}
 
 	@Override
