@@ -23,6 +23,9 @@ public class Wrives extends Personaje {
 			}
 		}
 		super.setContadorAtaques(super.getContadorAtaques() + 1);
+		//TODO definir comportamiento del contador de ataques.
+		//Si el wrives ha meditado y no puede atacar
+		//(no inflinje danio) el contador de ataques se incrementa??.
 	}
 
 	/**
@@ -34,9 +37,20 @@ public class Wrives extends Personaje {
 		this.haMeditado = false;
 	}
 
+	/**
+	 * pre : 'haMeditado' es falso
+	 * post: si se cumple la precondicion entonces se incrementa
+	 * 		 la salud actual y la maxima en 50 unidades.
+	 * 		 Ademas se adquiere el estado de meditacion.
+	 * 		 Si la precondicion no se comple, no sucede nada.
+	 */
 	@Override
 	public void descansar() {
-		this.meditado = true;
+		if(!haMeditado) {
+			this.haMeditado = true;
+			this.setMaxSalud(getMaxSalud() + 50);
+			this.setSalud(comprobarSalud() + 50);
+		}
 	}
 	
 	/**
