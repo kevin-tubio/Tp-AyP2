@@ -4,9 +4,10 @@ public class Nortaichian extends Personaje {
 
 	private boolean enfurecido, dePiedra;
 	
-	public Nortaichian(int salud, String tipoAtaque, int[] rango, int ataque) {
-		super(salud, tipoAtaque, rango, ataque);
-		// TODO Auto-generated constructor stub
+	public Nortaichian() {
+		super(66, "Arco", new int[]{16, 22}, 18);
+		this.dePiedra = false;
+		this.enfurecido = false;
 	}
 
 	@Override

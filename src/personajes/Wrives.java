@@ -1,10 +1,12 @@
 package personajes;
 
 public class Wrives extends Personaje {
-	private boolean meditado = false;
+	
+	private boolean haMeditado;
 
-	public Wrives(int salud, String tipoAtaque, int[] rango, int ataque) {
-		super(salud, tipoAtaque, rango, ataque);
+	public Wrives() {
+		super(108, "Magia", new int[]{14, 28}, 113);
+		this.haMeditado = false;
 	}
 
 	@Override

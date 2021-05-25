@@ -1,13 +1,15 @@
 package personajes;
 
 public class Reralopes extends Personaje {
+	private boolean desconcentrado;
+	private int ataqueInicial;
+	private int ataquesModificador;
 
-	private boolean desconcentrado = false;
-	private int ataqueInicial = super.getAtaque();
-	private int ataquesModificador = 0;
-
-	public Reralopes(int salud, String tipoAtaque, int[] rango, int ataque) {
-		super(salud, tipoAtaque, rango, ataque);
+	public Reralopes() {
+		super(53, "Catapulta", new int[]{5, 46}, 27);
+		this.ataqueInicial = super.getAtaque();
+		this.desconcentrado = false;
+		this.ataquesModificador = 0;
 	}
 
 	@Override
@@ -33,24 +35,15 @@ public class Reralopes extends Personaje {
 
 	@Override
 	public void recibirAtaque(int ataque) {
-		this.setDesconcentrado(true);
+		this.desconcentrado = true;
 		super.setAtaque(ataqueInicial);
 
 	}
 
 	@Override
 	public void descansar() {
-		this.setDesconcentrado(false);
+		this.desconcentrado = false;
 		super.setAtaque(super.getAtaque() * 2);
 	}
-
-	public boolean isDesconcentrado() {
-		return desconcentrado;
-	}
-
-	public void setDesconcentrado(boolean desconcentrado) {
-		this.desconcentrado = desconcentrado;
-	}
-	//comentario banana
 
 }

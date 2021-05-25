@@ -2,8 +2,8 @@ package personajes;
 
 public class Radeiteran extends Personaje {
 
-	public Radeiteran(int salud, String tipoAtaque, int[] rango, int ataque) {
-		super(salud, tipoAtaque, rango, ataque);
+	public Radeiteran() {
+		super(36, "Shuriken", new int[]{17, 41}, 56);
 		// TODO Auto-generated constructor stub
 	}
 
