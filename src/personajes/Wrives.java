@@ -1,3 +1,4 @@
+package personajes;
 
 public class Wrives extends Personaje {
 	private boolean meditado = false;

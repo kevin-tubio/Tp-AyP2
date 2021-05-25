@@ -1,3 +1,4 @@
+package personajes;
 
 public class Reralopes extends Personaje {
 	private boolean desconcentrado = false;
