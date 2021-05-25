@@ -1,6 +1,7 @@
 package personajes;
 
 public abstract class Personaje {
+	
 	private int salud;
 	private String tipoAtaque;
 	private int[] rango;

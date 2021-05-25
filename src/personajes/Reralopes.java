@@ -1,6 +1,7 @@
 package personajes;
 
 public class Reralopes extends Personaje {
+
 	private boolean desconcentrado = false;
 	private int ataqueInicial = super.getAtaque();
 	private int ataquesModificador = 0;
