@@ -11,9 +11,13 @@ public class PuebloEnemigo extends Pueblo {
 
 	@Override
 	public Ejercito visitarPueblo(Ejercito propio) {
-		super.visitarPueblo(propio);
 		Batalla batalla = new Batalla();
-		propio = batalla.iniciar(propio, getEjercitoNativo());
+		propio = batalla.iniciar(propio, super.visitarPueblo(propio));
 		return propio;
+	}
+
+	@Override
+	protected int consultarPrioridad() {
+		return super.consultarPrioridad()-1;
 	}
 }

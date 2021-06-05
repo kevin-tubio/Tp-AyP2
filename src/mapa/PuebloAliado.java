@@ -10,9 +10,8 @@ public class PuebloAliado extends Pueblo {
 
 	@Override
 	public Ejercito visitarPueblo(Ejercito propio) {
-		super.visitarPueblo(propio);
 		propio.descansar();
-		propio.reclutar(getEjercitoNativo());
+		propio.reclutar(super.visitarPueblo(propio));
 		return propio;
 	}
 }
