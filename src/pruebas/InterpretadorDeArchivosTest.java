@@ -1,9 +1,7 @@
 package pruebas;
 
 import static org.junit.Assert.*;
-
 import org.junit.Test;
-
 import excepciones.FormatoInvalidoException;
 import excepciones.RutaInvalidaException;
 import sistema.InterpretadorDeArchivos;
@@ -17,8 +15,11 @@ public class InterpretadorDeArchivosTest {
 		
 		try {
 			interpretador.crearMapa("archivoDeEntrada/invalido/prueba1.txt");
+		} 
+		catch (FormatoInvalidoException e) {
+			mensaje = e.getMessage();
 		}
-		catch (FormatoInvalidoException | RutaInvalidaException e) {
+		catch (RutaInvalidaException e) {
 			mensaje = e.getMessage();
 		}
 		
@@ -33,7 +34,10 @@ public class InterpretadorDeArchivosTest {
 		try {
 			interpretador.crearMapa("archivoDeEntrada/invalido/prueba2.txt");
 		}
-		catch (FormatoInvalidoException | RutaInvalidaException e) {
+		catch (FormatoInvalidoException e) {
+			mensaje = e.getMessage();
+		}
+		catch (RutaInvalidaException e) {
 			mensaje = e.getMessage();
 		}
 		
@@ -48,7 +52,10 @@ public class InterpretadorDeArchivosTest {
 		try {
 			interpretador.crearMapa("archivoDeEntrada/invalido/prueba3.txt");
 		}
-		catch (FormatoInvalidoException | RutaInvalidaException e) {
+		catch (FormatoInvalidoException e) {
+			mensaje = e.getMessage(); 
+		}
+		catch (RutaInvalidaException e) {
 			mensaje = e.getMessage();
 		}
 		
@@ -63,7 +70,10 @@ public class InterpretadorDeArchivosTest {
 		try {
 			interpretador.crearMapa("archivoDeEntrada/invalido/prueba4.txt");
 		}
-		catch (FormatoInvalidoException | RutaInvalidaException e) {
+		catch (FormatoInvalidoException e) {
+			mensaje = e.getMessage();
+		}
+		catch (RutaInvalidaException e) {
 			mensaje = e.getMessage();
 		}
 		
@@ -78,7 +88,10 @@ public class InterpretadorDeArchivosTest {
 		try {
 			interpretador.crearMapa("archivoDeEntrada/invalido/prueba5.txt");
 		}
-		catch (FormatoInvalidoException | RutaInvalidaException e) {
+		catch (FormatoInvalidoException e) {
+			mensaje = e.getMessage();
+		}
+		catch (RutaInvalidaException e) {
 			mensaje = e.getMessage();
 		}
 		
@@ -93,7 +106,10 @@ public class InterpretadorDeArchivosTest {
 		try {
 			interpretador.crearMapa("archivoDeEntrada/invalido/prueba6.txt");
 		}
-		catch (FormatoInvalidoException | RutaInvalidaException e) {
+		catch (FormatoInvalidoException e) {
+			mensaje = e.getMessage();
+		}
+		catch (RutaInvalidaException e) {
 			mensaje = e.getMessage();
 		}
 		

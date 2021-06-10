@@ -21,10 +21,10 @@ public class GrafoTest {
 		listaDePueblos[2] = new PuebloEnemigo(null);
 		listaDePueblos[3] = new PuebloEnemigo(null);
 		Grafo grafo = new Grafo(listaDePueblos);
-		grafo.agregarCamino(0, 1, 10);
-		grafo.agregarCamino(0, 2, 20);
-		grafo.agregarCamino(1, 2, 5);
-		grafo.agregarCamino(2, 3, 7);
+		grafo.agregarCamino(1, 2, 10);
+		grafo.agregarCamino(1, 3, 20);
+		grafo.agregarCamino(2, 3, 5);
+		grafo.agregarCamino(3, 4, 7);
 		grafo.definirDestino(1, 4);
 		
 		ArrayDeque<Pueblo> esperado = new ArrayDeque<Pueblo>();
@@ -57,21 +57,21 @@ public class GrafoTest {
 		listaDePueblos[9] = new PuebloAliado(null);
 		listaDePueblos[10] = new PuebloAliado(null);
 		Grafo grafo = new Grafo(listaDePueblos);
-		grafo.agregarCamino(2, 6, 5);
-		grafo.agregarCamino(2, 5, 5);
-		grafo.agregarCamino(3, 7, 10);
-		grafo.agregarCamino(4, 7, 10);
-		grafo.agregarCamino(5, 9, 10);
-		grafo.agregarCamino(6, 9, 10);
-		grafo.agregarCamino(8, 10, 5);
-		grafo.agregarCamino(7, 10, 11);
-		grafo.agregarCamino(0, 1, 5);
-		grafo.agregarCamino(1, 4, 5);
+		grafo.agregarCamino(3, 7, 5);
+		grafo.agregarCamino(3, 6, 5);
 		grafo.agregarCamino(4, 8, 10);
-		grafo.agregarCamino(5, 8, 3);
-		grafo.agregarCamino(0, 2, 5);
+		grafo.agregarCamino(5, 8, 10);
+		grafo.agregarCamino(6, 10, 10);
+		grafo.agregarCamino(7, 10, 10);
+		grafo.agregarCamino(9, 11, 5);
+		grafo.agregarCamino(8, 11, 11);
+		grafo.agregarCamino(1, 2, 5);
+		grafo.agregarCamino(2, 5, 5);
+		grafo.agregarCamino(5, 9, 10);
+		grafo.agregarCamino(6, 9, 3);
 		grafo.agregarCamino(1, 3, 5);
-		grafo.agregarCamino(9, 10, 11);
+		grafo.agregarCamino(2, 4, 5);
+		grafo.agregarCamino(10, 11, 11);
 		grafo.definirDestino(1, 11);
 		
 		ArrayDeque<Pueblo> esperado = new ArrayDeque<Pueblo>();
@@ -101,12 +101,12 @@ public class GrafoTest {
 		listaDePueblos[4] = new PuebloEnemigo(null);
 		listaDePueblos[5] = new PuebloAliado(null);
 		Grafo grafo = new Grafo(listaDePueblos);
-		grafo.agregarCamino(0, 3, 10);
-		grafo.agregarCamino(0, 1, 10);
-		grafo.agregarCamino(1, 2, 5);
-		grafo.agregarCamino(3, 4, 5);
-		grafo.agregarCamino(2, 5, 1);
-		grafo.agregarCamino(4, 5, 1);
+		grafo.agregarCamino(1, 4, 10);
+		grafo.agregarCamino(1, 2, 10);
+		grafo.agregarCamino(2, 3, 5);
+		grafo.agregarCamino(4, 5, 5);
+		grafo.agregarCamino(3, 6, 1);
+		grafo.agregarCamino(5, 6, 1);
 		grafo.definirDestino(1, 6);
 		
 		ArrayDeque<Pueblo> esperado = new ArrayDeque<Pueblo>();
@@ -134,18 +134,18 @@ public class GrafoTest {
 		listaDePueblos[4] = new PuebloEnemigo(null);
 		listaDePueblos[5] = new PuebloEnemigo(null);
 		Grafo grafo = new Grafo(listaDePueblos);
-		grafo.agregarCamino(0, 1, 5);
-		grafo.agregarCamino(0, 2, 5);
-		grafo.agregarCamino(1, 2, 1);
-		grafo.agregarCamino(1, 3, 14);
-		grafo.agregarCamino(1, 4, 3);
-		grafo.agregarCamino(2, 1, 1);
-		grafo.agregarCamino(2, 3, 3);
+		grafo.agregarCamino(1, 2, 5);
+		grafo.agregarCamino(1, 3, 5);
+		grafo.agregarCamino(2, 3, 1);
 		grafo.agregarCamino(2, 4, 14);
-		grafo.agregarCamino(3, 4, 5);
-		grafo.agregarCamino(3, 5, 11);
-		grafo.agregarCamino(4, 3, 5);
-		grafo.agregarCamino(4, 5, 11);
+		grafo.agregarCamino(2, 5, 3);
+		grafo.agregarCamino(3, 2, 1);
+		grafo.agregarCamino(3, 4, 3);
+		grafo.agregarCamino(3, 5, 14);
+		grafo.agregarCamino(4, 5, 5);
+		grafo.agregarCamino(4, 6, 11);
+		grafo.agregarCamino(5, 4, 5);
+		grafo.agregarCamino(5, 6, 11);
 		grafo.definirDestino(1, 6);
 		
 		ArrayDeque<Pueblo> esperado = new ArrayDeque<Pueblo>();
@@ -173,18 +173,18 @@ public class GrafoTest {
 		listaDePueblos[4] = new PuebloAliado(null);
 		listaDePueblos[5] = new PuebloEnemigo(null);
 		Grafo grafo = new Grafo(listaDePueblos);
-		grafo.agregarCamino(0, 2, 5);
-		grafo.agregarCamino(0, 1, 5);
-		grafo.agregarCamino(1, 2, 1);
-		grafo.agregarCamino(1, 3, 14);
-		grafo.agregarCamino(1, 4, 3);
-		grafo.agregarCamino(2, 1, 1);
-		grafo.agregarCamino(2, 3, 3);
+		grafo.agregarCamino(1, 3, 5);
+		grafo.agregarCamino(1, 2, 5);
+		grafo.agregarCamino(2, 3, 1);
 		grafo.agregarCamino(2, 4, 14);
-		grafo.agregarCamino(3, 4, 5);
-		grafo.agregarCamino(3, 5, 11);
-		grafo.agregarCamino(4, 3, 5);
-		grafo.agregarCamino(4, 5, 11);
+		grafo.agregarCamino(2, 5, 3);
+		grafo.agregarCamino(3, 2, 1);
+		grafo.agregarCamino(3, 4, 3);
+		grafo.agregarCamino(3, 5, 14);
+		grafo.agregarCamino(4, 5, 5);
+		grafo.agregarCamino(4, 6, 11);
+		grafo.agregarCamino(5, 4, 5);
+		grafo.agregarCamino(5, 6, 11);
 		grafo.definirDestino(1, 6);
 		
 		ArrayDeque<Pueblo> esperado = new ArrayDeque<Pueblo>();
@@ -212,10 +212,10 @@ public class GrafoTest {
 		listaDePueblos[4] = new PuebloEnemigo(null);
 		listaDePueblos[5] = new PuebloAliado(null);
 		Grafo grafo = new Grafo(listaDePueblos);
-		grafo.agregarCamino(0, 3, 10);
-		grafo.agregarCamino(0, 1, 10);
-		grafo.agregarCamino(1, 2, 5);
-		grafo.agregarCamino(3, 4, 5);
+		grafo.agregarCamino(1, 4, 10);
+		grafo.agregarCamino(1, 2, 10);
+		grafo.agregarCamino(2, 3, 5);
+		grafo.agregarCamino(4, 5, 5);
 	
 		grafo.definirDestino(1, 6);
 		
@@ -234,10 +234,10 @@ public class GrafoTest {
 		listaDePueblos[5] = new PuebloAliado(null);
 		Grafo grafo = new Grafo(listaDePueblos);
 	
-		grafo.agregarCamino(1, 2, 5);
-		grafo.agregarCamino(3, 4, 5);
-		grafo.agregarCamino(2, 5, 1);
-		grafo.agregarCamino(4, 5, 1);
+		grafo.agregarCamino(2, 3, 5);
+		grafo.agregarCamino(4, 5, 5);
+		grafo.agregarCamino(3, 6, 1);
+		grafo.agregarCamino(5, 6, 1);
 		grafo.definirDestino(1, 6);
 		
 		grafo.calcularTrayecto();
@@ -254,10 +254,10 @@ public class GrafoTest {
 		listaDePueblos[4] = new PuebloEnemigo(null);
 		listaDePueblos[5] = new PuebloAliado(null);
 		Grafo grafo = new Grafo(listaDePueblos);
-		grafo.agregarCamino(0, 3, 10);
-		grafo.agregarCamino(0, 1, 10);
-		grafo.agregarCamino(2, 5, 1);
-		grafo.agregarCamino(4, 5, 1);
+		grafo.agregarCamino(1, 4, 10);
+		grafo.agregarCamino(1, 2, 10);
+		grafo.agregarCamino(3, 6, 1);
+		grafo.agregarCamino(5, 6, 1);
 		grafo.definirDestino(1, 6);
 		
 		grafo.calcularTrayecto();
