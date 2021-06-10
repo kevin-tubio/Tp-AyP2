@@ -6,9 +6,9 @@ public class Grupo extends Ejercito {
 
 	public Grupo(int salud, String tipoAtaque, int[] rango, int ataque) {
 		super();
-		this.soldados = new PriorityQueue<Ejercito>();
+		this.soldados = new PriorityQueue<Ejercito>(new UnidadComparator());
 	}
-	
+
 	public void pelear(Grupo ejercitoEnemigo) throws EjercitoDesmayadoException {
 		PriorityQueue<Ejercito> grupo = ejercitoEnemigo.getSoldados();
 
@@ -84,7 +84,7 @@ public class Grupo extends Ejercito {
 	@Override
 	protected void atacar(Ejercito enemigo) throws FueraRangoException, MeditandoException {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
