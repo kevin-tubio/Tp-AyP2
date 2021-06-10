@@ -1,7 +1,9 @@
 package mapa;
 
-import sistema.Batalla;
+import excepciones.EjercitoDesmayadoException;
+import excepciones.FueraRangoException;
 import personajes.Ejercito;
+import personajes.Grupo;
 
 public class PuebloEnemigo extends Pueblo {
 
@@ -10,9 +12,8 @@ public class PuebloEnemigo extends Pueblo {
 	}
 
 	@Override
-	public Ejercito visitarPueblo(Ejercito propio) {
-		Batalla batalla = new Batalla();
-		propio = batalla.iniciar(propio, super.visitarPueblo(propio));
+	public Ejercito visitarPueblo(Ejercito propio) throws FueraRangoException, EjercitoDesmayadoException {
+		((Grupo)propio).pelear((Grupo)super.visitarPueblo(propio));
 		return propio;
 	}
 

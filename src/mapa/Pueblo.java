@@ -1,5 +1,7 @@
 package mapa;
 
+import excepciones.EjercitoDesmayadoException;
+import excepciones.FueraRangoException;
 import personajes.Ejercito;
 
 public class Pueblo {
@@ -10,7 +12,7 @@ public class Pueblo {
 		this.ejercitoNativo = ejercitoNativo;
 	}
 
-	public Ejercito visitarPueblo(Ejercito propio) {
+	public Ejercito visitarPueblo(Ejercito propio) throws FueraRangoException, EjercitoDesmayadoException {
 		return ejercitoNativo;
 	}
 
