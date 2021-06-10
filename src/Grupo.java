@@ -1,6 +1,6 @@
 import java.util.PriorityQueue;
 
-public abstract class Grupo extends Ejercito {
+public class Grupo extends Ejercito {
 
 	private PriorityQueue<Ejercito> soldados;
 
@@ -79,6 +79,17 @@ public abstract class Grupo extends Ejercito {
 
 	public int getPosicion() {
 		return this.soldados.peek().getPosicion();
+	}
+
+	@Override
+	protected void atacar(Ejercito enemigo) throws FueraRangoException, MeditandoException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected Unidad.Estado getEstado() {
+		return this.soldados.peek().getEstado();
 	}
 
 }

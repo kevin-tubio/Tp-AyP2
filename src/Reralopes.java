@@ -34,9 +34,9 @@ public class Reralopes extends Unidad {
 
 	@Override
 	public void recibirAtaque(int ataque) {
+		super.recibirAtaque(ataque);
 		this.setDesconcentrado(true);
 		super.setAtaque(super.getAtaqueInicial());
-
 	}
 
 	@Override
