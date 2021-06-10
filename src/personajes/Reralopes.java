@@ -1,48 +1,57 @@
 package personajes;
 
-public class Reralopes extends Personaje {
-
-	private boolean concentrado;
-	private int ataquesConcentrados;
+public class Reralopes extends Unidad {
+	private boolean desconcentrado;
+	private int ataquesModificador;
 
 	public Reralopes() {
-		super(53, "Catapulta", new int[]{5, 46}, 27);
-		this.concentrado = false;
-		this.ataquesConcentrados = 0;
+		super(53, "Catapulta", new int[] { 5, 46 }, 27);
+		this.desconcentrado = false;
+		this.ataquesModificador = 0;
 	}
 
 	@Override
-	public void atacar(Personaje enemigo) throws FueraRangoException {
-		if (super.puedeAtacar(enemigo) && aciertaAtaque(super.getContadorAtaques())) {
-			if(duplicaDanio()) {
-				enemigo.recibirAtaque(super.getAtaque() * 2);
-				this.ataquesConcentrados--;
+	public void atacar(Ejercito unidad) throws FueraRangoException {
+		if (super.puedeAtacar(unidad)) {
+			if (super.getCantAtaques() > 2) {
+				unidad.recibirAtaque(super.getAtaque());
 			}
-			else {
-				enemigo.recibirAtaque(super.getAtaque());
-			}
+		} else {
+			throw new FueraRangoException("El personaje se encuentra fuera de rango");
 		}
-		super.setContadorAtaques(super.getContadorAtaques() + 1);
+
+		if (super.getCantAtaques() < 4) {
+			super.setCantAtaques(1);
+		} else {
+			super.setCantAtaques(1);
+		}
+
+		if (this.ataquesModificador == 3) {
+			super.setAtaque(super.getAtaqueInicial());
+		} else {
+			this.ataquesModificador++;
+		}
 	}
 
 	@Override
 	public void recibirAtaque(int ataque) {
-		this.concentrado = false;
-		this.ataquesConcentrados = 0;
 		super.recibirAtaque(ataque);
+		this.setDesconcentrado(true);
+		super.setAtaque(super.getAtaqueInicial());
 	}
 
 	@Override
-	public void descansar() {
-		this.concentrado = true;
-		this.ataquesConcentrados = 3;
+	public void descanzar() {
+		this.setDesconcentrado(false);
+		super.setAtaque(super.getAtaque() * 2);
 	}
 
-	private boolean aciertaAtaque(int contadorAtaques) {
-		return ((contadorAtaques % 4)+1) >= 3;
+	public boolean isDesconcentrado() {
+		return desconcentrado;
 	}
 
-	private boolean duplicaDanio() {
-		return concentrado && ataquesConcentrados > 0;
+	public void setDesconcentrado(boolean desconcentrado) {
+		this.desconcentrado = desconcentrado;
 	}
+
 }

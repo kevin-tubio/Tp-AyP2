@@ -1,48 +1,50 @@
 package personajes;
 
-public class Wrives extends Personaje {
-	
-	private boolean haMeditado;
+import excepciones.MeditandoException;
+
+public class Wrives extends Unidad {
+	private boolean meditado;
 
 	public Wrives() {
 		super(108, "Magia", new int[]{14, 28}, 113);
-		this.haMeditado = false;
+		this.meditado = false;
 	}
 
-	/**
-	 * pre : 'enemigo' debe pertenecer al rango de ataque.
-	 * post: reduce la salud del enemigo.
-	 */
 	@Override
-	public void atacar(Personaje enemigo) throws FueraRangoException {
-		if (super.puedeAtacar(enemigo) && !haMeditado) {
-			enemigo.recibirAtaque(super.getAtaque() * (1 + super.getContadorAtaques() % 2));
+	public void atacar(Ejercito unidad) throws FueraRangoException, MeditandoException {
+		if (!meditado) {
+			if (super.puedeAtacar(unidad)) {
+				if (super.getCantAtaques() % 2 != 0) {
+					unidad.recibirAtaque(super.getAtaque() * 2);
+				} else {
+					unidad.recibirAtaque(super.getAtaque());
+				}
+				super.setCantAtaques(1);
+			} else {
+				throw new FueraRangoException("El personaje se encuentra fuera de rango");
+			}
+		}else {
+			throw new MeditandoException("No puedo atacar, estoy meditando");
 		}
-		super.setContadorAtaques(super.getContadorAtaques() + 1);
 	}
 
-	/**
-	 * post: reduce la salud del personaje y niega el estado meditativo.
-	 */
 	@Override
 	public void recibirAtaque(int ataque) {
 		super.recibirAtaque(ataque * 2);
-		this.haMeditado = false;
+		this.meditado = false;
 	}
 
-	/**
-	 * pre : 'haMeditado' es falso
-	 * post: si se cumple la precondicion entonces se incrementa
-	 * 		 la salud actual y la maxima en 50 unidades.
-	 * 		 Ademas se adquiere el estado de meditacion.
-	 * 		 Si la precondicion no se cumple, no sucede nada.
-	 */
-	@Override
-	public void descansar() {
-		if(!haMeditado) {
-			this.haMeditado = true;
-			this.setMaxSalud(getMaxSalud() + 50);
-			this.setSalud(comprobarSalud() + 50);
-		}
+	public boolean isMeditado() {
+		return meditado;
 	}
+
+	public void setMeditado(boolean meditado) {
+		this.meditado = meditado;
+	}
+
+	@Override
+	public void descanzar() {
+		this.meditado = true;
+	}
+
 }

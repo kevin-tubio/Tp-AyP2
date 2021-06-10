@@ -1,40 +1,23 @@
 package personajes;
 
-public abstract class Ejercito extends Personaje {
-	
-	public Ejercito(int salud, String tipoAtaque, int[] rango, int ataque) {
-		super(salud, tipoAtaque, rango, ataque);
-		// TODO Auto-generated constructor stub
-	}
+import excepciones.MeditandoException;
 
-	public void reclutar(Personaje personaje) {
-		//TODO
-	}
-	
-	public void reclutar(Ejercito ejercito) {
-		//TODO
-	}
-	
-	public void ordenarFormacion() {
-		//TODO
-	}
-	
-	public void abandonarCaido() {
-		//TODO
-	}
-	
-	@Override
-	public void atacar(Personaje personaje) throws FueraRangoException {
-		// TODO Auto-generated method stub
-	}
+public abstract class Ejercito {
 
-	@Override
-	public void descansar() {
-		// TODO Auto-generated method stub
-	}
+	protected abstract int getAtaque();
 
-	@Override
-	public void recibirAtaque(int ataque) {
-		// TODO Auto-generated method stub
-	}
+	protected abstract void recibirAtaque(int ataque);
+
+	protected abstract void atacar(Ejercito enemigo) throws FueraRangoException, MeditandoException;
+
+	protected abstract int getSalud();
+
+	protected abstract int getSaludInicial();
+
+	protected abstract Unidad.Estado getEstado();
+
+	protected abstract int getPosicion();
+
+	protected abstract void descanzar();
+
 }
