@@ -1,5 +1,7 @@
 package personajes;
 
+import excepciones.FueraRangoException;
+
 public class Nortaichian extends Unidad {
 	public int ataques = 0;
 	public boolean esPiedra;
@@ -53,7 +55,7 @@ public class Nortaichian extends Unidad {
 		}
 	}
 
-	public void descanzar() {
+	public void descansar() {
 		super.setSalud(super.getMaxSalud());
 		this.esPiedra = true;
 	}

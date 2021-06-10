@@ -3,6 +3,7 @@ package personajes;
 import java.util.PriorityQueue;
 
 import excepciones.EjercitoDesmayadoException;
+import excepciones.FueraRangoException;
 import excepciones.MeditandoException;
 
 public class Grupo extends Ejercito {
@@ -56,9 +57,9 @@ public class Grupo extends Ejercito {
 		this.soldados.peek().recibirAtaque(ataque);
 	}
 
-	public void descanzar() {
+	public void descansar() {
 		for (Ejercito unidad : this.soldados) {
-			unidad.descanzar();
+			unidad.descansar();
 		}
 	}
 

@@ -1,5 +1,7 @@
 package personajes;
 
+import excepciones.FueraRangoException;
+
 public class Radeiteran extends Unidad {
 	private int ataques = 0;
 
@@ -19,8 +21,8 @@ public class Radeiteran extends Unidad {
 	}
 
 	@Override
-	public void descanzar() {
-		System.out.println("Â¡Soy un Radaiteran y estoy descansando! No me molesten");
+	public void descansar() {
+		System.out.println("¡Soy un Radaiteran y estoy descansando! No me molesten");
 	}
 
 }

@@ -1,5 +1,6 @@
 package personajes;
 
+import excepciones.FueraRangoException;
 import excepciones.MeditandoException;
 
 public class Wrives extends Unidad {
@@ -43,7 +44,7 @@ public class Wrives extends Unidad {
 	}
 
 	@Override
-	public void descanzar() {
+	public void descansar() {
 		this.meditado = true;
 	}
 

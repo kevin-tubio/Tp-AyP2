@@ -1,4 +1,4 @@
-package personajes;
+package excepciones;
 
 public class FueraRangoException extends Exception {
 	/**

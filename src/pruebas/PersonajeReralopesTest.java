@@ -3,7 +3,7 @@ package pruebas;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
-import personajes.FueraRangoException;
+import excepciones.FueraRangoException;
 import personajes.Reralopes;
 
 public class PersonajeReralopesTest {

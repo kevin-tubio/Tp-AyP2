@@ -1,5 +1,7 @@
 package personajes;
 
+import excepciones.FueraRangoException;
+
 public abstract class Unidad extends Ejercito {
 
 	/*
@@ -103,13 +105,7 @@ public abstract class Unidad extends Ejercito {
 	public Unidad obtenerAtacante() {
 		return this;
 	}
-
-	protected void reclutar() {
-
-	}
-
-	public abstract void descanzar();
-
+	
 	public int getMaxSalud() {
 		return maxSalud;
 	}

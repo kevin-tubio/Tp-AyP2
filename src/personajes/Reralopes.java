@@ -1,5 +1,7 @@
 package personajes;
 
+import excepciones.FueraRangoException;
+
 public class Reralopes extends Unidad {
 	private boolean desconcentrado;
 	private int ataquesModificador;
@@ -41,7 +43,7 @@ public class Reralopes extends Unidad {
 	}
 
 	@Override
-	public void descanzar() {
+	public void descansar() {
 		this.setDesconcentrado(false);
 		super.setAtaque(super.getAtaque() * 2);
 	}

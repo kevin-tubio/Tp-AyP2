@@ -1,5 +1,6 @@
 package personajes;
 
+import excepciones.FueraRangoException;
 import excepciones.MeditandoException;
 
 public abstract class Ejercito {
@@ -18,6 +19,5 @@ public abstract class Ejercito {
 
 	protected abstract int getPosicion();
 
-	protected abstract void descanzar();
-
+	public abstract void descansar();
 }

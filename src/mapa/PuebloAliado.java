@@ -1,6 +1,7 @@
 package mapa;
 
 import personajes.Ejercito;
+import personajes.Grupo;
 
 public class PuebloAliado extends Pueblo {
 
@@ -11,7 +12,7 @@ public class PuebloAliado extends Pueblo {
 	@Override
 	public Ejercito visitarPueblo(Ejercito propio) {
 		propio.descansar();
-		propio.reclutar(super.visitarPueblo(propio));
+		((Grupo)propio).reclutar(super.visitarPueblo(propio));
 		return propio;
 	}
 }
