@@ -5,8 +5,8 @@ public class Nortaichian extends Unidad {
 	// Estado para saber si estando convertido en piedra fue atacado al menos una vez
 	public boolean fueAtacadoUnaVez = false;
 
-	public Nortaichian(int posicion) {
-		super(66, "Arco", new int[]{16, 22}, 18, posicion);
+	public Nortaichian() {
+		super(66, "Arco", new int[]{16, 22}, 18);
 		this.esPiedra = false;
 	}
 

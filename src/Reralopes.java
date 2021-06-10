@@ -3,8 +3,8 @@ public class Reralopes extends Unidad {
 	private boolean desconcentrado;
 	private int ataquesModificador;
 
-	public Reralopes(int posicion) {
-		super(53, "Catapulta", new int[] { 5, 46 }, 27, posicion);
+	public Reralopes() {
+		super(53, "Catapulta", new int[] { 5, 46 }, 27);
 		this.desconcentrado = false;
 		this.ataquesModificador = 0;
 	}

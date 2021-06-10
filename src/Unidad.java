@@ -25,7 +25,7 @@ public abstract class Unidad extends Ejercito {
 		DISPONIBLE, DESMAYADO
 	}
 
-	public Unidad(int saludInicial, String tipoAtaque, int[] rangoAtaque, int danioAtaque,int posicion) {
+	public Unidad(int saludInicial, String tipoAtaque, int[] rangoAtaque, int danioAtaque) {
 		this.setAtributosSalud(saludInicial);
 		this.tipoAtaque = tipoAtaque;
 		this.rangoAtaque = rangoAtaque;
@@ -33,7 +33,6 @@ public abstract class Unidad extends Ejercito {
 		this.contadorDeAtaques = 0;
 		this.setEstado(Unidad.Estado.DISPONIBLE);
 		this.cantAtaques = 0;
-		this.posicion = posicion;
 	}
 
 	/*

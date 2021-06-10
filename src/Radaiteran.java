@@ -2,8 +2,8 @@
 public class Radaiteran extends Unidad {
 	private int ataques = 0;
 
-	public Radaiteran(int posicion) {
-		super(36, "Shuriken", new int[]{17, 41}, 56, posicion);
+	public Radaiteran() {
+		super(36, "Shuriken", new int[]{17, 41}, 56);
 	}
 
 	@Override

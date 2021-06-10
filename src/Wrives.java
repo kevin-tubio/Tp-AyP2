@@ -2,8 +2,8 @@
 public class Wrives extends Unidad {
 	private boolean meditado;
 
-	public Wrives(int posicion) {
-		super(108, "Magia", new int[]{14, 28}, 113,posicion);
+	public Wrives() {
+		super(108, "Magia", new int[]{14, 28}, 113);
 		this.meditado = false;
 	}
 
