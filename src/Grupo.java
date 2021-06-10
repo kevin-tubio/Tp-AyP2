@@ -4,7 +4,7 @@ public class Grupo extends Ejercito {
 
 	private PriorityQueue<Ejercito> soldados;
 
-	public Grupo(int salud, String tipoAtaque, int[] rango, int ataque) {
+	public Grupo() {
 		super();
 		this.soldados = new PriorityQueue<Ejercito>(new UnidadComparator());
 	}
