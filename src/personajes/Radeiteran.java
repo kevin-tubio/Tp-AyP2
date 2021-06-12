@@ -13,8 +13,8 @@ public class Radeiteran extends Unidad {
 	public void atacar(Ejercito unidad) throws FueraRangoException {
 		if (super.puedeAtacar(unidad)) {
 			unidad.recibirAtaque(super.getAtaque());
-			ataques++;
-			super.setAtaque(super.getAtaqueInicial() + (3 * ataques));
+			this.ataques++;
+			super.setAtaque(super.getAtaque() + (3 * this.ataques));
 		} else {
 			throw new FueraRangoException("El personaje se encuentra fuera de rango");
 		}
@@ -22,7 +22,7 @@ public class Radeiteran extends Unidad {
 
 	@Override
 	public void descansar() {
-		System.out.println("¡Soy un Radaiteran y estoy descansando! No me molesten");
+		System.out.println("Â¡Soy un Radaiteran y estoy descansando! No me molesten");
 	}
 
 }

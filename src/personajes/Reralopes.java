@@ -10,6 +10,7 @@ public class Reralopes extends Unidad {
 		super(53, "Catapulta", new int[] { 5, 46 }, 27);
 		this.desconcentrado = false;
 		this.ataquesModificador = 0;
+		super.setCantAtaques(1);
 	}
 
 	@Override
@@ -25,10 +26,11 @@ public class Reralopes extends Unidad {
 		if (super.getCantAtaques() < 4) {
 			super.setCantAtaques(1);
 		} else {
-			super.setCantAtaques(1);
+			// Resetea la cant de ataques a 0
+			super.setCantAtaques(-3);
 		}
 
-		if (this.ataquesModificador == 3) {
+		if (this.ataquesModificador == 4) {
 			super.setAtaque(super.getAtaqueInicial());
 		} else {
 			this.ataquesModificador++;

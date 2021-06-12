@@ -15,7 +15,7 @@ public class Wrives extends Unidad {
 	public void atacar(Ejercito unidad) throws FueraRangoException, MeditandoException {
 		if (!meditado) {
 			if (super.puedeAtacar(unidad)) {
-				if (super.getCantAtaques() % 2 != 0) {
+				if (super.getCantAtaques() % 2 == 0 && super.getCantAtaques() != 0) {
 					unidad.recibirAtaque(super.getAtaque() * 2);
 				} else {
 					unidad.recibirAtaque(super.getAtaque());

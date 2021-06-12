@@ -25,7 +25,7 @@ public abstract class Unidad extends Ejercito {
 	private int cantAtaques;
 	private Estado estado;
 
-	enum Estado {
+	public enum Estado {
 		DISPONIBLE, DESMAYADO
 	}
 
@@ -108,10 +108,6 @@ public abstract class Unidad extends Ejercito {
 	
 	public int getMaxSalud() {
 		return maxSalud;
-	}
-
-	public int comprobarSalud() {
-		return saludInicial;
 	}
 
 	public int getSaludInicial() {
