@@ -1,5 +1,6 @@
 package personajes;
 
+import excepciones.EstadoPiedraException;
 import excepciones.FueraRangoException;
 
 public class Nortaichian extends Unidad {
@@ -15,7 +16,7 @@ public class Nortaichian extends Unidad {
 	}
 
 	@Override
-	public void atacar(Ejercito unidad) throws FueraRangoException {
+	public void atacar(Ejercito unidad) throws FueraRangoException, EstadoPiedraException {
 		if (!this.esPiedra) {
 			if (super.puedeAtacar(unidad)) {
 				unidad.recibirAtaque(super.getAtaque());
@@ -37,6 +38,7 @@ public class Nortaichian extends Unidad {
 				this.esPiedra = false;
 				this.fueAtacadoUnaVez = false;
 			}
+			throw new EstadoPiedraException("No puedo atacar, estoy duro como una piedra");
 		}
 
 	}

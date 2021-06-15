@@ -1,5 +1,6 @@
 package personajes;
 
+import excepciones.EstadoPiedraException;
 import excepciones.FueraRangoException;
 import excepciones.MeditandoException;
 
@@ -9,7 +10,7 @@ public abstract class Ejercito {
 
 	protected abstract void recibirAtaque(int ataque);
 
-	protected abstract void atacar(Ejercito enemigo) throws FueraRangoException, MeditandoException;
+	protected abstract void atacar(Ejercito enemigo) throws FueraRangoException, MeditandoException, EstadoPiedraException;
 
 	protected abstract int getSalud();
 
