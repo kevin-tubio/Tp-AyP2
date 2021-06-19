@@ -77,7 +77,7 @@ public class GrupoTest {
 		this.grupoPropio.reclutar(raideiterean);
 
 		/* El size del ejercito es = 8 debido al reclutamiento en el método init() */
-		assertEquals(8, this.grupoPropio.getSoldados().size());
+		assertEquals(8, this.grupoPropio.getCantidad());
 	}
 
 	@Test
