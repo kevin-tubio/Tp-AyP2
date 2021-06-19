@@ -84,13 +84,13 @@ public class Grupo extends Ejercito {
 	}
 
 	/* Método que efectúa el descanso del ejercito */
-	protected void descansar() {
+	public void descansar() {
 		for (Ejercito unidad : this.soldados) {
 			unidad.descansar();
 		}
 	}
 
-	public PriorityQueue<Ejercito> getSoldados() {
+	private PriorityQueue<Ejercito> getSoldados() {
 		return this.soldados;
 	}
 
@@ -128,4 +128,7 @@ public class Grupo extends Ejercito {
 		this.estado = estado;
 	}
 
+	public int getCantidad() {
+		return this.soldados.size();
+	}
 }

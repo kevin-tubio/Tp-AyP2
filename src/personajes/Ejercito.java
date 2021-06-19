@@ -20,5 +20,5 @@ public abstract class Ejercito {
 
 	protected abstract int getPosicion();
 
-	protected abstract void descansar();
+	public abstract void descansar();
 }
