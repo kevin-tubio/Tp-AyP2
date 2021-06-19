@@ -6,10 +6,14 @@ import org.junit.Before;
 import org.junit.Test;
 
 import excepciones.EjercitoDesmayadoException;
+import excepciones.FueraRangoException;
+import excepciones.MeditandoException;
+import personajes.Ejercito;
 import personajes.Grupo;
 import personajes.Nortaichian;
 import personajes.Radeiteran;
 import personajes.Reralopes;
+import personajes.Unidad;
 import personajes.Wrives;
 
 public class GrupoTest {
@@ -74,6 +78,62 @@ public class GrupoTest {
 
 		/* El size del ejercito es = 8 debido al reclutamiento en el método init() */
 		assertEquals(8, this.grupoPropio.getSoldados().size());
+	}
+
+	@Test
+	public void atacar() {
+		try {
+			this.grupoPropio.atacar(this.grupoEnemigo.getSoldados().peek());
+		} catch (FueraRangoException | MeditandoException e) {
+			System.out.println(e.getMessage());
+		}
+
+		Unidad unidad = (Unidad) this.grupoEnemigo.getSoldados().peek();
+
+		assertEquals(0, unidad.getSalud());
+	}
+
+	@Test
+	public void recibirAtaque() {
+		try {
+			this.grupoEnemigo.atacar(this.grupoPropio.getSoldados().peek());
+		} catch (FueraRangoException | MeditandoException e) {
+			System.out.println(e.getMessage());
+		}
+
+		Unidad unidad = (Unidad) this.grupoPropio.getSoldados().peek();
+
+		assertEquals(0, unidad.getSalud());
+	}
+
+	@Test
+	public void salud() {
+		assertEquals(108, this.grupoPropio.getSalud());
+	}
+
+	@Test
+	public void saludInicial() {
+		try {
+			this.grupoEnemigo.atacar(this.grupoPropio.getSoldados().peek());
+		} catch (FueraRangoException | MeditandoException e) {
+			System.out.println(e.getMessage());
+		}
+		assertEquals(108, this.grupoPropio.getSaludInicial());
+	}
+
+	@Test
+	public void valorAtaque() {
+		assertEquals(113, this.grupoPropio.getAtaque());
+	}
+
+	@Test
+	public void posicion() {
+		assertEquals(15, this.grupoPropio.getPosicion());
+	}
+
+	@Test
+	public void estadoUnidad() {
+		assertEquals(Unidad.Estado.DISPONIBLE, this.grupoPropio.getEstado());
 	}
 
 }

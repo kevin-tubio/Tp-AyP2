@@ -66,7 +66,7 @@ public class Grupo extends Ejercito {
 	 * @param enemigo - Ejercito
 	 */
 	@Override
-	protected void atacar(Ejercito enemigo) throws FueraRangoException, MeditandoException {
+	public void atacar(Ejercito enemigo) throws FueraRangoException, MeditandoException {
 		try {
 			this.soldados.peek().atacar(enemigo);
 		} catch (FueraRangoException | MeditandoException | EstadoPiedraException e) {
@@ -116,7 +116,7 @@ public class Grupo extends Ejercito {
 	}
 
 	@Override
-	protected Unidad.Estado getEstado() {
+	public Unidad.Estado getEstado() {
 		return this.soldados.peek().getEstado();
 	}
 
