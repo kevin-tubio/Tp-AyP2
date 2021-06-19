@@ -90,7 +90,7 @@ public class Grupo extends Ejercito {
 		}
 	}
 
-	private PriorityQueue<Ejercito> getSoldados() {
+	public PriorityQueue<Ejercito> getSoldados() {
 		return this.soldados;
 	}
 
