@@ -3,39 +3,41 @@ package personajes;
 import java.util.PriorityQueue;
 
 import excepciones.EjercitoDesmayadoException;
+import excepciones.EstadoPiedraException;
 import excepciones.FueraRangoException;
 import excepciones.MeditandoException;
 
 public class Grupo extends Ejercito {
 
 	private PriorityQueue<Ejercito> soldados;
+	private boolean estado;
 
 	public Grupo() {
 		super();
 		this.soldados = new PriorityQueue<Ejercito>(new UnidadComparator());
+		this.estado = false;
 	}
 
+	/*
+	 * Método que inicializa la pelea contra un ejercito enemigo
+	 * 
+	 * @param ejercitoEnemigo - Grupo
+	 */
 	public void pelear(Grupo ejercitoEnemigo) throws EjercitoDesmayadoException {
 		PriorityQueue<Ejercito> grupo = ejercitoEnemigo.getSoldados();
 
 		Ejercito unidad = null;
 
-		while (!grupo.isEmpty()) {
+		while (!grupo.isEmpty() && !this.soldados.isEmpty()) {
 
 			unidad = this.soldados.peek();
 
 			try {
 				unidad.atacar(grupo.peek());
-			} catch (FueraRangoException e) {
-				System.out.println(e.getMessage());
-			} catch (MeditandoException e) {
+			} catch (FueraRangoException | MeditandoException | EstadoPiedraException e) {
 				System.out.println(e.getMessage());
 			}
 			unidad.recibirAtaque(grupo.peek().getAtaque());
-
-			if (this.soldados.isEmpty()) {
-				throw new EjercitoDesmayadoException("El ejercito fue derrotado");
-			}
 
 			// Si se desmaya lo desencolo y no lo vuelvo a encolar
 			if (unidad.getEstado() == Unidad.Estado.DESMAYADO) {
@@ -43,21 +45,46 @@ public class Grupo extends Ejercito {
 			}
 		}
 
+		/* Si nuestro ejercito perdió lanzo una exception */
+		if (this.soldados.isEmpty()) {
+			this.setEstado(true);
+			throw new EjercitoDesmayadoException("El ejercito fue derrotado");
+		} else {
+			System.out.println("Vencedor: Ejercito propio");
+		}
+
 		// Si se redujo la vida lo encolo
-		if (unidad.getSalud() < unidad.getSaludInicial()) {
+		if (unidad.getSalud() < unidad.getSaludInicial() && !this.soldados.isEmpty()) {
 			this.soldados.add(this.soldados.poll());
+		}
+
+	}
+
+	/*
+	 * Método que ejecuta el ataque correspondiente de cada instancia
+	 * 
+	 * @param enemigo - Ejercito
+	 */
+	@Override
+	protected void atacar(Ejercito enemigo) throws FueraRangoException, MeditandoException {
+		try {
+			this.soldados.peek().atacar(enemigo);
+		} catch (FueraRangoException | MeditandoException | EstadoPiedraException e) {
+			System.out.println(e.getMessage());
 		}
 	}
 
-	public void atacar(Unidad unidad) throws FueraRangoException, MeditandoException {
-		this.soldados.peek().atacar(unidad);
-	}
-
-	public void recibirAtaque(int ataque) {
+	/*
+	 * Método que efectúa la resolución del ataque
+	 * 
+	 * @param ataque - int
+	 */
+	protected void recibirAtaque(int ataque) {
 		this.soldados.peek().recibirAtaque(ataque);
 	}
 
-	public void descansar() {
+	/* Método que efectúa el descanso del ejercito */
+	protected void descansar() {
 		for (Ejercito unidad : this.soldados) {
 			unidad.descansar();
 		}
@@ -67,6 +94,7 @@ public class Grupo extends Ejercito {
 		return this.soldados;
 	}
 
+	/* Método que agrega una unidad o un grupo al ejercito */
 	public void reclutar(Ejercito unidad) {
 		this.soldados.add(unidad);
 	}
@@ -88,14 +116,16 @@ public class Grupo extends Ejercito {
 	}
 
 	@Override
-	protected void atacar(Ejercito enemigo) throws FueraRangoException, MeditandoException {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	protected Unidad.Estado getEstado() {
 		return this.soldados.peek().getEstado();
+	}
+
+	public boolean isDesmayado() {
+		return estado;
+	}
+
+	private void setEstado(boolean estado) {
+		this.estado = estado;
 	}
 
 }
