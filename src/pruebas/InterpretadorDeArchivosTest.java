@@ -2,46 +2,33 @@ package pruebas;
 
 import static org.junit.Assert.*;
 import org.junit.Test;
-import excepciones.FormatoInvalidoException;
-import excepciones.RutaInvalidaException;
+import excepciones.DestinoInalcanzableException;
+import excepciones.EjercitoDesmayadoException;
+import excepciones.FueraRangoException;
+import excepciones.InterpretadorException;
+import mapa.Mapa;
 import sistema.InterpretadorDeArchivos;
 
 public class InterpretadorDeArchivosTest {
 
 	@Test
-	public void prueba001() {
+	public void prueba001() throws InterpretadorException, DestinoInalcanzableException, FueraRangoException, EjercitoDesmayadoException {
 		InterpretadorDeArchivos interpretador = new InterpretadorDeArchivos();
-		String mensaje = "";
+		Mapa mapa = interpretador.crearMapa("archivoDeEntrada/valido/consigna.txt");
 		
-		try {
-			interpretador.crearMapa("archivoDeEntrada/invalido/prueba1.txt");
-		} 
-		catch (FormatoInvalidoException e) {
-			mensaje = e.getMessage();
-		}
-		catch (RutaInvalidaException e) {
-			mensaje = e.getMessage();
-		}
-		
-		assertEquals("Linea 2: Falta el parametro 1", mensaje);
+		assertTrue(mapa != null);
 	}
 
 	@Test
-	public void prueba002() {
+	public void prueba002() throws DestinoInalcanzableException, FueraRangoException, EjercitoDesmayadoException {
 		InterpretadorDeArchivos interpretador = new InterpretadorDeArchivos();
-		String mensaje = "";
+		Mapa mapa = null;
+		try{
+			mapa = interpretador.crearMapa("archivoDeEntrada/invalido/consigna.txt");
+		}
+		catch (InterpretadorException e) {}
 		
-		try {
-			interpretador.crearMapa("archivoDeEntrada/invalido/prueba2.txt");
-		}
-		catch (FormatoInvalidoException e) {
-			mensaje = e.getMessage();
-		}
-		catch (RutaInvalidaException e) {
-			mensaje = e.getMessage();
-		}
-		
-		assertEquals("Linea 6: Se esperaban tres parametros, contando el separador", mensaje);
+		assertTrue(mapa == null);
 	}
 
 	@Test
@@ -50,16 +37,13 @@ public class InterpretadorDeArchivosTest {
 		String mensaje = "";
 		
 		try {
-			interpretador.crearMapa("archivoDeEntrada/invalido/prueba3.txt");
+			interpretador.crearMapa("archivoDeEntrada/invalido/prueba2.txt");
 		}
-		catch (FormatoInvalidoException e) {
-			mensaje = e.getMessage(); 
-		}
-		catch (RutaInvalidaException e) {
+		catch (InterpretadorException e) {
 			mensaje = e.getMessage();
 		}
 		
-		assertEquals("Linea 1: no deberia estar vacia", mensaje);
+		assertEquals("Linea 6: Se esperaban tres parametros, contando el separador", mensaje);
 	}
 
 	@Test
@@ -68,16 +52,13 @@ public class InterpretadorDeArchivosTest {
 		String mensaje = "";
 		
 		try {
-			interpretador.crearMapa("archivoDeEntrada/invalido/prueba4.txt");
+			interpretador.crearMapa("archivoDeEntrada/invalido/prueba3.txt");
 		}
-		catch (FormatoInvalidoException e) {
-			mensaje = e.getMessage();
-		}
-		catch (RutaInvalidaException e) {
+		catch (InterpretadorException e) {
 			mensaje = e.getMessage();
 		}
 		
-		assertEquals("Linea 4: Falta el parametro 2", mensaje);
+		assertEquals("Linea 1: no deberia estar vacia", mensaje);
 	}
 
 	@Test
@@ -86,16 +67,13 @@ public class InterpretadorDeArchivosTest {
 		String mensaje = "";
 		
 		try {
-			interpretador.crearMapa("archivoDeEntrada/invalido/prueba5.txt");
+			interpretador.crearMapa("archivoDeEntrada/invalido/prueba4.txt");
 		}
-		catch (FormatoInvalidoException e) {
-			mensaje = e.getMessage();
-		}
-		catch (RutaInvalidaException e) {
+		catch (InterpretadorException e) {
 			mensaje = e.getMessage();
 		}
 		
-		assertEquals("Linea 5: Solo un pueblo puede ser marcado como propio", mensaje);
+		assertEquals("Linea 4: Falta el parametro 2", mensaje);
 	}
 
 	@Test
@@ -104,15 +82,102 @@ public class InterpretadorDeArchivosTest {
 		String mensaje = "";
 		
 		try {
-			interpretador.crearMapa("archivoDeEntrada/invalido/prueba6.txt");
+			interpretador.crearMapa("archivoDeEntrada/invalido/prueba5.txt");
 		}
-		catch (FormatoInvalidoException e) {
+		catch (InterpretadorException e) {
 			mensaje = e.getMessage();
 		}
-		catch (RutaInvalidaException e) {
+		
+		assertEquals("Linea 5: Solo un pueblo puede ser marcado como propio", mensaje);
+	}
+
+	@Test
+	public void prueba007() {
+		InterpretadorDeArchivos interpretador = new InterpretadorDeArchivos();
+		String mensaje = "";
+		
+		try {
+			interpretador.crearMapa("archivoDeEntrada/invalido/prueba6.txt");
+		}
+		catch (InterpretadorException e) {
 			mensaje = e.getMessage();
 		}
 		
 		assertEquals("Algun pueblo debe ser marcado como propio", mensaje);
+	}
+
+	@Test
+	public void prueba008() {
+		InterpretadorDeArchivos interpretador = new InterpretadorDeArchivos();
+		String mensaje = "";
+		
+		try {
+			interpretador.crearMapa("archivoDeEntrada/invalido/prueba1.txt");
+		}
+		catch (InterpretadorException e) {
+			mensaje = e.getMessage();
+		}
+		
+		assertEquals("Linea 2: Falta el parametro 1", mensaje);
+	}
+	
+	@Test
+	public void prueba009() {
+		InterpretadorDeArchivos interpretador = new InterpretadorDeArchivos();
+		String mensaje = "";
+		
+		try {
+			interpretador.crearMapa("archivoDeEntrada/invalido/prueba7.txt");
+		}
+		catch (InterpretadorException e) {
+			mensaje = e.getMessage();
+		}
+		
+		assertEquals("Linea 2: Se esperaba un numero", mensaje);
+	}
+	
+	@Test
+	public void prueba0010() {
+		InterpretadorDeArchivos interpretador = new InterpretadorDeArchivos();
+		String mensaje = "";
+		
+		try {
+			interpretador.crearMapa("archivoDeEntrada/invalido/prueba8.txt");
+		}
+		catch (InterpretadorException e) {
+			mensaje = e.getMessage();
+		}
+		
+		assertEquals("Linea 3: Numero de pueblo erroneo, los pueblos deben estar ordenados", mensaje);
+	}
+	
+	@Test
+	public void prueba0011() {
+		InterpretadorDeArchivos interpretador = new InterpretadorDeArchivos();
+		String mensaje = "";
+		
+		try {
+			interpretador.crearMapa("archivoDeEntrada/invalido/prueba9.txt");
+		}
+		catch (InterpretadorException e) {
+			mensaje = e.getMessage();
+		}
+		
+		assertEquals("Linea 4: relacion entre pueblos invalida", mensaje);
+	}
+	
+	@Test
+	public void prueba0012() {
+		InterpretadorDeArchivos interpretador = new InterpretadorDeArchivos();
+		String mensaje = "";
+		
+		try {
+			interpretador.crearMapa("archivoDeEntrada/invalido/prueba10.txt");
+		}
+		catch (InterpretadorException e) {
+			mensaje = e.getMessage();
+		}
+		
+		assertEquals("Linea 2: raza de guerrero invalida", mensaje);
 	}
 }

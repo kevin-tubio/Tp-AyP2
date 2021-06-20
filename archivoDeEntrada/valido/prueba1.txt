@@ -1,0 +1,26 @@
+4
+1 140 Nortaichian enemigo
+2 35  Reralopes aliado
+3 19  Wrives aliado
+4 105 Wrives aliado
+5 40  Radeiteran enemigo
+6 140 Nortaichian aliado
+7 19  Nortaichian aliado
+8 19  Nortaichian aliado
+3 -> 2
+1 2 2
+1 4 1
+1 5 2
+2 3 4
+2 6 4
+2 7 2
+2 8 4
+3 5 4
+3 6 3
+4 8 3
+5 4 2 
+5 7 1
+6 1 3
+7 1 2
+8 3 2
+8 6 2

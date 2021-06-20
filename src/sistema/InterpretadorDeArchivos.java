@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import excepciones.FormatoInvalidoException;
+import excepciones.InterpretadorException;
 import excepciones.RutaInvalidaException;
 import mapa.*;
 import personajes.*;
@@ -14,7 +15,7 @@ public class InterpretadorDeArchivos {
 
 	private int numeroDeLinea;
 
-	public Mapa crearMapa(String ruta) throws FormatoInvalidoException, RutaInvalidaException {
+	public Mapa crearMapa(String ruta) throws InterpretadorException {
 		BufferedReader buffer = null;
 		try {
 			buffer = new BufferedReader(new FileReader(ruta));
@@ -33,7 +34,7 @@ public class InterpretadorDeArchivos {
 			try{
 				if(buffer != null) {
 					buffer.close(); 
-				}	
+				}
 			}
 			catch (IOException e) {
 				System.out.println(e.getMessage());
@@ -59,7 +60,7 @@ public class InterpretadorDeArchivos {
 			verificarNumeroDeDatos(datosLinea, 4);
 			
 			if((Integer.parseInt(datosLinea[0])) != i+1) {
-				throw new FormatoInvalidoException("Linea " + numeroDeLinea + ": numero de pueblo erroneo, los pueblos deben estar ordenados");
+				throw new FormatoInvalidoException("Linea " + numeroDeLinea + ": Numero de pueblo erroneo, los pueblos deben estar ordenados");
 			}
 			
 			aparicionesDePropio = verificarAparicionesDePropio(datosLinea[3], aparicionesDePropio);
