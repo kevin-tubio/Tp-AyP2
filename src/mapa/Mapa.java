@@ -13,10 +13,10 @@ public class Mapa {
 	}
 
 	public static Mapa obtenerMapa(Grafo grafo) {
-		if(instancia != null) {
-			return instancia;
+		if(instancia == null) {
+			instancia = new Mapa(grafo);
 		}
-		return new Mapa(grafo);
+		return instancia;
 	}
 
 	public ArrayDeque<Pueblo> obtenerTrayecto() throws DestinoInalcanzableException {
