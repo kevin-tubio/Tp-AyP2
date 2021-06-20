@@ -8,7 +8,6 @@ import org.junit.Test;
 import excepciones.EjercitoDesmayadoException;
 import excepciones.FueraRangoException;
 import excepciones.MeditandoException;
-import personajes.Ejercito;
 import personajes.Grupo;
 import personajes.Nortaichian;
 import personajes.Radeiteran;
@@ -134,6 +133,12 @@ public class GrupoTest {
 	@Test
 	public void estadoUnidad() {
 		assertEquals(Unidad.Estado.DISPONIBLE, this.grupoPropio.getEstado());
+	}
+
+	@Test
+	public void descansar() {
+		/* revisión de mensajes lanzados en consola */
+		this.grupoPropio.descansar();
 	}
 
 }

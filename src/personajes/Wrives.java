@@ -7,7 +7,7 @@ public class Wrives extends Unidad {
 	private boolean meditado;
 
 	public Wrives() {
-		super(108, "Magia", new int[]{14, 28}, 113);
+		super(108, "Magia", new int[] { 14, 28 }, 113);
 		this.meditado = false;
 	}
 
@@ -24,7 +24,7 @@ public class Wrives extends Unidad {
 			} else {
 				throw new FueraRangoException("El personaje se encuentra fuera de rango");
 			}
-		}else {
+		} else {
 			throw new MeditandoException("No puedo atacar, estoy meditando");
 		}
 	}
@@ -46,6 +46,8 @@ public class Wrives extends Unidad {
 	@Override
 	public void descansar() {
 		this.meditado = true;
+		this.setSalud(this.getSalud() + 50);
+		super.setSaludInicial(super.getSaludInicial() + 50);
 	}
 
 }

@@ -76,15 +76,29 @@ public class WrivesTest {
 		assertEquals(Unidad.Estado.DESMAYADO, this.nortaichian.getEstado());
 		assertEquals(Unidad.Estado.DESMAYADO, this.raideiterean.getEstado());
 	}
-	
+
 	@Test
 	public void descansarYAtacar() {
 		this.wriveEnRango.descansar();
+
 		try {
 			this.wriveEnRango.atacar(this.nortaichian);
 		} catch (FueraRangoException | MeditandoException e) {
 			System.out.println(e.getMessage());
 		}
+	}
+
+	@Test
+	public void atacarYDescansar() {
+		try {
+			this.wriveEnRango.atacar(this.reralopes);
+		} catch (FueraRangoException | MeditandoException e) {
+			System.out.println(e.getMessage());
+		}
+
+		this.wriveEnRango.descansar();
+
+		assertEquals(158, this.wriveEnRango.getSalud());
 	}
 
 }

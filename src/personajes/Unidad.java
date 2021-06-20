@@ -85,7 +85,7 @@ public abstract class Unidad extends Ejercito {
 		this.maxSalud = maxSalud;
 	}
 
-	private void setSaludInicial(int saludInicial) {
+	protected void setSaludInicial(int saludInicial) {
 		this.saludInicial = saludInicial;
 	}
 
