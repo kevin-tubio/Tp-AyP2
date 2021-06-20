@@ -27,10 +27,15 @@ public class Grupo extends Ejercito {
 		PriorityQueue<Ejercito> grupo = ejercitoEnemigo.getSoldados();
 
 		Ejercito unidad = null;
+		Ejercito enemigo = null;
 
 		while (!grupo.isEmpty() && !this.soldados.isEmpty()) {
 
 			unidad = this.soldados.peek();
+			unidad.setPosicion(18);
+
+			enemigo = grupo.peek();
+			enemigo.setPosicion(18);
 
 			try {
 				unidad.atacar(grupo.peek());
@@ -130,5 +135,13 @@ public class Grupo extends Ejercito {
 
 	public int getCantidad() {
 		return this.soldados.size();
+	}
+
+	@Override
+	protected void setPosicion(int i) {
+		for (Ejercito unidad : this.soldados) {
+			unidad.setPosicion(i);
+		}
+
 	}
 }

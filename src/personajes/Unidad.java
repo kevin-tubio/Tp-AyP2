@@ -105,7 +105,7 @@ public abstract class Unidad extends Ejercito {
 	public Unidad obtenerAtacante() {
 		return this;
 	}
-	
+
 	public int getMaxSalud() {
 		return maxSalud;
 	}
@@ -146,6 +146,7 @@ public abstract class Unidad extends Ejercito {
 		return posicion;
 	}
 
+	@Override
 	public void setPosicion(int posicion) {
 		this.posicion = posicion;
 	}

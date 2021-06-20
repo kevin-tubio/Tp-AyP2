@@ -10,7 +10,8 @@ public abstract class Ejercito {
 
 	protected abstract void recibirAtaque(int ataque);
 
-	protected abstract void atacar(Ejercito enemigo) throws FueraRangoException, MeditandoException, EstadoPiedraException;
+	protected abstract void atacar(Ejercito enemigo)
+			throws FueraRangoException, MeditandoException, EstadoPiedraException;
 
 	protected abstract int getSalud();
 
@@ -21,4 +22,7 @@ public abstract class Ejercito {
 	protected abstract int getPosicion();
 
 	public abstract void descansar();
+
+	protected abstract void setPosicion(int i);
+
 }
