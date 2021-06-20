@@ -37,8 +37,10 @@ public class Grupo extends Ejercito {
 			enemigo = grupo.peek();
 			enemigo.setPosicion(18);
 
+			System.out.println(unidad.getPosicion());
+			System.out.println(enemigo.getPosicion());
 			try {
-				unidad.atacar(grupo.peek());
+				unidad.atacar(enemigo);
 			} catch (FueraRangoException | MeditandoException | EstadoPiedraException e) {
 				System.out.println(e.getMessage());
 			}
