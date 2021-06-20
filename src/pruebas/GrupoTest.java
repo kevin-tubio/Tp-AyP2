@@ -8,6 +8,7 @@ import org.junit.Test;
 import excepciones.EjercitoDesmayadoException;
 import excepciones.FueraRangoException;
 import excepciones.MeditandoException;
+import personajes.Ejercito;
 import personajes.Grupo;
 import personajes.Nortaichian;
 import personajes.Radeiteran;
@@ -18,7 +19,6 @@ import personajes.Wrives;
 public class GrupoTest {
 
 	private Wrives wriveEnRango;
-	private Wrives wriveFueraRango;
 	private Reralopes reralopes;
 	private Nortaichian nortaichian;
 	private Radeiteran raideiterean;
@@ -28,19 +28,12 @@ public class GrupoTest {
 	@Before
 	public void init() {
 		this.wriveEnRango = new Wrives();
-		this.wriveEnRango.setPosicion(15);
-
-		this.wriveFueraRango = new Wrives();
-		this.wriveFueraRango.setPosicion(1);
 
 		this.reralopes = new Reralopes();
-		this.reralopes.setPosicion(15);
 
 		this.nortaichian = new Nortaichian();
-		this.nortaichian.setPosicion(15);
 
 		this.raideiterean = new Radeiteran();
-		this.raideiterean.setPosicion(15);
 
 		this.grupoPropio = new Grupo();
 		this.grupoEnemigo = new Grupo();
@@ -82,6 +75,15 @@ public class GrupoTest {
 	@Test
 	public void atacar() {
 		try {
+			/*
+			 * Se settea la posición debido a que por defecto es 0 y su modificación
+			 * automática se encuentra dentro del método pelear de la clase Grupo. Este caso
+			 * es uno en particular
+			 */
+
+			Ejercito unidad = this.grupoPropio.getSoldados().peek();
+			unidad.setPosicion(18);
+
 			this.grupoPropio.atacar(this.grupoEnemigo.getSoldados().peek());
 		} catch (FueraRangoException | MeditandoException e) {
 			System.out.println(e.getMessage());
@@ -95,6 +97,15 @@ public class GrupoTest {
 	@Test
 	public void recibirAtaque() {
 		try {
+			/*
+			 * Se settea la posición debido a que por defecto es 0 y su modificación
+			 * automática se encuentra dentro del método pelear de la clase Grupo. Este caso
+			 * es uno en particular
+			 */
+
+			Ejercito unidad = this.grupoPropio.getSoldados().peek();
+			unidad.setPosicion(18);
+
 			this.grupoEnemigo.atacar(this.grupoPropio.getSoldados().peek());
 		} catch (FueraRangoException | MeditandoException e) {
 			System.out.println(e.getMessage());
@@ -127,7 +138,8 @@ public class GrupoTest {
 
 	@Test
 	public void posicion() {
-		assertEquals(15, this.grupoPropio.getPosicion());
+		/* Por defecto la posición es 0 , se ve modificada cuando el grupo ataca */
+		assertEquals(0, this.grupoPropio.getPosicion());
 	}
 
 	@Test
@@ -139,6 +151,45 @@ public class GrupoTest {
 	public void descansar() {
 		/* revisión de mensajes lanzados en consola */
 		this.grupoPropio.descansar();
+	}
+
+	@Test
+	public void posicionSobreGrupo() {
+		/* Creo un nuevo grupo que va a contener dos grupos dentro de sus soldados */
+		Grupo grupo = new Grupo();
+
+		/* Recluto dos grupos */
+		grupo.reclutar(this.grupoPropio);
+		grupo.reclutar(this.grupoPropio);
+
+		/*
+		 * Setteo la posicion del grupo (este método aplica sobre el primer elemento del
+		 * primer grupo)
+		 */
+		grupo.setPosicion(18);
+
+		/*
+		 * Obtengo el primer grupo de soldados y lo casteo a Grupo debido a que es una
+		 * cola de Ejercito
+		 */
+		Grupo grupo1 = (Grupo) grupo.getSoldados().poll();
+
+		/*
+		 * Compruebo que su posición sea 18 (modificación previa con el método
+		 * setPosicion)
+		 */
+		assertEquals(18, grupo1.getPosicion());
+
+		/* Lo desencolo */
+		grupo1.getSoldados().poll();
+
+		/* Compruebo que del mismo grupo, el siguiente tenga posición 0 */
+		assertEquals(0, grupo1.getPosicion());
+
+		/*
+		 * Con esto compruebo que el método setPosicion afecta a una unidad dentro del
+		 * grupo
+		 */
 	}
 
 }

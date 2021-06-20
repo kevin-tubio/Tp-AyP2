@@ -37,8 +37,6 @@ public class Grupo extends Ejercito {
 			enemigo = grupo.peek();
 			enemigo.setPosicion(18);
 
-			System.out.println(unidad.getPosicion());
-			System.out.println(enemigo.getPosicion());
 			try {
 				unidad.atacar(enemigo);
 			} catch (FueraRangoException | MeditandoException | EstadoPiedraException e) {
@@ -140,10 +138,9 @@ public class Grupo extends Ejercito {
 	}
 
 	@Override
-	protected void setPosicion(int i) {
-		for (Ejercito unidad : this.soldados) {
-			unidad.setPosicion(i);
-		}
-
+	public void setPosicion(int i) {
+		Ejercito unidad = this.soldados.peek();
+		unidad.setPosicion(i);
 	}
+
 }

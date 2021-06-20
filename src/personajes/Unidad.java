@@ -166,4 +166,5 @@ public abstract class Unidad extends Ejercito {
 	public void setCantAtaques(int cantidad) {
 		this.cantAtaques += cantidad;
 	}
+
 }

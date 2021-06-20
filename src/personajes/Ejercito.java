@@ -19,10 +19,10 @@ public abstract class Ejercito {
 
 	protected abstract Unidad.Estado getEstado();
 
-	protected abstract int getPosicion();
+	public abstract int getPosicion();
 
 	public abstract void descansar();
 
-	protected abstract void setPosicion(int i);
+	public abstract void setPosicion(int i);
 
 }
