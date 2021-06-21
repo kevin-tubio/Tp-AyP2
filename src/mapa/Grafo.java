@@ -21,7 +21,7 @@ public class Grafo {
 	}
 
 	public void agregarCamino(int origen, int destino, int trayectoEnDias) {
-		caminosAdyacentes[origen-1].add(new Camino(origen, destino, trayectoEnDias, pueblos));
+		caminosAdyacentes[origen-1].add(new Camino(origen, destino, trayectoEnDias));
 	}
 
 	public void definirDestino(int origen, int destino) {
@@ -38,7 +38,7 @@ public class Grafo {
 
 		inicializarDistancias(distancia);
 		
-		caminosAEvaluar.add(new Camino(origen+1, origen+1, 0, pueblos));
+		caminosAEvaluar.add(new Camino(origen+1, origen+1, 0));
 
 		while(!caminosAEvaluar.isEmpty()) {
 			Camino camino = caminosAEvaluar.poll();
@@ -49,7 +49,7 @@ public class Grafo {
 					if(verificarSiCaminoEsMasCorto(adyacente, visitado, distancia)) {
 						distancia[adyacente.destino()] = distancia[adyacente.origen()] + adyacente.trayectoEnDias();
 						predecesor[adyacente.destino()] = adyacente.origen()+1;
-						caminosAEvaluar.add(new Camino(adyacente.destino()+1, adyacente.destino()+1, adyacente.trayectoEnDias(), pueblos));
+						caminosAEvaluar.add(new Camino(adyacente.destino()+1, adyacente.destino()+1, distancia[adyacente.destino()]));
 					}
 				}
 			}
@@ -73,12 +73,13 @@ public class Grafo {
 
 	private ArrayDeque<Pueblo> devolverPueblosSegunRutaMasCorta(int[] predecesor) throws DestinoInalcanzableException {
 		ArrayDeque<Pueblo> trayecto = new ArrayDeque<Pueblo>();
-		while(predecesor[destino]-1 != -1) {
-			trayecto.push(pueblos[destino]);
-			destino = predecesor[destino]-1;
+		int aux = destino;
+		while(predecesor[aux]-1 != -1) {
+			trayecto.push(pueblos[aux]);
+			aux = predecesor[aux]-1;
 		}
 
-		if(destino != origen) {
+		if(aux != origen) {
 			throw new DestinoInalcanzableException("No hay ningun camino desde el pueblo de origen al pueblo de destino");
 		}
 		trayecto.push(pueblos[origen]);
