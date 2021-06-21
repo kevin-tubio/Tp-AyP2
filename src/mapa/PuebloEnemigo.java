@@ -11,14 +11,14 @@ public class PuebloEnemigo extends Pueblo {
 		super(ejercitoNativo);
 	}
 
+	/**
+	 * pre : 'propio' no es nulo.
+	 * post: hace que el ejercito 'propio' pelee con el ejercito nativo de este pueblo.
+	 */
 	@Override
-	public Ejercito visitarPueblo(Ejercito propio) throws FueraRangoException, EjercitoDesmayadoException {
-		((Grupo)propio).pelear((Grupo)super.visitarPueblo(propio));
-		return propio;
-	}
-
-	@Override
-	protected int consultarPrioridad() {
-		return super.consultarPrioridad()-1;
+	public void visitarPueblo(Ejercito propio) throws FueraRangoException, EjercitoDesmayadoException {
+		if(propio != null) {
+			((Grupo)propio).pelear((Grupo)super.obtenerEjercitoNativo());
+		}
 	}
 }
