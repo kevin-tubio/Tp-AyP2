@@ -129,6 +129,7 @@ public class GrupoTest {
 		} catch (FueraRangoException | MeditandoException e) {
 			System.out.println(e.getMessage());
 		}
+		
 		assertEquals(108, this.grupoPropio.getSaludInicial());
 	}
 

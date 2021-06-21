@@ -72,8 +72,46 @@ public class Grupo extends Ejercito {
 				} catch (FueraRangoException | MeditandoException | EstadoPiedraException e) {
 					System.out.println(e.getMessage());
 				}
-
 			}
+
+			/*
+			 * Este caso ocurre si la cola de aliados es vacía pero la cola de propios no lo
+			 * es, pelean
+			 */
+			if (ejercito.isEmpty() && !this.getSoldados().isEmpty()) {
+				ejercito = this.getSoldados();
+
+				while (!ejercito.isEmpty()) {
+
+					unidad = ejercito.peek();
+					unidad.setPosicion(18);
+
+					if (grupo.peek().getEstado() != Unidad.Estado.DESMAYADO) {
+						enemigo = grupo.peek();
+					} else {
+						grupo.poll();
+						/*
+						 * Si el ejercito enemigo se desmaya (su queue es vacia) corto la batalla, en
+						 * caso contrario, tomo el siguiente soldado
+						 */
+						if (grupo.isEmpty()) {
+							break;
+						} else {
+							enemigo = grupo.peek();
+						}
+					}
+
+					enemigo.setPosicion(18);
+
+					try {
+						unidad.atacar(enemigo);
+						unidad.recibirAtaque(enemigo.getAtaque());
+					} catch (FueraRangoException | MeditandoException | EstadoPiedraException e) {
+						System.out.println(e.getMessage());
+					}
+				}
+			}
+
 			/* Si nuestro ejercito perdió lanzo una exception */
 			if (ejercito.isEmpty()) {
 				this.setEstado(true);
@@ -113,7 +151,9 @@ public class Grupo extends Ejercito {
 	protected void recibirAtaque(int ataque) {
 		PriorityQueue<Ejercito> ejercito = this.getSoldados();
 
-		ejercito.peek().recibirAtaque(ataque);
+		Ejercito unidad = ejercito.peek();
+
+		unidad.recibirAtaque(ataque);
 
 	}
 
