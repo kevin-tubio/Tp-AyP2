@@ -69,8 +69,14 @@ public class Grupo extends Ejercito {
 				try {
 					unidad.atacar(enemigo);
 					unidad.recibirAtaque(enemigo.getAtaque());
-				} catch (FueraRangoException | MeditandoException | EstadoPiedraException e) {
+				} catch (FueraRangoException | EstadoPiedraException e) {
 					System.out.println(e.getMessage());
+				} catch (MeditandoException e) {
+					unidad.recibirAtaque(enemigo.getAtaque());
+				}
+
+				if (unidad.getEstado() == Unidad.Estado.DESMAYADO) {
+					ejercito.poll();
 				}
 			}
 
@@ -106,8 +112,14 @@ public class Grupo extends Ejercito {
 					try {
 						unidad.atacar(enemigo);
 						unidad.recibirAtaque(enemigo.getAtaque());
-					} catch (FueraRangoException | MeditandoException | EstadoPiedraException e) {
+					} catch (FueraRangoException | EstadoPiedraException e) {
 						System.out.println(e.getMessage());
+					} catch (MeditandoException e) {
+						unidad.recibirAtaque(enemigo.getAtaque());
+					}
+
+					if (unidad.getEstado() == Unidad.Estado.DESMAYADO) {
+						ejercito.poll();
 					}
 				}
 			}

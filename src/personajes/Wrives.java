@@ -31,8 +31,8 @@ public class Wrives extends Unidad {
 
 	@Override
 	public void recibirAtaque(int ataque) {
-		super.recibirAtaque(ataque * 2);
 		this.meditado = false;
+		super.recibirAtaque(ataque * 2);
 	}
 
 	public boolean isMeditado() {
