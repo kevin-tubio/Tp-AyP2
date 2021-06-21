@@ -23,18 +23,19 @@ public class Demo {
 					int opcion = Integer.parseInt(buffer.readLine());
 					switch (opcion) {
 					case 1:
-						presentarOpcion(1, "Escriba la ruta y/o nombre del archivo");
+						presentarOpcion(1, "Escriba la ruta y nombre del archivo Ej: directorio/archivo.txt");
 						simulador = new Simulador();
 						String ruta = buffer.readLine();
 						print("");
 						simulador.simularConquista(ruta);
-						esperarEnter();
+						print("", "-----------------------------------------------------------------", "Progama Terminado.");
+						print("-----------------------------------------------------------------");
+						ejecutando = false;
 						break;
 
 					case 2:
 						presentarOpcion(opcion, "Progama Terminado.");
 						ejecutando = false;
-						print("------------------------------------------------------------");
 						break;
 
 					default:
@@ -67,19 +68,19 @@ public class Demo {
 	}
 	
 	private static void imprimirOpcionesMenu() {
-		print("|***********************************************************|");
-		print("|-----------Elija una opcion ingresando un entero-----------|");
-		print("|                                                           |");
-		print("| (1) Simular Conquista                                     |");
-		print("| (2) Salir                                                 |");
-		print("|___________________________________________________________|");
+		print("|***************************************************************|");
+		print("|-------------Elija una opcion ingresando un entero-------------|");
+		print("|                                                               |");
+		print("| (1) Simular Conquista                                         |");
+		print("| (2) Salir                                                     |");
+		print("|_______________________________________________________________|");
 	}
 
 	private static void presentarOpcion(int numeroDeOpcion, String mensaje) {
-		print("*************************************************************", ("Opcion: " + numeroDeOpcion),
-				"-------------", "");
+		print("*****************************************************************", ("Opcion: " + numeroDeOpcion),
+				"-----------", "");
 		if (mensaje.length() > 0) {
-			print(mensaje, "--------------------------------------");
+			print(mensaje, "-----------------------------------------------------------------");
 		}
 	}
 	
@@ -90,7 +91,7 @@ public class Demo {
 	}
 	
 	private static void esperarEnter() throws IOException {
-		esperarEnter("------------------------------------------------------------");
+		esperarEnter("-----------------------------------------------------------------");
 	}
 
 	private static void esperarEnter(String mensaje) throws IOException {

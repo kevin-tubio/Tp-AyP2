@@ -1,7 +1,7 @@
-4
-1 140 Nortaichian enemigo
+8
+1 140 Nortaichian aliado
 2 35  Reralopes aliado
-3 19  Wrives aliado
+3 19  Wrives propio
 4 105 Wrives aliado
 5 40  Radeiteran enemigo
 6 140 Nortaichian aliado
