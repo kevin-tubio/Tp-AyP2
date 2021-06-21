@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import excepciones.DesmayadoException;
 import excepciones.EstadoPiedraException;
 import excepciones.FueraRangoException;
 import excepciones.MeditandoException;
@@ -45,7 +46,7 @@ public class NortaichianTest {
 		try {
 			this.nortaichianEnRango.atacar(this.wrives);
 			this.nortaichianEnRango.atacar(this.nortaichianFueraRango);
-		} catch (FueraRangoException | EstadoPiedraException e) {
+		} catch (FueraRangoException | EstadoPiedraException | DesmayadoException e) {
 			System.out.println(e.getMessage());
 		}
 
@@ -65,7 +66,7 @@ public class NortaichianTest {
 			this.nortaichianEnRango.atacar(this.wrives);
 			this.nortaichianEnRango.atacar(this.reralopes);
 			assertEquals(18, this.nortaichianEnRango.getAtaque());
-		} catch (FueraRangoException | MeditandoException | EstadoPiedraException e) {
+		} catch (FueraRangoException | MeditandoException | EstadoPiedraException | DesmayadoException e) {
 			System.out.println(e.getMessage());
 		}
 
@@ -76,7 +77,7 @@ public class NortaichianTest {
 		try {
 			this.nortaichianEnRango.descansar();
 			this.nortaichianEnRango.atacar(this.nortaichianEnRango);
-		} catch (FueraRangoException | EstadoPiedraException e) {
+		} catch (FueraRangoException | EstadoPiedraException | DesmayadoException e) {
 			System.out.println(e.getMessage());
 		}
 	}
@@ -87,7 +88,7 @@ public class NortaichianTest {
 			this.nortaichianEnRango.atacar(this.nortaichianEnRango);
 			// Al descansar recupera su maxSalud
 			this.nortaichianEnRango.descansar();
-		} catch (FueraRangoException | EstadoPiedraException e) {
+		} catch (FueraRangoException | EstadoPiedraException | DesmayadoException e) {
 			System.out.println(e.getMessage());
 		}
 
@@ -98,7 +99,7 @@ public class NortaichianTest {
 	public void recibirAtaque() {
 		try {
 			this.wrives.atacar(this.nortaichianEnRango);
-		} catch (FueraRangoException | MeditandoException e) {
+		} catch (FueraRangoException | MeditandoException | DesmayadoException e) {
 			System.out.println(e.getMessage());
 		}
 

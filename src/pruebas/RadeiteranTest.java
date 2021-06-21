@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import excepciones.DesmayadoException;
 import excepciones.FueraRangoException;
 import personajes.Nortaichian;
 import personajes.Radeiteran;
@@ -42,7 +43,7 @@ public class RadeiteranTest {
 	public void atacarYRecibir() {
 		try {
 			this.radeiteranEnRango.atacar(this.radeiteranEnRango);
-		} catch (FueraRangoException e) {
+		} catch (FueraRangoException | DesmayadoException e) {
 			System.out.println(e.getMessage());
 		}
 
@@ -53,7 +54,7 @@ public class RadeiteranTest {
 	public void atacarFueraRango() {
 		try {
 			this.radeiteranEnRango.atacar(this.radeiteranFueraRango);
-		} catch (FueraRangoException e) {
+		} catch (FueraRangoException | DesmayadoException e) {
 			System.out.println(e.getMessage());
 		}
 	}
@@ -69,7 +70,7 @@ public class RadeiteranTest {
 			
 			this.radeiteranEnRango.atacar(this.nortaichian);
 			assertEquals(74,this.radeiteranEnRango.getAtaque());
-		} catch (FueraRangoException e) {
+		} catch (FueraRangoException | DesmayadoException e) {
 			System.out.println(e.getMessage());
 		}
 	}
