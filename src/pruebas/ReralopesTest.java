@@ -5,7 +5,6 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import excepciones.DesmayadoException;
 import excepciones.FueraRangoException;
 import personajes.Nortaichian;
 import personajes.Radeiteran;
@@ -58,7 +57,7 @@ public class ReralopesTest {
 		atacado.setPosicion(10); // hacer que el atacado este dentro del rango de ataque
 		try {
 			atacante.atacar(atacado);
-		} catch (FueraRangoException | DesmayadoException e) {
+		} catch (FueraRangoException e) {
 			System.out.println(e.getMessage());
 		}
 		return atacado.getSalud();
@@ -69,7 +68,7 @@ public class ReralopesTest {
 	public void atacarYRecibirEnRango() {
 		try {
 			this.reralopesEnRango.atacar(this.reralopesEnRango);
-		} catch (FueraRangoException | DesmayadoException e) {
+		} catch (FueraRangoException e) {
 			System.out.println(e.getMessage());
 		}
 
@@ -80,7 +79,7 @@ public class ReralopesTest {
 	public void atacarFueraRango() {
 		try {
 			this.reralopesEnRango.atacar(this.reralopesFueraRango);
-		} catch (FueraRangoException | DesmayadoException e) {
+		} catch (FueraRangoException e) {
 			System.out.println(e.getMessage());
 		}
 
@@ -93,7 +92,7 @@ public class ReralopesTest {
 			this.reralopesEnRango.atacar(this.wrives);
 			this.reralopesEnRango.atacar(this.nortaichian);
 			this.reralopesEnRango.atacar(this.raideiterean);
-		} catch (FueraRangoException | DesmayadoException e) {
+		} catch (FueraRangoException e) {
 			System.out.println(e.getMessage());
 		}
 
@@ -105,15 +104,15 @@ public class ReralopesTest {
 	@Test
 	public void descansarYAtacar() {
 		this.reralopesEnRango.descansar();
-		
+
 		// Luego de descanzar duplica su daño
-		assertEquals(54,this.reralopesEnRango.getAtaque()); 
-		
+		assertEquals(54, this.reralopesEnRango.getAtaque());
+
 		try {
 			this.reralopesEnRango.atacar(this.nortaichian);
-		} catch (FueraRangoException | DesmayadoException e) {
+		} catch (FueraRangoException e) {
 			System.out.println(e.getMessage());
 		}
 	}
-	
+
 }

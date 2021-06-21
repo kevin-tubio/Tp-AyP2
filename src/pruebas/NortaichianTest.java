@@ -5,7 +5,6 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import excepciones.DesmayadoException;
 import excepciones.EstadoPiedraException;
 import excepciones.FueraRangoException;
 import excepciones.MeditandoException;
@@ -46,7 +45,7 @@ public class NortaichianTest {
 		try {
 			this.nortaichianEnRango.atacar(this.wrives);
 			this.nortaichianEnRango.atacar(this.nortaichianFueraRango);
-		} catch (FueraRangoException | EstadoPiedraException | DesmayadoException e) {
+		} catch (FueraRangoException | EstadoPiedraException e) {
 			System.out.println(e.getMessage());
 		}
 
@@ -60,13 +59,13 @@ public class NortaichianTest {
 			this.wrives.atacar(this.nortaichianEnRango);
 			// Está enfurecido por lo cual su ataque se duplica
 			assertEquals(36, this.nortaichianEnRango.getAtaque());
-			
+
 			// Descansa para volver a su estado normal y poder atacar
 			this.nortaichianEnRango.descansar();
 			this.nortaichianEnRango.atacar(this.wrives);
 			this.nortaichianEnRango.atacar(this.reralopes);
 			assertEquals(18, this.nortaichianEnRango.getAtaque());
-		} catch (FueraRangoException | MeditandoException | EstadoPiedraException | DesmayadoException e) {
+		} catch (FueraRangoException | MeditandoException | EstadoPiedraException e) {
 			System.out.println(e.getMessage());
 		}
 
@@ -77,7 +76,7 @@ public class NortaichianTest {
 		try {
 			this.nortaichianEnRango.descansar();
 			this.nortaichianEnRango.atacar(this.nortaichianEnRango);
-		} catch (FueraRangoException | EstadoPiedraException | DesmayadoException e) {
+		} catch (FueraRangoException | EstadoPiedraException e) {
 			System.out.println(e.getMessage());
 		}
 	}
@@ -88,7 +87,7 @@ public class NortaichianTest {
 			this.nortaichianEnRango.atacar(this.nortaichianEnRango);
 			// Al descansar recupera su maxSalud
 			this.nortaichianEnRango.descansar();
-		} catch (FueraRangoException | EstadoPiedraException | DesmayadoException e) {
+		} catch (FueraRangoException | EstadoPiedraException e) {
 			System.out.println(e.getMessage());
 		}
 
@@ -99,7 +98,7 @@ public class NortaichianTest {
 	public void recibirAtaque() {
 		try {
 			this.wrives.atacar(this.nortaichianEnRango);
-		} catch (FueraRangoException | MeditandoException | DesmayadoException e) {
+		} catch (FueraRangoException | MeditandoException e) {
 			System.out.println(e.getMessage());
 		}
 

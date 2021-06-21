@@ -5,7 +5,6 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import excepciones.DesmayadoException;
 import excepciones.FueraRangoException;
 import personajes.Nortaichian;
 import personajes.Radeiteran;
@@ -43,34 +42,34 @@ public class RadeiteranTest {
 	public void atacarYRecibir() {
 		try {
 			this.radeiteranEnRango.atacar(this.radeiteranEnRango);
-		} catch (FueraRangoException | DesmayadoException e) {
+		} catch (FueraRangoException e) {
 			System.out.println(e.getMessage());
 		}
 
 		assertEquals(Unidad.Estado.DESMAYADO, this.radeiteranEnRango.getEstado());
 	}
-	
+
 	@Test
 	public void atacarFueraRango() {
 		try {
 			this.radeiteranEnRango.atacar(this.radeiteranFueraRango);
-		} catch (FueraRangoException | DesmayadoException e) {
+		} catch (FueraRangoException e) {
 			System.out.println(e.getMessage());
 		}
 	}
-	
+
 	@Test
 	public void comprobarAumentoAtaque() {
 		try {
 			this.radeiteranEnRango.atacar(this.nortaichian);
-			assertEquals(59,this.radeiteranEnRango.getAtaque());
-			
+			assertEquals(59, this.radeiteranEnRango.getAtaque());
+
 			this.radeiteranEnRango.atacar(this.wrives);
-			assertEquals(65,this.radeiteranEnRango.getAtaque());
-			
+			assertEquals(65, this.radeiteranEnRango.getAtaque());
+
 			this.radeiteranEnRango.atacar(this.nortaichian);
-			assertEquals(74,this.radeiteranEnRango.getAtaque());
-		} catch (FueraRangoException | DesmayadoException e) {
+			assertEquals(74, this.radeiteranEnRango.getAtaque());
+		} catch (FueraRangoException e) {
 			System.out.println(e.getMessage());
 		}
 	}
