@@ -70,7 +70,7 @@ public class Grupo extends Ejercito {
 					unidad.atacar(enemigo);
 					unidad.recibirAtaque(enemigo.getAtaque());
 				} catch (FueraRangoException | EstadoPiedraException e) {
-					System.out.println(e.getMessage());
+					unidad.recibirAtaque(enemigo.getAtaque());
 				} catch (MeditandoException e) {
 					unidad.recibirAtaque(enemigo.getAtaque());
 				}
@@ -113,7 +113,7 @@ public class Grupo extends Ejercito {
 						unidad.atacar(enemigo);
 						unidad.recibirAtaque(enemigo.getAtaque());
 					} catch (FueraRangoException | EstadoPiedraException e) {
-						System.out.println(e.getMessage());
+						unidad.recibirAtaque(enemigo.getAtaque());
 					} catch (MeditandoException e) {
 						unidad.recibirAtaque(enemigo.getAtaque());
 					}

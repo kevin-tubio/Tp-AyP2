@@ -8,8 +8,6 @@ import org.junit.Test;
 import excepciones.EjercitoDesmayadoException;
 import excepciones.FueraRangoException;
 import excepciones.MeditandoException;
-import mapa.Pueblo;
-import mapa.PuebloEnemigo;
 import personajes.Ejercito;
 import personajes.Grupo;
 import personajes.Nortaichian;
@@ -60,7 +58,7 @@ public class GrupoTest {
 		}
 
 		/* Si desmayado es true, significa que el ejercito fue derrotado */
-		assertEquals(false, this.grupoPropio.isDesmayado());
+		assertEquals(true, this.grupoPropio.isDesmayado());
 	}
 
 	@Test
@@ -129,7 +127,7 @@ public class GrupoTest {
 		} catch (FueraRangoException | MeditandoException e) {
 			System.out.println(e.getMessage());
 		}
-		
+
 		assertEquals(108, this.grupoPropio.getSaludInicial());
 	}
 
@@ -192,35 +190,6 @@ public class GrupoTest {
 		 * Con esto compruebo que el método setPosicion afecta a una unidad dentro del
 		 * grupo
 		 */
-	}
-
-	@Test
-	public void prueba003() {
-		Grupo ejercitoNativo = new Grupo();
-		ejercitoNativo.reclutar(new Reralopes());
-
-		Grupo ejercitoEnemigo = new Grupo();
-		ejercitoEnemigo.reclutar(new Reralopes());
-
-		try {
-			ejercitoNativo.pelear(ejercitoEnemigo);
-		} catch (EjercitoDesmayadoException e) {
-			System.out.println(e.getMessage());
-		}
-
-		assertEquals(1, ejercitoNativo.getCantidad());
-
-	}
-
-	@Test
-	public void prueba002() throws FueraRangoException, EjercitoDesmayadoException {
-
-		Grupo ejercitoNativo = new Grupo();
-		ejercitoNativo.reclutar(new Reralopes());
-
-		Pueblo puebloEnemigo = new PuebloEnemigo(new Grupo());
-		puebloEnemigo.visitarPueblo(ejercitoNativo);
-		assertEquals(1, ejercitoNativo.getCantidad());
 	}
 
 }
