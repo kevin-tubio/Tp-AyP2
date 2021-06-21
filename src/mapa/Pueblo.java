@@ -12,11 +12,9 @@ public class Pueblo {
 		this.ejercitoNativo = ejercitoNativo;
 	}
 
-	public Ejercito visitarPueblo(Ejercito propio) throws FueraRangoException, EjercitoDesmayadoException {
-		return ejercitoNativo;
-	}
+	public void visitarPueblo(Ejercito propio) throws FueraRangoException, EjercitoDesmayadoException {}
 
-	protected int consultarPrioridad() {
-		return 0;
+	public Ejercito obtenerEjercitoNativo() {
+		return this.ejercitoNativo;
 	}
 }

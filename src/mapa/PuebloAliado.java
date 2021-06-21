@@ -12,9 +12,10 @@ public class PuebloAliado extends Pueblo {
 	}
 
 	@Override
-	public Ejercito visitarPueblo(Ejercito propio) throws FueraRangoException, EjercitoDesmayadoException {
+	public void visitarPueblo(Ejercito propio) throws FueraRangoException, EjercitoDesmayadoException {
 		propio.descansar();
-		((Grupo)propio).reclutar(super.visitarPueblo(propio));
-		return propio;
+		if(super.obtenerEjercitoNativo() != null) {
+			((Grupo)propio).reclutar(super.obtenerEjercitoNativo());
+		}
 	}
 }

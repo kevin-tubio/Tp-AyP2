@@ -22,4 +22,8 @@ public class Mapa {
 	public ArrayDeque<Pueblo> obtenerTrayecto() throws DestinoInalcanzableException {
 		return this.grafo.calcularTrayecto();
 	}
+
+	public int calcularDuracionDelTrayecto() {
+		return this.grafo.getDistanciaAlDestino();
+	}
 }

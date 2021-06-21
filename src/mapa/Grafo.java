@@ -10,6 +10,7 @@ public class Grafo {
 	private Pueblo[] pueblos;
 	private LinkedList<Camino>[] caminosAdyacentes;
 	private int origen, destino;
+	private int distanciaAlDestino;
 
 	@SuppressWarnings("unchecked")
 	public Grafo(Pueblo[] pueblos) {
@@ -27,6 +28,28 @@ public class Grafo {
 	public void definirDestino(int origen, int destino) {
 		this.origen = origen-1;
 		this.destino = destino-1;
+	}
+	
+	public ArrayDeque<Pueblo> calcularTrayectoAlternativo() throws DestinoInalcanzableException {
+		ArrayDeque<Integer> cola = new ArrayDeque<Integer>();
+		int[] distancia = new int[pueblos.length];
+		int[] predecesor = new int[pueblos.length];
+		
+		inicializarDistancias(distancia);
+		
+		cola.offer(origen);
+		
+		while(!cola.isEmpty()) {
+			for(Camino adyacente : caminosAdyacentes[cola.poll()]) {
+				if(distancia[adyacente.destino()] == Integer.MAX_VALUE) {
+					distancia[adyacente.destino()] = distancia[adyacente.origen()] + adyacente.trayectoEnDias();
+					predecesor[adyacente.destino()] = adyacente.origen()+1;
+					cola.push(adyacente.destino());
+				}
+			}
+		}
+		
+		return devolverTrayecto(predecesor);
 	}
 	
 	public ArrayDeque<Pueblo> calcularTrayecto() throws DestinoInalcanzableException {
@@ -55,7 +78,9 @@ public class Grafo {
 			}
 		}
 
-		return devolverPueblosSegunRutaMasCorta(predecesor);
+		this.distanciaAlDestino = distancia[destino];
+		
+		return devolverTrayecto(predecesor);
 	}
 	
 	private int[] inicializarDistancias(int[] distancia) {
@@ -71,7 +96,7 @@ public class Grafo {
 		return !visitado[ad.destino()] && dist[ad.origen()] + ad.trayectoEnDias() < dist[ad.destino()];
 	}
 
-	private ArrayDeque<Pueblo> devolverPueblosSegunRutaMasCorta(int[] predecesor) throws DestinoInalcanzableException {
+	private ArrayDeque<Pueblo> devolverTrayecto(int[] predecesor) throws DestinoInalcanzableException {
 		ArrayDeque<Pueblo> trayecto = new ArrayDeque<Pueblo>();
 		int aux = destino;
 		while(predecesor[aux]-1 != -1) {
@@ -84,5 +109,9 @@ public class Grafo {
 		}
 		trayecto.push(pueblos[origen]);
 		return trayecto;
+	}
+
+	public int getDistanciaAlDestino() {
+		return distanciaAlDestino;
 	}
 }

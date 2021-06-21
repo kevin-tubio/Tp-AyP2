@@ -33,6 +33,7 @@ public class GrafoTest {
 		assertTrue(listaDePueblos[1] == resultado.pop());
 		assertTrue(listaDePueblos[2] == resultado.pop());
 		assertTrue(listaDePueblos[3] == resultado.pop());
+		assertEquals(22, grafo.getDistanciaAlDestino());
 	}
 	
 	@Test
@@ -49,7 +50,7 @@ public class GrafoTest {
 		listaDePueblos[7] = new PuebloAliado(null);
 		listaDePueblos[8] = new PuebloEnemigo(null);
 		listaDePueblos[9] = new PuebloAliado(null);
-		listaDePueblos[10] = new PuebloAliado(null);
+		listaDePueblos[10] = new PuebloEnemigo(null);
 		Grafo grafo = new Grafo(listaDePueblos);
 		grafo.agregarCamino(3, 7, 5);
 		grafo.agregarCamino(3, 6, 5);
@@ -75,6 +76,7 @@ public class GrafoTest {
 		assertTrue(listaDePueblos[5] == resultado.pop());
 		assertTrue(listaDePueblos[8] == resultado.pop());
 		assertTrue(listaDePueblos[10] == resultado.pop());
+		assertEquals(18, grafo.getDistanciaAlDestino());
 	}
 	
 	@Test
@@ -86,7 +88,7 @@ public class GrafoTest {
 		listaDePueblos[2] = new PuebloAliado(null);
 		listaDePueblos[3] = new PuebloEnemigo(null);
 		listaDePueblos[4] = new PuebloEnemigo(null);
-		listaDePueblos[5] = new PuebloAliado(null);
+		listaDePueblos[5] = new PuebloEnemigo(null);
 		Grafo grafo = new Grafo(listaDePueblos);
 		grafo.agregarCamino(1, 2, 10);
 		grafo.agregarCamino(1, 4, 10);
@@ -102,6 +104,7 @@ public class GrafoTest {
 		assertTrue(listaDePueblos[1] == resultado.pop());
 		assertTrue(listaDePueblos[2] == resultado.pop());
 		assertTrue(listaDePueblos[5] == resultado.pop());
+		assertEquals(16, grafo.getDistanciaAlDestino());
 	}
 		
 	@Test
@@ -135,6 +138,7 @@ public class GrafoTest {
 		assertTrue(listaDePueblos[1] == resultado.pop());
 		assertTrue(listaDePueblos[4] == resultado.pop());
 		assertTrue(listaDePueblos[5] == resultado.pop());
+		assertEquals(19, grafo.getDistanciaAlDestino());
 	}
 	
 	@Test
@@ -168,6 +172,7 @@ public class GrafoTest {
 		assertTrue(listaDePueblos[2] == resultado.pop());
 		assertTrue(listaDePueblos[3] == resultado.pop());
 		assertTrue(listaDePueblos[5] == resultado.pop());
+		assertEquals(19, grafo.getDistanciaAlDestino());
 	}
 	
 	@Test(expected = DestinoInalcanzableException.class)
@@ -179,7 +184,7 @@ public class GrafoTest {
 		listaDePueblos[2] = new PuebloAliado(null);
 		listaDePueblos[3] = new PuebloEnemigo(null);
 		listaDePueblos[4] = new PuebloEnemigo(null);
-		listaDePueblos[5] = new PuebloAliado(null);
+		listaDePueblos[5] = new PuebloEnemigo(null);
 		Grafo grafo = new Grafo(listaDePueblos);
 		grafo.agregarCamino(1, 4, 10);
 		grafo.agregarCamino(1, 2, 10);
@@ -200,7 +205,7 @@ public class GrafoTest {
 		listaDePueblos[2] = new PuebloAliado(null);
 		listaDePueblos[3] = new PuebloEnemigo(null);
 		listaDePueblos[4] = new PuebloEnemigo(null);
-		listaDePueblos[5] = new PuebloAliado(null);
+		listaDePueblos[5] = new PuebloEnemigo(null);
 		Grafo grafo = new Grafo(listaDePueblos);
 	
 		grafo.agregarCamino(2, 3, 5);
@@ -221,7 +226,7 @@ public class GrafoTest {
 		listaDePueblos[2] = new PuebloAliado(null);
 		listaDePueblos[3] = new PuebloEnemigo(null);
 		listaDePueblos[4] = new PuebloEnemigo(null);
-		listaDePueblos[5] = new PuebloAliado(null);
+		listaDePueblos[5] = new PuebloEnemigo(null);
 		Grafo grafo = new Grafo(listaDePueblos);
 		grafo.agregarCamino(1, 4, 10);
 		grafo.agregarCamino(1, 2, 10);
@@ -278,5 +283,6 @@ public class GrafoTest {
 		assertTrue(listaDePueblos[4] == resultado.pop());
 		assertTrue(listaDePueblos[7] == resultado.pop());
 		assertTrue(listaDePueblos[10] == resultado.pop());
+		assertEquals(20, grafo.getDistanciaAlDestino());
 	}
 }
