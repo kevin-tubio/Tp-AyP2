@@ -18,32 +18,28 @@ public class Nortaichian extends Unidad {
 
 	@Override
 	public void atacar(Ejercito unidad) throws FueraRangoException, EstadoPiedraException, DesmayadoException {
-		if (this.getEstado() != Unidad.Estado.DESMAYADO) {
-			if (!this.esPiedra) {
-				if (super.puedeAtacar(unidad)) {
-					unidad.recibirAtaque(super.getAtaque());
-					super.setSalud(super.getSalud() + ((super.getSalud() * 4) / 100));
-					if (this.ataques < 2) {
-						this.ataques++;
-					} else {
-						this.ataques = 0;
-						super.setAtaque(super.getAtaqueInicial());
-					}
-				} else {
-					throw new FueraRangoException("El personaje se encuentra fuera de rango");
-				}
-			} else {
+		if (!this.esPiedra) {
+			if (super.puedeAtacar(unidad)) {
+				unidad.recibirAtaque(super.getAtaque());
+				super.setSalud(super.getSalud() + ((super.getSalud() * 4) / 100));
 				if (this.ataques < 2) {
 					this.ataques++;
 				} else {
 					this.ataques = 0;
-					this.esPiedra = false;
-					this.fueAtacadoUnaVez = false;
+					super.setAtaque(super.getAtaqueInicial());
 				}
-				throw new EstadoPiedraException("No puedo atacar, estoy duro como una piedra");
+			} else {
+				throw new FueraRangoException("El personaje se encuentra fuera de rango");
 			}
 		} else {
-			throw new DesmayadoException("No puedo atacar, estoy desmayado");
+			if (this.ataques < 2) {
+				this.ataques++;
+			} else {
+				this.ataques = 0;
+				this.esPiedra = false;
+				this.fueAtacadoUnaVez = false;
+			}
+			throw new EstadoPiedraException("No puedo atacar, estoy duro como una piedra");
 		}
 
 	}

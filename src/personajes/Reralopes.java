@@ -16,29 +16,25 @@ public class Reralopes extends Unidad {
 
 	@Override
 	public void atacar(Ejercito unidad) throws FueraRangoException, DesmayadoException {
-		if (this.getEstado() != Unidad.Estado.DESMAYADO) {
-			if (super.puedeAtacar(unidad)) {
-				if (super.getCantAtaques() > 2) {
-					unidad.recibirAtaque(super.getAtaque());
-				}
-			} else {
-				throw new FueraRangoException("El personaje se encuentra fuera de rango");
-			}
-
-			if (super.getCantAtaques() < 4) {
-				super.setCantAtaques(1);
-			} else {
-				// Resetea la cant de ataques a 0
-				super.setCantAtaques(-3);
-			}
-
-			if (this.ataquesModificador == 4) {
-				super.setAtaque(super.getAtaqueInicial());
-			} else {
-				this.ataquesModificador++;
+		if (super.puedeAtacar(unidad)) {
+			if (super.getCantAtaques() > 2) {
+				unidad.recibirAtaque(super.getAtaque());
 			}
 		} else {
-			throw new DesmayadoException("No puedo atacar, estoy desmayado");
+			throw new FueraRangoException("El personaje se encuentra fuera de rango");
+		}
+
+		if (super.getCantAtaques() < 4) {
+			super.setCantAtaques(1);
+		} else {
+			// Resetea la cant de ataques a 0
+			super.setCantAtaques(-3);
+		}
+
+		if (this.ataquesModificador == 4) {
+			super.setAtaque(super.getAtaqueInicial());
+		} else {
+			this.ataquesModificador++;
 		}
 	}
 
