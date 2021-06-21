@@ -29,29 +29,7 @@ public class Grafo {
 		this.origen = origen-1;
 		this.destino = destino-1;
 	}
-	
-	public ArrayDeque<Pueblo> calcularTrayectoAlternativo() throws DestinoInalcanzableException {
-		ArrayDeque<Integer> cola = new ArrayDeque<Integer>();
-		int[] distancia = new int[pueblos.length];
-		int[] predecesor = new int[pueblos.length];
 		
-		inicializarDistancias(distancia);
-		
-		cola.offer(origen);
-		
-		while(!cola.isEmpty()) {
-			for(Camino adyacente : caminosAdyacentes[cola.poll()]) {
-				if(distancia[adyacente.destino()] == Integer.MAX_VALUE) {
-					distancia[adyacente.destino()] = distancia[adyacente.origen()] + adyacente.trayectoEnDias();
-					predecesor[adyacente.destino()] = adyacente.origen()+1;
-					cola.push(adyacente.destino());
-				}
-			}
-		}
-		
-		return devolverTrayecto(predecesor);
-	}
-	
 	public ArrayDeque<Pueblo> calcularTrayecto() throws DestinoInalcanzableException {
 		
 		PriorityQueue<Camino> caminosAEvaluar = new PriorityQueue<Camino>();
