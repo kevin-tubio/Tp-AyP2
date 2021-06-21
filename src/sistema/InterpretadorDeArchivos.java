@@ -108,25 +108,25 @@ public class InterpretadorDeArchivos {
 		switch(tipo) {
 		case "Wrives":
 			for(int i = 0; i < cantidadDeSoldados; i++) {
-				nuevoEjercito.reclutar(new Wrives());
+				nuevoEjercito.reclutarPropio(new Wrives());
 			}
 			break;
 
 		case "Radeiteran":
 			for(int i = 0; i < cantidadDeSoldados; i++) {
-				nuevoEjercito.reclutar(new Radeiteran());
+				nuevoEjercito.reclutarPropio(new Radeiteran());
 			}
 			break;
 			
 		case "Reralopes":
 			for(int i = 0; i < cantidadDeSoldados; i++) {
-				nuevoEjercito.reclutar(new Reralopes());
+				nuevoEjercito.reclutarPropio(new Reralopes());
 			}
 			break;
 			
 		case "Nortaichian":
 			for(int i = 0; i < cantidadDeSoldados; i++) {
-				nuevoEjercito.reclutar(new Nortaichian());
+				nuevoEjercito.reclutarPropio(new Nortaichian());
 			}
 			break;
 			
