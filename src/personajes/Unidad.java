@@ -95,8 +95,8 @@ public abstract class Unidad extends Ejercito {
 
 	public void recibirAtaque(int ataque) {
 		if (this.getSalud() - ataque <= 0) {
-			this.setSalud(0);
 			this.setEstado(Unidad.Estado.DESMAYADO);
+			this.setSalud(0);
 		} else {
 			this.salud -= ataque;
 		}

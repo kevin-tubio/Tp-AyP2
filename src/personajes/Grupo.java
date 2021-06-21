@@ -48,22 +48,36 @@ public class Grupo extends Ejercito {
 				unidad = ejercito.peek();
 				unidad.setPosicion(18);
 
-				enemigo = grupo.peek();
+				if (grupo.peek().getEstado() != Unidad.Estado.DESMAYADO) {
+					enemigo = grupo.peek();
+				} else {
+					/* Desencolo el enemigo desmayado para luchar con el siguiente */
+					grupo.poll();
+
+					/*
+					 * Si el ejercito enemigo se desmaya (su queue es vacia) corto la batalla, en
+					 * caso contrario, tomo el siguiente soldado
+					 */
+					if (grupo.isEmpty()) {
+						break;
+					} else {
+						enemigo = grupo.peek();
+					}
+				}
+
 				enemigo.setPosicion(18);
 
 				try {
 					unidad.atacar(enemigo);
-				} catch (FueraRangoException | MeditandoException | EstadoPiedraException | DesmayadoException e) {
+					unidad.recibirAtaque(enemigo.getAtaque());
+				} catch (FueraRangoException | MeditandoException | EstadoPiedraException e) {
 					System.out.println(e.getMessage());
-				}
-				unidad.recibirAtaque(grupo.peek().getAtaque());
-
-				// Si se desmaya lo desencolo y no lo vuelvo a encolar
-				if (unidad.getEstado() == Unidad.Estado.DESMAYADO) {
+				} catch (DesmayadoException e) {
+					/* Desencolo al soldado desmayado */
 					ejercito.poll();
 				}
-			}
 
+			}
 			/* Si nuestro ejercito perdió lanzo una exception */
 			if (ejercito.isEmpty()) {
 				this.setEstado(true);
@@ -71,7 +85,6 @@ public class Grupo extends Ejercito {
 			} else {
 				System.out.println("Vencedor: Ejercito propio");
 			}
-
 			// Si se redujo la vida lo encolo
 			if (unidad.getSalud() < unidad.getSaludInicial() && !ejercito.isEmpty()) {
 				ejercito.add(ejercito.poll());
@@ -105,6 +118,7 @@ public class Grupo extends Ejercito {
 		PriorityQueue<Ejercito> ejercito = this.getSoldados();
 
 		ejercito.peek().recibirAtaque(ataque);
+
 	}
 
 	/* Método que efectúa el descanso del ejercito */
@@ -135,6 +149,10 @@ public class Grupo extends Ejercito {
 	/* Método que agrega una unidad o un grupo al ejercito */
 	public void reclutar(Ejercito unidad) {
 		this.soldados.get(0).add(unidad);
+	}
+
+	public void reclutarPropio(Ejercito unidad) {
+		this.soldados.get(1).add(unidad);
 	}
 
 	public int getSalud() {
@@ -177,7 +195,7 @@ public class Grupo extends Ejercito {
 	}
 
 	public int getCantidad() {
-		return this.soldados.size();
+		return this.soldados.get(0).size() + this.soldados.get(1).size();
 	}
 
 	@Override

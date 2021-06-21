@@ -60,7 +60,7 @@ public class GrupoTest {
 		}
 
 		/* Si desmayado es true, significa que el ejercito fue derrotado */
-		assertEquals(true, this.grupoPropio.isDesmayado());
+		assertEquals(false, this.grupoPropio.isDesmayado());
 	}
 
 	@Test
@@ -71,12 +71,11 @@ public class GrupoTest {
 		this.grupoPropio.reclutar(raideiterean);
 
 		/* El size del ejercito es = 8 debido al reclutamiento en el método init() */
-		assertEquals(2, this.grupoPropio.getCantidad());
+		assertEquals(8, this.grupoPropio.getCantidad());
 	}
 
 	@Test
 	public void atacar() {
-		System.out.println(this.grupoPropio.getSoldados());
 		try {
 			/*
 			 * Se settea la posición debido a que por defecto es 0 y su modificación
@@ -195,7 +194,7 @@ public class GrupoTest {
 	}
 
 	@Test
-	public void prueba003() throws FueraRangoException, EjercitoDesmayadoException {
+	public void prueba003() {
 		Grupo ejercitoNativo = new Grupo();
 		ejercitoNativo.reclutar(new Reralopes());
 
@@ -204,10 +203,12 @@ public class GrupoTest {
 
 		try {
 			ejercitoNativo.pelear(ejercitoEnemigo);
-			assertEquals(1, ejercitoNativo.getCantidad());
 		} catch (EjercitoDesmayadoException e) {
-			fail();
+			System.out.println(e.getMessage());
 		}
+
+		assertEquals(1, ejercitoNativo.getCantidad());
+
 	}
 
 	@Test
