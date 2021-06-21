@@ -1,5 +1,6 @@
 package personajes;
 
+import excepciones.DesmayadoException;
 import excepciones.FueraRangoException;
 
 public class Radeiteran extends Unidad {
@@ -10,13 +11,17 @@ public class Radeiteran extends Unidad {
 	}
 
 	@Override
-	public void atacar(Ejercito unidad) throws FueraRangoException {
-		if (super.puedeAtacar(unidad)) {
-			unidad.recibirAtaque(super.getAtaque());
-			this.ataques++;
-			super.setAtaque(super.getAtaque() + (3 * this.ataques));
-		} else {
-			throw new FueraRangoException("El personaje se encuentra fuera de rango");
+	public void atacar(Ejercito unidad) throws FueraRangoException, DesmayadoException {
+		if (this.getEstado() != Unidad.Estado.DESMAYADO) {
+			if (super.puedeAtacar(unidad)) {
+				unidad.recibirAtaque(super.getAtaque());
+				this.ataques++;
+				super.setAtaque(super.getAtaque() + (3 * this.ataques));
+			} else {
+				throw new FueraRangoException("El personaje se encuentra fuera de rango");
+			}
+		}else {
+			throw new DesmayadoException("No puedo atacar, estoy desmayado");
 		}
 	}
 

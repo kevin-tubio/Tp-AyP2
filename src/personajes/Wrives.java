@@ -1,5 +1,6 @@
 package personajes;
 
+import excepciones.DesmayadoException;
 import excepciones.FueraRangoException;
 import excepciones.MeditandoException;
 
@@ -12,20 +13,24 @@ public class Wrives extends Unidad {
 	}
 
 	@Override
-	public void atacar(Ejercito unidad) throws FueraRangoException, MeditandoException {
-		if (!meditado) {
-			if (super.puedeAtacar(unidad)) {
-				if (super.getCantAtaques() % 2 == 0 && super.getCantAtaques() != 0) {
-					unidad.recibirAtaque(super.getAtaque() * 2);
+	public void atacar(Ejercito unidad) throws FueraRangoException, MeditandoException, DesmayadoException {
+		if (this.getEstado() != Unidad.Estado.DESMAYADO) {
+			if (!meditado) {
+				if (super.puedeAtacar(unidad)) {
+					if (super.getCantAtaques() % 2 == 0 && super.getCantAtaques() != 0) {
+						unidad.recibirAtaque(super.getAtaque() * 2);
+					} else {
+						unidad.recibirAtaque(super.getAtaque());
+					}
+					super.setCantAtaques(1);
 				} else {
-					unidad.recibirAtaque(super.getAtaque());
+					throw new FueraRangoException("El personaje se encuentra fuera de rango");
 				}
-				super.setCantAtaques(1);
 			} else {
-				throw new FueraRangoException("El personaje se encuentra fuera de rango");
+				throw new MeditandoException("No puedo atacar, estoy meditando");
 			}
 		} else {
-			throw new MeditandoException("No puedo atacar, estoy meditando");
+			throw new DesmayadoException("No puedo atacar, estoy desmayado");
 		}
 	}
 

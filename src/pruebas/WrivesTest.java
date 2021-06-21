@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
+import excepciones.DesmayadoException;
 import excepciones.FueraRangoException;
 import excepciones.MeditandoException;
 import personajes.Nortaichian;
@@ -43,7 +44,7 @@ public class WrivesTest {
 	public void atacarYRecibirEnRango() {
 		try {
 			this.wriveEnRango.atacar(this.wriveEnRango);
-		} catch (FueraRangoException | MeditandoException e) {
+		} catch (FueraRangoException | MeditandoException | DesmayadoException e) {
 			System.out.println(e.getMessage());
 		}
 
@@ -54,7 +55,7 @@ public class WrivesTest {
 	public void atacarFueraRango() {
 		try {
 			this.wriveEnRango.atacar(this.wriveFueraRango);
-		} catch (FueraRangoException | MeditandoException e) {
+		} catch (FueraRangoException | MeditandoException | DesmayadoException e) {
 			System.out.println(e.getMessage());
 		}
 
@@ -68,7 +69,7 @@ public class WrivesTest {
 			this.wriveEnRango.atacar(this.nortaichian);
 			// Segundo ataque, al atacar duplica su ataque
 			this.wriveEnRango.atacar(this.raideiterean);
-		} catch (FueraRangoException | MeditandoException e) {
+		} catch (FueraRangoException | MeditandoException | DesmayadoException e) {
 			System.out.println(e.getMessage());
 		}
 
@@ -83,7 +84,7 @@ public class WrivesTest {
 
 		try {
 			this.wriveEnRango.atacar(this.nortaichian);
-		} catch (FueraRangoException | MeditandoException e) {
+		} catch (FueraRangoException | MeditandoException | DesmayadoException e) {
 			System.out.println(e.getMessage());
 		}
 	}
@@ -92,7 +93,7 @@ public class WrivesTest {
 	public void atacarYDescansar() {
 		try {
 			this.wriveEnRango.atacar(this.reralopes);
-		} catch (FueraRangoException | MeditandoException e) {
+		} catch (FueraRangoException | MeditandoException | DesmayadoException e) {
 			System.out.println(e.getMessage());
 		}
 

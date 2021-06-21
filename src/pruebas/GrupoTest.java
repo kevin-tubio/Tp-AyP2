@@ -8,6 +8,8 @@ import org.junit.Test;
 import excepciones.EjercitoDesmayadoException;
 import excepciones.FueraRangoException;
 import excepciones.MeditandoException;
+import mapa.Pueblo;
+import mapa.PuebloEnemigo;
 import personajes.Ejercito;
 import personajes.Grupo;
 import personajes.Nortaichian;
@@ -69,18 +71,18 @@ public class GrupoTest {
 		this.grupoPropio.reclutar(raideiterean);
 
 		/* El size del ejercito es = 8 debido al reclutamiento en el método init() */
-		assertEquals(8, this.grupoPropio.getCantidad());
+		assertEquals(2, this.grupoPropio.getCantidad());
 	}
 
 	@Test
 	public void atacar() {
+		System.out.println(this.grupoPropio.getSoldados());
 		try {
 			/*
 			 * Se settea la posición debido a que por defecto es 0 y su modificación
 			 * automática se encuentra dentro del método pelear de la clase Grupo. Este caso
 			 * es uno en particular
 			 */
-
 			Ejercito unidad = this.grupoPropio.getSoldados().peek();
 			unidad.setPosicion(18);
 
@@ -190,6 +192,33 @@ public class GrupoTest {
 		 * Con esto compruebo que el método setPosicion afecta a una unidad dentro del
 		 * grupo
 		 */
+	}
+
+	@Test
+	public void prueba003() throws FueraRangoException, EjercitoDesmayadoException {
+		Grupo ejercitoNativo = new Grupo();
+		ejercitoNativo.reclutar(new Reralopes());
+
+		Grupo ejercitoEnemigo = new Grupo();
+		ejercitoEnemigo.reclutar(new Reralopes());
+
+		try {
+			ejercitoNativo.pelear(ejercitoEnemigo);
+			assertEquals(1, ejercitoNativo.getCantidad());
+		} catch (EjercitoDesmayadoException e) {
+			fail();
+		}
+	}
+
+	@Test
+	public void prueba002() throws FueraRangoException, EjercitoDesmayadoException {
+
+		Grupo ejercitoNativo = new Grupo();
+		ejercitoNativo.reclutar(new Reralopes());
+
+		Pueblo puebloEnemigo = new PuebloEnemigo(new Grupo());
+		puebloEnemigo.visitarPueblo(ejercitoNativo);
+		assertEquals(1, ejercitoNativo.getCantidad());
 	}
 
 }
