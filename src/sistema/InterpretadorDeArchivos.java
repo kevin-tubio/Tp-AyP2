@@ -34,7 +34,7 @@ public class InterpretadorDeArchivos {
 			try{
 				if(buffer != null) {
 					buffer.close(); 
-				}
+				}	
 			}
 			catch (IOException e) {
 				System.out.println(e.getMessage());
@@ -55,9 +55,9 @@ public class InterpretadorDeArchivos {
 		int aparicionesDePropio = 0;
 		
 		for(int i = 0; i < arreglo.length; i++) {	
-			String lineaActual = verificarLineaActual(buffer);	
+			String lineaActual = verificarLineaActual(buffer).replaceAll("\\s+"," ").strip();
 			String[] datosLinea = lineaActual.split(" ");
-			verificarNumeroDeDatos(datosLinea, 4);
+			verificarNumeroDeDatos(datosLinea, 4, "");
 			
 			if((Integer.parseInt(datosLinea[0])) != i+1) {
 				throw new FormatoInvalidoException("Linea " + numeroDeLinea + ": Numero de pueblo erroneo, los pueblos deben estar ordenados");
@@ -103,7 +103,7 @@ public class InterpretadorDeArchivos {
 			break;
 			
 		default:
-			throw new FormatoInvalidoException("Linea " + numeroDeLinea + ": raza de guerrero invalida");
+			throw new FormatoInvalidoException("Linea " + numeroDeLinea + ": Raza de guerrero invalida");
 		}
 		return nuevoEjercito;
 	}
@@ -120,17 +120,17 @@ public class InterpretadorDeArchivos {
 			return new PuebloEnemigo(ejercitoNativo);
 		
 		default:
-			throw new FormatoInvalidoException("Linea " + numeroDeLinea + ": relacion entre pueblos invalida");
+			throw new FormatoInvalidoException("Linea " + numeroDeLinea + ": Relacion entre pueblos invalida");
 		}
 	}
 	
 	private Grafo crearGrafo(BufferedReader buffer, Pueblo[] pueblos) throws IOException, FormatoInvalidoException {
-		String lineaActual = verificarLineaActual(buffer);
-		String[] datosLinea = lineaActual.split("->");
-		verificarNumeroDeDatos(datosLinea, 2 , "Se esperaban tres parametros, contando el separador");
+		String lineaActual = verificarLineaActual(buffer).replaceAll("\\s+"," ").strip();
+		String[] datosLinea = lineaActual.split(" -> ");
+		verificarNumeroDeDatos(datosLinea, 2, ", obviando el separador");
 		
-		int origen = Integer.parseInt(datosLinea[0].strip());
-		int destino = Integer.parseInt(datosLinea[1].strip());
+		int origen = Integer.parseInt(datosLinea[0]);
+		int destino = Integer.parseInt(datosLinea[1]);
 		Grafo grafo = new Grafo(pueblos);
 		grafo.definirDestino(origen, destino);
 		
@@ -142,12 +142,12 @@ public class InterpretadorDeArchivos {
 		
 		while(lineaActual != null) {
 			if (!lineaActual.strip().isEmpty()) {
-				String[] datoCaminos = lineaActual.split(" ");
-				verificarNumeroDeDatos(datoCaminos, 3);
+				String[] datoCaminos = lineaActual.replaceAll("\\s+"," ").strip().split(" ");
+				verificarNumeroDeDatos(datoCaminos, 3, "");
 				
-				int origen = Integer.parseInt(datoCaminos[0].strip());
-				int destino = Integer.parseInt(datoCaminos[1].strip());
-				int trayectoEnDias = Integer.parseInt(datoCaminos[2].strip());
+				int origen = Integer.parseInt(datoCaminos[0]);
+				int destino = Integer.parseInt(datoCaminos[1]);
+				int trayectoEnDias = Integer.parseInt(datoCaminos[2]);
 				grafo.agregarCamino(origen, destino, trayectoEnDias);
 			}
 			lineaActual = buffer.readLine();
@@ -160,23 +160,14 @@ public class InterpretadorDeArchivos {
 		String lineaActual = buffer.readLine();
 		numeroDeLinea++;
 		if(lineaActual == null || lineaActual.strip().isEmpty()) {
-			throw new FormatoInvalidoException("Linea " + numeroDeLinea + ": no deberia estar vacia");
+			throw new FormatoInvalidoException("Linea " + numeroDeLinea + ": No deberia estar vacia");
 		}
 		return lineaActual;
 	}
 
-	private void verificarNumeroDeDatos(String[] recibido, int esperado) throws FormatoInvalidoException {
-		verificarNumeroDeDatos(recibido, esperado, ("se esperaba " + esperado + " parametros"));	
-	}
-	
 	private void verificarNumeroDeDatos(String[] recibido, int esperado, String mensaje) throws FormatoInvalidoException {
 		if(recibido.length != esperado) {
-			throw new FormatoInvalidoException("Linea " + numeroDeLinea + ": " + mensaje);
-		}
-		for(int i = 1; i <= esperado; i++) {
-			if(recibido[i-1].strip().isEmpty()) {
-				throw new FormatoInvalidoException("Linea " + numeroDeLinea + ": Falta el parametro " + i);
-			}
+			throw new FormatoInvalidoException("Linea " + numeroDeLinea + ": Se esperaban " + esperado + " parametros" + mensaje);
 		}
 	}
 

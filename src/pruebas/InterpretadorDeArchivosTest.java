@@ -1,6 +1,7 @@
 package pruebas;
 
 import static org.junit.Assert.*;
+
 import org.junit.Test;
 import excepciones.DestinoInalcanzableException;
 import excepciones.EjercitoDesmayadoException;
@@ -11,16 +12,9 @@ import sistema.InterpretadorDeArchivos;
 
 public class InterpretadorDeArchivosTest {
 
+	
 	@Test
-	public void prueba001() throws InterpretadorException, DestinoInalcanzableException, FueraRangoException, EjercitoDesmayadoException {
-		InterpretadorDeArchivos interpretador = new InterpretadorDeArchivos();
-		Mapa mapa = interpretador.crearMapa("archivoDeEntrada/valido/consigna.txt");
-		
-		assertTrue(mapa != null);
-	}
-
-	@Test
-	public void prueba002() throws DestinoInalcanzableException, FueraRangoException, EjercitoDesmayadoException {
+	public void prueba001() throws DestinoInalcanzableException, FueraRangoException, EjercitoDesmayadoException {
 		InterpretadorDeArchivos interpretador = new InterpretadorDeArchivos();
 		Mapa mapa = null;
 		try{
@@ -32,7 +26,7 @@ public class InterpretadorDeArchivosTest {
 	}
 
 	@Test
-	public void prueba003() {
+	public void prueba002() {
 		InterpretadorDeArchivos interpretador = new InterpretadorDeArchivos();
 		String mensaje = "";
 		
@@ -43,11 +37,11 @@ public class InterpretadorDeArchivosTest {
 			mensaje = e.getMessage();
 		}
 		
-		assertEquals("Linea 6: Se esperaban tres parametros, contando el separador", mensaje);
+		assertEquals("Linea 6: Se esperaban 2 parametros, obviando el separador", mensaje);
 	}
 
 	@Test
-	public void prueba004() {
+	public void prueba003() {
 		InterpretadorDeArchivos interpretador = new InterpretadorDeArchivos();
 		String mensaje = "";
 		
@@ -58,11 +52,11 @@ public class InterpretadorDeArchivosTest {
 			mensaje = e.getMessage();
 		}
 		
-		assertEquals("Linea 1: no deberia estar vacia", mensaje);
+		assertEquals("Linea 1: No deberia estar vacia", mensaje);
 	}
 
 	@Test
-	public void prueba005() {
+	public void prueba004() {
 		InterpretadorDeArchivos interpretador = new InterpretadorDeArchivos();
 		String mensaje = "";
 		
@@ -73,11 +67,11 @@ public class InterpretadorDeArchivosTest {
 			mensaje = e.getMessage();
 		}
 		
-		assertEquals("Linea 4: Falta el parametro 2", mensaje);
+		assertEquals("Linea 4: Se esperaban 4 parametros", mensaje);
 	}
 
 	@Test
-	public void prueba006() {
+	public void prueba005() {
 		InterpretadorDeArchivos interpretador = new InterpretadorDeArchivos();
 		String mensaje = "";
 		
@@ -92,7 +86,7 @@ public class InterpretadorDeArchivosTest {
 	}
 
 	@Test
-	public void prueba007() {
+	public void prueba006() {
 		InterpretadorDeArchivos interpretador = new InterpretadorDeArchivos();
 		String mensaje = "";
 		
@@ -107,22 +101,22 @@ public class InterpretadorDeArchivosTest {
 	}
 
 	@Test
-	public void prueba008() {
+	public void prueba007() {
 		InterpretadorDeArchivos interpretador = new InterpretadorDeArchivos();
 		String mensaje = "";
 		
 		try {
 			interpretador.crearMapa("archivoDeEntrada/invalido/prueba1.txt");
-		}
+		} 
 		catch (InterpretadorException e) {
 			mensaje = e.getMessage();
 		}
 		
-		assertEquals("Linea 2: Falta el parametro 1", mensaje);
+		assertEquals("Linea 2: Se esperaban 4 parametros", mensaje);
 	}
 	
 	@Test
-	public void prueba009() {
+	public void prueba008() {
 		InterpretadorDeArchivos interpretador = new InterpretadorDeArchivos();
 		String mensaje = "";
 		
@@ -137,7 +131,7 @@ public class InterpretadorDeArchivosTest {
 	}
 	
 	@Test
-	public void prueba0010() {
+	public void prueba009() {
 		InterpretadorDeArchivos interpretador = new InterpretadorDeArchivos();
 		String mensaje = "";
 		
@@ -152,7 +146,7 @@ public class InterpretadorDeArchivosTest {
 	}
 	
 	@Test
-	public void prueba0011() {
+	public void prueba010() {
 		InterpretadorDeArchivos interpretador = new InterpretadorDeArchivos();
 		String mensaje = "";
 		
@@ -163,11 +157,11 @@ public class InterpretadorDeArchivosTest {
 			mensaje = e.getMessage();
 		}
 		
-		assertEquals("Linea 4: relacion entre pueblos invalida", mensaje);
+		assertEquals("Linea 4: Relacion entre pueblos invalida", mensaje);
 	}
 	
 	@Test
-	public void prueba0012() {
+	public void prueba011() {
 		InterpretadorDeArchivos interpretador = new InterpretadorDeArchivos();
 		String mensaje = "";
 		
@@ -178,6 +172,6 @@ public class InterpretadorDeArchivosTest {
 			mensaje = e.getMessage();
 		}
 		
-		assertEquals("Linea 2: raza de guerrero invalida", mensaje);
+		assertEquals("Linea 2: Raza de guerrero invalida", mensaje);
 	}
 }
