@@ -1,6 +1,5 @@
 package personajes;
 
-import excepciones.DesmayadoException;
 import excepciones.FueraRangoException;
 import excepciones.MeditandoException;
 
@@ -13,7 +12,7 @@ public class Wrives extends Unidad {
 	}
 
 	@Override
-	public void atacar(Ejercito unidad) throws FueraRangoException, MeditandoException, DesmayadoException {
+	public void atacar(Ejercito unidad) throws FueraRangoException, MeditandoException {
 		if (!meditado) {
 			if (super.puedeAtacar(unidad)) {
 				if (super.getCantAtaques() % 2 == 0 && super.getCantAtaques() != 0) {

@@ -3,7 +3,6 @@ package personajes;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
 
-import excepciones.DesmayadoException;
 import excepciones.EjercitoDesmayadoException;
 import excepciones.EstadoPiedraException;
 import excepciones.FueraRangoException;
@@ -72,9 +71,6 @@ public class Grupo extends Ejercito {
 					unidad.recibirAtaque(enemigo.getAtaque());
 				} catch (FueraRangoException | MeditandoException | EstadoPiedraException e) {
 					System.out.println(e.getMessage());
-				} catch (DesmayadoException e) {
-					/* Desencolo al soldado desmayado */
-					ejercito.poll();
 				}
 
 			}
@@ -104,7 +100,7 @@ public class Grupo extends Ejercito {
 			PriorityQueue<Ejercito> ejercito = this.getSoldados();
 
 			ejercito.peek().atacar(enemigo);
-		} catch (FueraRangoException | MeditandoException | EstadoPiedraException | DesmayadoException e) {
+		} catch (FueraRangoException | MeditandoException | EstadoPiedraException e) {
 			System.out.println(e.getMessage());
 		}
 	}

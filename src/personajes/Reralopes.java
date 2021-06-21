@@ -1,6 +1,5 @@
 package personajes;
 
-import excepciones.DesmayadoException;
 import excepciones.FueraRangoException;
 
 public class Reralopes extends Unidad {
@@ -15,7 +14,7 @@ public class Reralopes extends Unidad {
 	}
 
 	@Override
-	public void atacar(Ejercito unidad) throws FueraRangoException, DesmayadoException {
+	public void atacar(Ejercito unidad) throws FueraRangoException {
 		if (super.puedeAtacar(unidad)) {
 			if (super.getCantAtaques() > 2) {
 				unidad.recibirAtaque(super.getAtaque());
