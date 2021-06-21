@@ -14,6 +14,10 @@ public class Pueblo {
 
 	public void visitarPueblo(Ejercito propio) throws FueraRangoException, EjercitoDesmayadoException {}
 
+	/**
+	 * post: devuelve la referencia al ejercito de este pueblo.
+	 * @return
+	 */
 	public Ejercito obtenerEjercitoNativo() {
 		return this.ejercitoNativo;
 	}

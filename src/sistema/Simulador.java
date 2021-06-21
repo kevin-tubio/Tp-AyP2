@@ -11,6 +11,12 @@ import personajes.Ejercito;
 
 public class Simulador {
 
+	/**
+	 * pre : 'ruta' es la direccion de un archivo valido
+	 * post: simula la conquista de la tierra de fantasia, imprime por pantalla si la conquista es factible y la duracion de la misma.
+	 * @param ruta
+	 * @throws EjercitoDesmayadoException
+	 */
 	public void simularConquista(String ruta) throws EjercitoDesmayadoException {
 		try {	
 			InterpretadorDeArchivos interp = new InterpretadorDeArchivos();
@@ -43,6 +49,10 @@ public class Simulador {
 		}
 	}
 
+	/**
+	 * post: devuelve la referencia al ejercito del primer elemento de la pila de pueblos 'trayecto'
+	 * @param trayecto
+	 */
 	private Ejercito obtenerEjercitoPropio(ArrayDeque<Pueblo> trayecto) throws FueraRangoException, EjercitoDesmayadoException {
 		return trayecto.pop().obtenerEjercitoNativo();
 	}

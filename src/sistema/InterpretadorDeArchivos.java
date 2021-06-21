@@ -15,6 +15,17 @@ public class InterpretadorDeArchivos {
 
 	private int numeroDeLinea;
 
+	/**
+	 * pre : la direccion 'ruta' contiene una archivo de entrada valido.
+	 * 		 el archivo de entrada tiene un formato correcto.
+	 * 
+	 * post: interpreta el archivo de entrada de la dirreccion 'ruta' y crea 
+	 * 		 un mapa segun las especificaciones del archivo.
+	 * 		 lanza una excepcion y muestra un mensaje si el archivo no pudo ser interpretado correctamente.
+	 * @param ruta
+	 * @return
+	 * @throws InterpretadorException
+	 */
 	public Mapa crearMapa(String ruta) throws InterpretadorException {
 		BufferedReader buffer = null;
 		try {
@@ -43,6 +54,10 @@ public class InterpretadorDeArchivos {
 		return null; 
 	}
 
+	/**
+	 * pre : archivo de entrada valido.
+	 * post: crea un arreglo vacio de tipo Pueblo, el tamanio del arreglo depende del archivo de entrada.
+	 */
 	private Pueblo[] crearArregloPueblos(BufferedReader buffer) throws FormatoInvalidoException, IOException {
 		
 		String lineaActual = verificarLineaActual(buffer);
@@ -51,6 +66,13 @@ public class InterpretadorDeArchivos {
 		return inicializarArregloPueblos(buffer, listaDePueblos);
 	}
 
+	/**
+	 * pre : archivo de entrada valido.
+	 * post: crea pueblos segun el archivo de entrada y los almacena en 'arreglo', la cantidad, el tipo y la ocupacion
+	 * 		 cada pueblo depende del archivo de entrada.
+	 *
+	 * @param arreglo
+	 */
 	private Pueblo[] inicializarArregloPueblos(BufferedReader buffer, Pueblo[] arreglo) throws FormatoInvalidoException, IOException {
 		int aparicionesDePropio = 0;
 		
@@ -75,6 +97,12 @@ public class InterpretadorDeArchivos {
 		return arreglo;
 	}
 
+	/**
+	 * pre : archivo de entrada valido.
+	 * post: crea un ejercito de personajes.
+	 * @param cantidadDeSoldados
+	 * @param tipo
+	 */
 	private Ejercito crearEjercito(int cantidadDeSoldados, String tipo) throws FormatoInvalidoException {
 		Grupo nuevoEjercito = new Grupo();
 		switch(tipo) {
@@ -108,6 +136,12 @@ public class InterpretadorDeArchivos {
 		return nuevoEjercito;
 	}
 
+	/** 
+	 * pre : archivo de entrada valido.
+	 * post: crea un pueblo segun la 'relacion' y almacena en el mismo a 'ejercitoNativo'.
+	 * @param ejercitoNativo
+	 * @param relacion
+	 */
 	private Pueblo crearPueblo(Ejercito ejercitoNativo, String relacion) throws FormatoInvalidoException {
 		switch(relacion) {
 		case "propio":
@@ -124,6 +158,12 @@ public class InterpretadorDeArchivos {
 		}
 	}
 	
+	/**
+	 * pre : archivo de entrada valido.
+	 * post: crea un grafo para contener los pueblos del arreglo 'pueblos'.
+	 * 		 define el pueblo de origen y el pueblo de destino segun el archivo de entrada.
+	 * @param pueblos
+	 */
 	private Grafo crearGrafo(BufferedReader buffer, Pueblo[] pueblos) throws IOException, FormatoInvalidoException {
 		String lineaActual = verificarLineaActual(buffer).replaceAll("\\s+"," ").strip();
 		String[] datosLinea = lineaActual.split(" -> ");
@@ -137,6 +177,11 @@ public class InterpretadorDeArchivos {
 		return crearCaminosParaGrafo(buffer, grafo);
 	}
 
+	/**
+	 * pre : archivo de entrada valido
+	 * post: establece los caminos entre cada pueblo segun el archivo de entrada.
+	 * @param grafo
+	 */
 	private Grafo crearCaminosParaGrafo(BufferedReader buffer, Grafo grafo) throws FormatoInvalidoException, IOException {
 		String lineaActual = verificarLineaActual(buffer);
 		
@@ -156,6 +201,9 @@ public class InterpretadorDeArchivos {
 		return grafo;
 	}
 
+	/**
+	 * post: lanza una excepcion si la linea actual del archivo esta vacia o es nula.
+	 */
 	private String verificarLineaActual(BufferedReader buffer) throws FormatoInvalidoException, IOException {
 		String lineaActual = buffer.readLine();
 		numeroDeLinea++;
@@ -165,12 +213,26 @@ public class InterpretadorDeArchivos {
 		return lineaActual;
 	}
 
+	/**
+	 * pre : archivo de entrada valido.
+	 * post: lanza una excepcion si los datos interpretados del archivo ('recibido') no son tantos como 'esperado'.
+	 * @param recibido
+	 * @param esperado
+	 * @param mensaje
+	 * @throws FormatoInvalidoException
+	 */
 	private void verificarNumeroDeDatos(String[] recibido, int esperado, String mensaje) throws FormatoInvalidoException {
 		if(recibido.length != esperado) {
 			throw new FormatoInvalidoException("Linea " + numeroDeLinea + ": Se esperaban " + esperado + " parametros" + mensaje);
 		}
 	}
 
+	/**
+	 * pre : archivo de entrada valido.
+	 * post: lanza una excepcion si en el archivo de entrada se hace referencia personajes propios mas de una vez.
+	 * @param dato
+	 * @param aparicionesDePropio
+	 */
 	private int verificarAparicionesDePropio(String dato, int aparicionesDePropio) throws FormatoInvalidoException {
 		if(dato.equals("propio")) {
 			aparicionesDePropio++;

@@ -11,6 +11,10 @@ public class PuebloEnemigo extends Pueblo {
 		super(ejercitoNativo);
 	}
 
+	/**
+	 * pre : 'propio' no es nulo.
+	 * post: hace que el ejercito 'propio' pelee con el ejercito nativo de este pueblo.
+	 */
 	@Override
 	public void visitarPueblo(Ejercito propio) throws FueraRangoException, EjercitoDesmayadoException {
 		if(propio != null) {
