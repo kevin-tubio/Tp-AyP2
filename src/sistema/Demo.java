@@ -6,15 +6,13 @@ import java.io.InputStreamReader;
 
 import excepciones.EjercitoDesmayadoException;
 import excepciones.InterpretadorException;
-import excepciones.RutaInvalidaException;
 
 public class Demo {
 
 	private static BufferedReader buffer;
-	private static Simulador simulador;
 	
 	public static void main(String[] args) {
-
+		Simulador simulador = null;
 		try {
 			buffer = new BufferedReader(new InputStreamReader(System.in));
 			boolean ejecutando = true;
@@ -52,15 +50,10 @@ public class Demo {
 					finalizarPrograma();
 					ejecutando = false;
 				}
-				catch (RutaInvalidaException e) {
+				catch (InterpretadorException e) {
 					System.out.println("Problema con el archivo de entrada: " + e.getMessage());
 					System.out.println("Intente nuevamente");
 					esperarEnter();
-				}
-				catch (InterpretadorException e) {
-					System.out.println("Problema con el archivo de entrada: " + e.getMessage());
-					finalizarPrograma();
-					ejecutando = false;
 				}
 			}
 		}
