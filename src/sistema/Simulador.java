@@ -17,7 +17,7 @@ public class Simulador {
 	 * @param ruta
 	 * @throws EjercitoDesmayadoException
 	 */
-	public void simularConquista(String ruta) throws EjercitoDesmayadoException {
+	public void simularConquista(String ruta) throws EjercitoDesmayadoException, InterpretadorException {
 		try {	
 			InterpretadorDeArchivos interp = new InterpretadorDeArchivos();
 
@@ -37,9 +37,6 @@ public class Simulador {
 			}
 			System.out.println("La conquista es factible");
 			System.out.println("La conquista toma " + duracion + " dias");
-		}
-		catch (InterpretadorException e) {
-			System.out.println("Problema con el archivo de entrada: " + e.getMessage());
 		}
 		catch (DestinoInalcanzableException e) {
 			System.out.println(e.getMessage());
