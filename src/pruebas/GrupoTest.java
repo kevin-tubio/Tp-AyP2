@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import excepciones.EjercitoDesmayadoException;
+import excepciones.EstadoPiedraException;
 import excepciones.FueraRangoException;
 import excepciones.MeditandoException;
 import personajes.Ejercito;
@@ -84,7 +85,7 @@ public class GrupoTest {
 			unidad.setPosicion(18);
 
 			this.grupoPropio.atacar(this.grupoEnemigo.getSoldados().peek());
-		} catch (FueraRangoException | MeditandoException e) {
+		} catch (FueraRangoException | MeditandoException | EstadoPiedraException e) {
 			System.out.println(e.getMessage());
 		}
 
@@ -106,7 +107,7 @@ public class GrupoTest {
 			unidad.setPosicion(18);
 
 			this.grupoEnemigo.atacar(this.grupoPropio.getSoldados().peek());
-		} catch (FueraRangoException | MeditandoException e) {
+		} catch (FueraRangoException | MeditandoException | EstadoPiedraException e) {
 			System.out.println(e.getMessage());
 		}
 
@@ -124,7 +125,7 @@ public class GrupoTest {
 	public void saludInicial() {
 		try {
 			this.grupoEnemigo.atacar(this.grupoPropio.getSoldados().peek());
-		} catch (FueraRangoException | MeditandoException e) {
+		} catch (FueraRangoException | MeditandoException | EstadoPiedraException e) {
 			System.out.println(e.getMessage());
 		}
 
@@ -191,5 +192,4 @@ public class GrupoTest {
 		 * grupo
 		 */
 	}
-
 }

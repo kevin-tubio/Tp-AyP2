@@ -15,12 +15,8 @@ public class Wrives extends Unidad {
 	public void atacar(Ejercito unidad) throws FueraRangoException, MeditandoException {
 		if (!meditado) {
 			if (super.puedeAtacar(unidad)) {
-				if (super.getCantAtaques() % 2 == 0 && super.getCantAtaques() != 0) {
-					unidad.recibirAtaque(super.getAtaque() * 2);
-				} else {
-					unidad.recibirAtaque(super.getAtaque());
-				}
-				super.setCantAtaques(1);
+				unidad.recibirAtaque(super.getAtaque() * (1 + super.getContadorAtaques() % 2));
+				super.setContadorAtaques(super.getContadorAtaques() + 1);
 			} else {
 				throw new FueraRangoException("El personaje se encuentra fuera de rango");
 			}

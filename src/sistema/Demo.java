@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import excepciones.EjercitoDesmayadoException;
+import excepciones.InterpretadorException;
+import excepciones.RutaInvalidaException;
 
 public class Demo {
 
@@ -28,8 +30,7 @@ public class Demo {
 						String ruta = buffer.readLine();
 						print("");
 						simulador.simularConquista(ruta);
-						print("", "-----------------------------------------------------------------", "Progama Terminado.");
-						print("-----------------------------------------------------------------");
+						finalizarPrograma();
 						ejecutando = false;
 						break;
 
@@ -48,7 +49,18 @@ public class Demo {
 				} 
 				catch (EjercitoDesmayadoException e) {
 					print("La conquista no es factible");
+					finalizarPrograma();
+					ejecutando = false;
+				}
+				catch (RutaInvalidaException e) {
+					System.out.println("Problema con el archivo de entrada: " + e.getMessage());
+					System.out.println("Intente nuevamente");
 					esperarEnter();
+				}
+				catch (InterpretadorException e) {
+					System.out.println("Problema con el archivo de entrada: " + e.getMessage());
+					finalizarPrograma();
+					ejecutando = false;
 				}
 			}
 		}
@@ -97,5 +109,10 @@ public class Demo {
 	private static void esperarEnter(String mensaje) throws IOException {
 		print(mensaje, "Pulse enter para continuar");
 		buffer.readLine();
+	}
+	
+	private static void finalizarPrograma() {
+		print("", "-----------------------------------------------------------------", "Progama Terminado.");
+		print("-----------------------------------------------------------------");
 	}
 }
