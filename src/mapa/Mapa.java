@@ -38,4 +38,18 @@ public class Mapa {
 	public int calcularDuracionDelTrayecto() {
 		return this.grafo.getDistanciaAlDestino();
 	}
+	
+	/**
+	 * pre : el pueblo destino es alcanzable ya que hay un camino que lo conecta directa o indirectamente con el pueblo de origen.
+	 * post: devuelve una pila de pueblos ordenada segun el trayecto alternativo de la conquista.
+	 * @return
+	 * @throws DestinoInalcanzableException
+	 */
+	public ArrayDeque<Pueblo> obtenerTrayectoAlternativo() throws DestinoInalcanzableException {
+		return this.grafo.calcularTrayectoAlternativo();
+	}
+	
+	public static void resetearMapa() {
+		Mapa.instancia = null;
+	}
 }

@@ -12,7 +12,7 @@ public class Demo {
 	private static BufferedReader buffer;
 	
 	public static void main(String[] args) {
-		Simulador simulador = null;
+		String ruta = null;
 		try {
 			buffer = new BufferedReader(new InputStreamReader(System.in));
 			boolean ejecutando = true;
@@ -24,12 +24,11 @@ public class Demo {
 					switch (opcion) {
 					case 1:
 						presentarOpcion(1, "Escriba la ruta y nombre del archivo Ej: directorio/archivo.txt");
-						simulador = new Simulador();
-						String ruta = buffer.readLine();
+						Simulador simulador = new Simulador();
+						ruta = buffer.readLine();
 						print("");
 						simulador.simularConquista(ruta);
-						finalizarPrograma();
-						ejecutando = false;
+						esperarEnter();
 						break;
 
 					case 2:
@@ -38,7 +37,8 @@ public class Demo {
 						break;
 
 					default:
-						esperarEnter("Opcion invalida");
+						print("", "Opcion invalida");
+						esperarEnter();
 					}
 				}
 				catch (NumberFormatException e) {
@@ -47,12 +47,13 @@ public class Demo {
 				} 
 				catch (EjercitoDesmayadoException e) {
 					print("La conquista no es factible");
-					finalizarPrograma();
-					ejecutando = false;
+					print("-----------------------------------------------------------------");
+					ofrecerAlternativa(buffer, ruta);
+					esperarEnter();
 				}
 				catch (InterpretadorException e) {
 					System.out.println("Problema con el archivo de entrada: " + e.getMessage());
-					System.out.println("Intente nuevamente");
+					System.out.println("Pruebe con un archivo valido");
 					esperarEnter();
 				}
 			}
@@ -72,6 +73,39 @@ public class Demo {
 		}
 	}
 	
+	private static void ofrecerAlternativa(BufferedReader buffer, String ruta) throws IOException {
+		boolean ejecutando = true;
+		while (ejecutando) {
+			try {
+				print("¿Desea reintentar la conquista usando otro camino?", "si / no");
+				switch (buffer.readLine()) {
+				case "si":
+					Simulador simulador = new Simulador();
+					print("");
+					simulador.simularConquistaAlternativa(ruta);
+					ejecutando = false;
+					break;
+					
+				case "no":
+					print("");
+					ejecutando = false;
+					break;
+				
+				default:
+					print("", "Opcion invalida");
+					esperarEnter();
+				}
+			}
+			catch (EjercitoDesmayadoException e) {
+				print("La conquista no es factible por el camino alternativo, pruebe con otro archivo");
+				ejecutando = false;
+			}
+			catch (InterpretadorException e) {
+				System.out.println("Problema con el archivo de entrada: " + e.getMessage());
+			}
+		}
+	}
+
 	private static void imprimirOpcionesMenu() {
 		print("|***************************************************************|");
 		print("|-------------Elija una opcion ingresando un entero-------------|");
@@ -102,10 +136,5 @@ public class Demo {
 	private static void esperarEnter(String mensaje) throws IOException {
 		print(mensaje, "Pulse enter para continuar");
 		buffer.readLine();
-	}
-	
-	private static void finalizarPrograma() {
-		print("", "-----------------------------------------------------------------", "Progama Terminado.");
-		print("-----------------------------------------------------------------");
 	}
 }

@@ -285,4 +285,32 @@ public class GrafoTest {
 		assertTrue(listaDePueblos[10] == resultado.pop());
 		assertEquals(20, grafo.getDistanciaAlDestino());
 	}
+	
+	@Test
+	public void prueba010() throws DestinoInalcanzableException {
+	
+		Pueblo[] listaDePueblos = new Pueblo[5];
+		
+		listaDePueblos[0] = new Pueblo(null);
+		listaDePueblos[1] = new PuebloAliado(null);
+		listaDePueblos[2] = new PuebloEnemigo(null);
+		listaDePueblos[3] = new PuebloAliado(null);
+		listaDePueblos[4] = new PuebloEnemigo(null);
+		
+		Grafo grafo = new Grafo(listaDePueblos);
+		grafo.agregarCamino(1, 2, 2);
+		grafo.agregarCamino(1, 3, 6);
+		grafo.agregarCamino(1, 4, 7);
+		grafo.agregarCamino(2, 4, 3);
+		grafo.agregarCamino(2, 5, 6);
+		grafo.agregarCamino(3, 5, 1);
+		grafo.agregarCamino(4, 5, 5);
+		grafo.definirDestino(1, 5);
+		
+		ArrayDeque<Pueblo> trayectoAlternativo = grafo.calcularTrayectoAlternativo();
+		assertTrue(listaDePueblos[0] == trayectoAlternativo.pop());
+		assertTrue(listaDePueblos[1] == trayectoAlternativo.pop());
+		assertTrue(listaDePueblos[4] == trayectoAlternativo.pop());
+		assertEquals(8, grafo.getDistanciaAlDestino());
+	}
 }

@@ -80,6 +80,37 @@ public class Grafo {
 	}
 	
 	/**
+	 * pre : el pueblo destino es alcanzable ya que hay un camino que lo conecta directa o indirectamente con el pueblo de origen.
+	 * post: busca un camino por el cual llegar al destino pasando por la menor cantidad de pueblos posible y que el camino entre cada 
+	 * 		 pueblo sea el mas corto posible.
+	 * @return
+	 * @throws DestinoInalcanzableException
+	 */
+	public ArrayDeque<Pueblo> calcularTrayectoAlternativo() throws DestinoInalcanzableException {
+		PriorityQueue<Camino> cola = new PriorityQueue<Camino>();
+		int[] distancia = new int[pueblos.length];
+		int[] predecesor = new int[pueblos.length];
+		
+		inicializarDistancias(distancia);
+		
+		cola.offer(new Camino(origen+1, origen+1, 0));
+		
+		while(!cola.isEmpty()) {
+			for(Camino adyacente : caminosAdyacentes[cola.poll().destino()]) {
+				if(distancia[adyacente.destino()] == Integer.MAX_VALUE) {
+					distancia[adyacente.destino()] = distancia[adyacente.origen()] + adyacente.trayectoEnDias();
+					predecesor[adyacente.destino()] = adyacente.origen()+1;
+					cola.offer(adyacente);
+				}
+			}
+		}
+		
+		this.distanciaAlDestino = distancia[destino];
+		
+		return devolverTrayecto(predecesor);
+	}
+	
+	/**
 	 * post: establece la distancia entre cada pueblo como infinita.
 	 * @param distancia
 	 * @return
