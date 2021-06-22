@@ -6,10 +6,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import excepciones.EjercitoDesmayadoException;
+import excepciones.EstadoPiedraException;
 import excepciones.FueraRangoException;
 import excepciones.MeditandoException;
-import mapa.Pueblo;
-import mapa.PuebloEnemigo;
 import personajes.Ejercito;
 import personajes.Grupo;
 import personajes.Nortaichian;
@@ -86,7 +85,7 @@ public class GrupoTest {
 			unidad.setPosicion(18);
 
 			this.grupoPropio.atacar(this.grupoEnemigo.getSoldados().peek());
-		} catch (FueraRangoException | MeditandoException e) {
+		} catch (FueraRangoException | MeditandoException | EstadoPiedraException e) {
 			System.out.println(e.getMessage());
 		}
 
@@ -108,7 +107,7 @@ public class GrupoTest {
 			unidad.setPosicion(18);
 
 			this.grupoEnemigo.atacar(this.grupoPropio.getSoldados().peek());
-		} catch (FueraRangoException | MeditandoException e) {
+		} catch (FueraRangoException | MeditandoException | EstadoPiedraException e) {
 			System.out.println(e.getMessage());
 		}
 
@@ -126,7 +125,7 @@ public class GrupoTest {
 	public void saludInicial() {
 		try {
 			this.grupoEnemigo.atacar(this.grupoPropio.getSoldados().peek());
-		} catch (FueraRangoException | MeditandoException e) {
+		} catch (FueraRangoException | MeditandoException | EstadoPiedraException e) {
 			System.out.println(e.getMessage());
 		}
 		
@@ -193,34 +192,4 @@ public class GrupoTest {
 		 * grupo
 		 */
 	}
-
-	@Test
-	public void prueba003() {
-		Grupo ejercitoNativo = new Grupo();
-		ejercitoNativo.reclutar(new Reralopes());
-
-		Grupo ejercitoEnemigo = new Grupo();
-		ejercitoEnemigo.reclutar(new Reralopes());
-
-		try {
-			ejercitoNativo.pelear(ejercitoEnemigo);
-		} catch (EjercitoDesmayadoException e) {
-			System.out.println(e.getMessage());
-		}
-
-		assertEquals(1, ejercitoNativo.getCantidad());
-
-	}
-
-	@Test
-	public void prueba002() throws FueraRangoException, EjercitoDesmayadoException {
-
-		Grupo ejercitoNativo = new Grupo();
-		ejercitoNativo.reclutar(new Reralopes());
-
-		Pueblo puebloEnemigo = new PuebloEnemigo(new Grupo());
-		puebloEnemigo.visitarPueblo(ejercitoNativo);
-		assertEquals(1, ejercitoNativo.getCantidad());
-	}
-
 }

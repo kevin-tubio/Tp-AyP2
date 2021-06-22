@@ -1,8 +1,6 @@
 package personajes;
 
-import java.util.LinkedList;
 import java.util.PriorityQueue;
-
 import excepciones.EjercitoDesmayadoException;
 import excepciones.EstadoPiedraException;
 import excepciones.FueraRangoException;
@@ -10,137 +8,51 @@ import excepciones.MeditandoException;
 
 public class Grupo extends Ejercito {
 
-	private LinkedList<PriorityQueue<Ejercito>> soldados;
 	private PriorityQueue<Ejercito> aliados;
 	private PriorityQueue<Ejercito> propios;
-	private boolean estado;
 
 	public Grupo() {
-		super();
-		this.soldados = new LinkedList<PriorityQueue<Ejercito>>();
 		this.aliados = new PriorityQueue<Ejercito>(new UnidadComparator());
 		this.propios = new PriorityQueue<Ejercito>(new UnidadComparator());
-		this.estado = false;
-		this.soldados.add(this.aliados);
-		this.soldados.add(this.propios);
 	}
 
-	/*
-	 * Método que inicializa la pelea contra un ejercito enemigo
-	 * 
-	 * @param ejercitoEnemigo - Grupo
-	 */
-	public void pelear(Grupo ejercitoEnemigo) throws EjercitoDesmayadoException {
-		PriorityQueue<Ejercito> ejercito = this.getSoldados();
-
-		if (ejercito.isEmpty()) {
-			this.setEstado(true);
-			throw new EjercitoDesmayadoException("El ejercito fue derrotado");
-		} else {
-			PriorityQueue<Ejercito> grupo = ejercitoEnemigo.getSoldados();
-
-			Ejercito unidad = null;
-			Ejercito enemigo = null;
-
-			while (!ejercito.isEmpty()) {
-
-				unidad = ejercito.peek();
-				unidad.setPosicion(18);
-
-				if (grupo.peek().getEstado() != Unidad.Estado.DESMAYADO) {
-					enemigo = grupo.peek();
-				} else {
-					/* Desencolo el enemigo desmayado para luchar con el siguiente */
-					grupo.poll();
-
-					/*
-					 * Si el ejercito enemigo se desmaya (su queue es vacia) corto la batalla, en
-					 * caso contrario, tomo el siguiente soldado
-					 */
-					if (grupo.isEmpty()) {
-						break;
-					} else {
-						enemigo = grupo.peek();
-					}
+	public void pelear(Grupo enemigo) throws EjercitoDesmayadoException {
+		while(this.getCantidad() != 0 && enemigo.getCantidad() != 0) {
+			this.setPosicion(18);
+			enemigo.setPosicion(18);
+			try {
+				atacar(enemigo);
+ 				if(enemigo.getEstado() != Unidad.Estado.DESMAYADO) {
+					enemigo.atacar(this);
 				}
-
-				enemigo.setPosicion(18);
-
-				try {
-					unidad.atacar(enemigo);
-					unidad.recibirAtaque(enemigo.getAtaque());
-				} catch (FueraRangoException | MeditandoException | EstadoPiedraException e) {
-					System.out.println(e.getMessage());
-				}
-			}
-
-			/*
-			 * Este caso ocurre si la cola de aliados es vacía pero la cola de propios no lo
-			 * es, pelean
-			 */
-			if (ejercito.isEmpty() && !this.getSoldados().isEmpty()) {
-				ejercito = this.getSoldados();
-
-				while (!ejercito.isEmpty()) {
-
-					unidad = ejercito.peek();
-					unidad.setPosicion(18);
-
-					if (grupo.peek().getEstado() != Unidad.Estado.DESMAYADO) {
-						enemigo = grupo.peek();
-					} else {
-						grupo.poll();
-						/*
-						 * Si el ejercito enemigo se desmaya (su queue es vacia) corto la batalla, en
-						 * caso contrario, tomo el siguiente soldado
-						 */
-						if (grupo.isEmpty()) {
-							break;
-						} else {
-							enemigo = grupo.peek();
-						}
-					}
-
-					enemigo.setPosicion(18);
-
-					try {
-						unidad.atacar(enemigo);
-						unidad.recibirAtaque(enemigo.getAtaque());
-					} catch (FueraRangoException | MeditandoException | EstadoPiedraException e) {
-						System.out.println(e.getMessage());
-					}
-				}
-			}
-
-			/* Si nuestro ejercito perdió lanzo una exception */
-			if (ejercito.isEmpty()) {
-				this.setEstado(true);
-				throw new EjercitoDesmayadoException("El ejercito fue derrotado");
-			} else {
-				System.out.println("Vencedor: Ejercito propio");
-			}
-			// Si se redujo la vida lo encolo
-			if (unidad.getSalud() < unidad.getSaludInicial() && !ejercito.isEmpty()) {
-				ejercito.add(ejercito.poll());
+			} 
+			catch (FueraRangoException | EstadoPiedraException e) {
+				System.out.println(e.getMessage());
+			} 
+			catch (MeditandoException e) {
+				this.recibirAtaque(enemigo.getAtaque());
 			}
 		}
-
+		if(this.getCantidad() == 0) {
+			throw new EjercitoDesmayadoException("Nuestro ejercito fue derrotado");
+		}
+		if(!aliados.isEmpty()) {
+			aliados.offer(aliados.poll());
+		}
+		else {
+			propios.offer(propios.poll());
+		}
 	}
 
-	/*
-	 * Método que ejecuta el ataque correspondiente de cada instancia
-	 * 
-	 * @param enemigo - Ejercito
-	 */
+
 	@Override
-	public void atacar(Ejercito enemigo) throws FueraRangoException, MeditandoException {
-		try {
-			PriorityQueue<Ejercito> ejercito = this.getSoldados();
-
-			ejercito.peek().atacar(enemigo);
-		} catch (FueraRangoException | MeditandoException | EstadoPiedraException e) {
-			System.out.println(e.getMessage());
+	public void atacar(Ejercito enemigo) throws FueraRangoException, MeditandoException, EstadoPiedraException {
+		if(!aliados.isEmpty()) {
+			aliados.peek().atacar(enemigo);
 		}
+		else if(!propios.isEmpty()) {
+			propios.peek().atacar(enemigo);
+		}	
 	}
 
 	/*
@@ -149,97 +61,113 @@ public class Grupo extends Ejercito {
 	 * @param ataque - int
 	 */
 	protected void recibirAtaque(int ataque) {
-		PriorityQueue<Ejercito> ejercito = this.getSoldados();
-
-		Ejercito unidad = ejercito.peek();
-
-		unidad.recibirAtaque(ataque);
-
+		if(!aliados.isEmpty()) {
+			aliados.peek().recibirAtaque(ataque);
+			if(aliados.peek().getEstado() == Unidad.Estado.DESMAYADO) {
+				aliados.poll();
+			}
+		}
+		else if(!propios.isEmpty()){
+			propios.peek().recibirAtaque(ataque);
+			if(propios.peek().getEstado() == Unidad.Estado.DESMAYADO) {
+				propios.poll();
+			}
+		}
 	}
 
 	/* Método que efectúa el descanso del ejercito */
 	public void descansar() {
-		for (Ejercito unidad : this.soldados.get(0)) {
+		for (Ejercito unidad : this.aliados) {
 			unidad.descansar();
 		}
 
-		for (Ejercito unidad : this.soldados.get(1)) {
+		for (Ejercito unidad : this.propios) {
 			unidad.descansar();
 		}
-
-	}
-
-	public PriorityQueue<Ejercito> getSoldados() {
-		PriorityQueue<Ejercito> ejercito = null;
-
-		/* Si el grupo aliado está vacío se obtiene del propio */
-		if (!this.soldados.get(0).isEmpty()) {
-			ejercito = this.soldados.get(0);
-		} else {
-			ejercito = this.soldados.get(1);
-		}
-
-		return ejercito;
 	}
 
 	/* Método que agrega una unidad o un grupo al ejercito */
 	public void reclutar(Ejercito unidad) {
-		this.soldados.get(0).add(unidad);
+		this.aliados.offer(unidad);
 	}
 
 	public void reclutarPropio(Ejercito unidad) {
-		this.soldados.get(1).add(unidad);
+		this.propios.offer(unidad);
 	}
 
 	public int getSalud() {
-		PriorityQueue<Ejercito> ejercito = this.getSoldados();
-
-		return ejercito.peek().getSalud();
+		if(!aliados.isEmpty()) {
+			return aliados.peek().getSalud();
+		}
+		else if(!propios.isEmpty()) {
+			return propios.peek().getSalud();
+		}
+		return 0;
 	}
 
 	public int getSaludInicial() {
-		PriorityQueue<Ejercito> ejercito = this.getSoldados();
-
-		return ejercito.peek().getSaludInicial();
+		if(!aliados.isEmpty()) {
+			return aliados.peek().getSaludInicial();
+		}
+		else if(!propios.isEmpty()) {
+			return propios.peek().getSaludInicial();
+		}
+		return 0;
 	}
 
 	public int getAtaque() {
-		PriorityQueue<Ejercito> ejercito = this.getSoldados();
-
-		return ejercito.peek().getAtaque();
+		if(!aliados.isEmpty()) {
+			return aliados.peek().getAtaque();
+		}
+		else if(!propios.isEmpty()) {
+			return propios.peek().getAtaque();
+		}
+		return 0;
 	}
 
 	public int getPosicion() {
-		PriorityQueue<Ejercito> ejercito = this.getSoldados();
-
-		return ejercito.peek().getPosicion();
+		if(!aliados.isEmpty()) {
+			return aliados.peek().getPosicion();
+		}
+		else if(!propios.isEmpty()) {
+			return propios.peek().getPosicion();
+		}
+		return 0;
 	}
 
 	@Override
 	public Unidad.Estado getEstado() {
-		PriorityQueue<Ejercito> ejercito = this.getSoldados();
-
-		return ejercito.peek().getEstado();
-	}
-
-	public boolean isDesmayado() {
-		return estado;
-	}
-
-	private void setEstado(boolean estado) {
-		this.estado = estado;
+		if(!aliados.isEmpty()) {
+			return aliados.peek().getEstado();
+		}
+		else if(!propios.isEmpty()) {
+			return propios.peek().getEstado();
+		}
+		return Unidad.Estado.DESMAYADO;
 	}
 
 	public int getCantidad() {
-		return this.soldados.get(0).size() + this.soldados.get(1).size();
+		return propios.size() + aliados.size();
 	}
 
 	@Override
-	public void setPosicion(int i) {
-		PriorityQueue<Ejercito> ejercito = this.getSoldados();
-
-		Ejercito unidad = ejercito.peek();
-		unidad.setPosicion(i);
+	public void setPosicion(int posicion) {
+		if(!aliados.isEmpty()) {
+			aliados.peek().setPosicion(posicion);
+		}
+		else if(!propios.isEmpty()) {
+			propios.peek().setPosicion(posicion);
+		}
 	}
-
+	
+	public boolean isDesmayado() {
+		return getCantidad() == 0;
+	}
+	
+	public PriorityQueue<Ejercito> getSoldados() {
+		if(!aliados.isEmpty()) {
+			return aliados;
+		}
+		return propios;
+	}
 }
