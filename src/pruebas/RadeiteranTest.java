@@ -39,7 +39,7 @@ public class RadeiteranTest {
 	}
 
 	@Test
-	public void atacarYRecibir() {
+	public void prueba001() {
 		try {
 			this.radeiteranEnRango.atacar(this.radeiteranEnRango);
 		} catch (FueraRangoException e) {
@@ -50,7 +50,7 @@ public class RadeiteranTest {
 	}
 
 	@Test
-	public void atacarFueraRango() {
+	public void prueba002() {
 		try {
 			this.radeiteranEnRango.atacar(this.radeiteranFueraRango);
 		} catch (FueraRangoException e) {
@@ -59,7 +59,7 @@ public class RadeiteranTest {
 	}
 
 	@Test
-	public void comprobarAumentoAtaque() {
+	public void prueba003() {
 		try {
 			this.radeiteranEnRango.atacar(this.nortaichian);
 			assertEquals(59, this.radeiteranEnRango.getAtaque());

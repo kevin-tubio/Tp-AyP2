@@ -16,7 +16,7 @@ public class Nortaichian extends Unidad {
 	}
 
 	@Override
-	public void atacar(Ejercito unidad) throws FueraRangoException, EstadoPiedraException{
+	public void atacar(Ejercito unidad) throws FueraRangoException, EstadoPiedraException {
 		if (!this.esPiedra) {
 			if (super.puedeAtacar(unidad)) {
 				unidad.recibirAtaque(super.getAtaque());

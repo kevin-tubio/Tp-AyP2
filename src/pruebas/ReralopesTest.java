@@ -39,7 +39,7 @@ public class ReralopesTest {
 	}
 
 	@Test
-	public void rarelopesAsierta2deCada4AtaquesPrueba001() throws FueraRangoException {
+	public void prueba001() throws FueraRangoException {
 		Reralopes atacante = new Reralopes(); // Reralopes: da�o de ataque = 27
 		// Reralopes: da�o al recibir ataque = ataque, salud inicial 53
 
@@ -65,7 +65,7 @@ public class ReralopesTest {
 
 	/* Test sobre el método atacar y recibir ataque */
 	@Test
-	public void atacarYRecibirEnRango() {
+	public void prueba003() {
 		try {
 			this.reralopesEnRango.atacar(this.reralopesEnRango);
 		} catch (FueraRangoException e) {
@@ -76,7 +76,7 @@ public class ReralopesTest {
 	}
 
 	@Test
-	public void atacarFueraRango() {
+	public void prueba004() {
 		try {
 			this.reralopesEnRango.atacar(this.reralopesFueraRango);
 		} catch (FueraRangoException e) {
@@ -87,7 +87,7 @@ public class ReralopesTest {
 	}
 
 	@Test
-	public void atacarPersonajes() {
+	public void prueba005() {
 		try {
 			this.reralopesEnRango.atacar(this.wrives);
 			this.reralopesEnRango.atacar(this.nortaichian);
@@ -102,7 +102,7 @@ public class ReralopesTest {
 	}
 
 	@Test
-	public void descansarYAtacar() {
+	public void prueba006() {
 		this.reralopesEnRango.descansar();
 
 		// Luego de descanzar duplica su daño
