@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import java.util.ArrayDeque;
 import mapa.Grafo;
+import mapa.Mapa;
 import mapa.Pueblo;
 import mapa.PuebloAliado;
 import mapa.PuebloEnemigo;
@@ -307,7 +308,15 @@ public class GrafoTest {
 		grafo.agregarCamino(4, 5, 5);
 		grafo.definirDestino(1, 5);
 		
-		ArrayDeque<Pueblo> trayectoAlternativo = grafo.calcularTrayectoAlternativo();
+		Mapa mapa = Mapa.obtenerMapa(grafo);
+		
+		ArrayDeque<Pueblo> trayecto = mapa.obtenerTrayecto();
+		assertTrue(listaDePueblos[0] == trayecto.pop());
+		assertTrue(listaDePueblos[2] == trayecto.pop());
+		assertTrue(listaDePueblos[4] == trayecto.pop());
+		assertEquals(7, grafo.getDistanciaAlDestino()); 
+		
+		ArrayDeque<Pueblo> trayectoAlternativo = mapa.obtenerTrayectoAlternativo();
 		assertTrue(listaDePueblos[0] == trayectoAlternativo.pop());
 		assertTrue(listaDePueblos[1] == trayectoAlternativo.pop());
 		assertTrue(listaDePueblos[4] == trayectoAlternativo.pop());

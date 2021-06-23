@@ -174,4 +174,17 @@ public class InterpretadorDeArchivosTest {
 		
 		assertEquals("Linea 2: Raza de guerrero invalida", mensaje);
 	}
+	
+	@Test
+	public void prueba012() throws DestinoInalcanzableException, FueraRangoException, EjercitoDesmayadoException {
+		InterpretadorDeArchivos interpretador = new InterpretadorDeArchivos();
+		Mapa mapa = null;
+		try{
+			mapa = interpretador.crearMapa("archivoDeEntrada/valido/consigna.txt");
+		}
+		catch (InterpretadorException e) {
+			fail();
+		}		
+		assertTrue(mapa != null);
+	}
 }
