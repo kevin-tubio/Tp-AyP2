@@ -145,7 +145,7 @@ public class InterpretadorDeArchivos {
 	private Pueblo crearPueblo(Ejercito ejercitoNativo, String relacion) throws FormatoInvalidoException {
 		switch(relacion) {
 		case "propio":
-			return new Pueblo(ejercitoNativo);
+			return new PuebloPropio(ejercitoNativo);
 
 		case "aliado":
 			return new PuebloAliado(ejercitoNativo);

@@ -49,34 +49,7 @@ public class Grafo {
 	 * @throws DestinoInalcanzableException
 	 */
 	public ArrayDeque<Pueblo> calcularTrayecto() throws DestinoInalcanzableException {
-		
-		PriorityQueue<Camino> caminosAEvaluar = new PriorityQueue<Camino>();
-		int[] distancia = new int[pueblos.length];
-		int[] predecesor = new int[pueblos.length];
-		boolean[] visitado = new boolean[pueblos.length];
-
-		inicializarDistancias(distancia);
-		
-		caminosAEvaluar.add(new Camino(origen+1, origen+1, 0));
-
-		while(!caminosAEvaluar.isEmpty()) {
-			Camino camino = caminosAEvaluar.poll();
-
-			if(!visitado[camino.origen()]) {
-				visitado[camino.origen()] = true;
-				for(Camino adyacente : caminosAdyacentes[camino.origen()]) {
-					if(verificarSiCaminoEsMasCorto(adyacente, visitado, distancia)) {
-						distancia[adyacente.destino()] = distancia[adyacente.origen()] + adyacente.trayectoEnDias();
-						predecesor[adyacente.destino()] = adyacente.origen()+1;
-						caminosAEvaluar.add(new Camino(adyacente.destino()+1, adyacente.destino()+1, distancia[adyacente.destino()]));
-					}
-				}
-			}
-		}
-
-		this.distanciaAlDestino = distancia[destino];
-		
-		return devolverTrayecto(predecesor);
+		return dijkstra();
 	}
 	
 	/**
@@ -168,5 +141,41 @@ public class Grafo {
 	 */
 	public int getDistanciaAlDestino() {
 		return distanciaAlDestino;
+	}
+	
+	/**
+	 * pre : el pueblo destino es alcanzable ya que hay un camino que lo conecta directa o indirectamente con el pueblo de origen.
+	 * post: calcula la distancia minima a cada pueblo y registra las secuencia de pueblos a recorrer para lograr dicha distancia.
+	 * @return
+	 * @throws DestinoInalcanzableException
+	 */
+	private ArrayDeque<Pueblo> dijkstra() throws DestinoInalcanzableException {
+		PriorityQueue<Camino> caminosAEvaluar = new PriorityQueue<Camino>();
+		int[] distancia = new int[pueblos.length];
+		int[] predecesor = new int[pueblos.length];
+		boolean[] visitado = new boolean[pueblos.length];
+
+		inicializarDistancias(distancia);
+		
+		caminosAEvaluar.add(new Camino(origen+1, origen+1, 0));
+
+		while(!caminosAEvaluar.isEmpty()) {
+			Camino camino = caminosAEvaluar.poll();
+
+			if(!visitado[camino.origen()]) {
+				visitado[camino.origen()] = true;
+				for(Camino adyacente : caminosAdyacentes[camino.origen()]) {
+					if(verificarSiCaminoEsMasCorto(adyacente, visitado, distancia)) {
+						distancia[adyacente.destino()] = distancia[adyacente.origen()] + adyacente.trayectoEnDias();
+						predecesor[adyacente.destino()] = adyacente.origen()+1;
+						caminosAEvaluar.add(new Camino(adyacente.destino()+1, adyacente.destino()+1, distancia[adyacente.destino()]));
+					}
+				}
+			}
+		}
+
+		this.distanciaAlDestino = distancia[destino];
+		
+		return devolverTrayecto(predecesor);
 	}
 }
