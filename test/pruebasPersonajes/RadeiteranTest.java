@@ -1,4 +1,4 @@
-package pruebas;
+package pruebasPersonajes;
 
 import static org.junit.Assert.*;
 

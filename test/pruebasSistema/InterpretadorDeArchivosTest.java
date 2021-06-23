@@ -1,7 +1,8 @@
-package pruebas;
+package pruebasSistema;
 
 import static org.junit.Assert.*;
 
+import org.junit.After;
 import org.junit.Test;
 import excepciones.DestinoInalcanzableException;
 import excepciones.EjercitoDesmayadoException;
@@ -12,6 +13,11 @@ import sistema.InterpretadorDeArchivos;
 
 public class InterpretadorDeArchivosTest {
 
+	@After
+	public void after() {
+		Mapa.resetearMapa();
+	}
+	
 	
 	@Test
 	public void prueba001() throws DestinoInalcanzableException, FueraRangoException, EjercitoDesmayadoException {

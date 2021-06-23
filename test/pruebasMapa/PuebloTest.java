@@ -1,4 +1,4 @@
-package pruebas;
+package pruebasMapa;
 
 import static org.junit.Assert.*;
 import org.junit.Test;
@@ -6,6 +6,7 @@ import org.junit.Test;
 import excepciones.EjercitoDesmayadoException;
 import excepciones.FueraRangoException;
 import mapa.Pueblo;
+import mapa.PuebloPropio;
 import mapa.PuebloAliado;
 import mapa.PuebloEnemigo;
 import personajes.*;
@@ -19,7 +20,7 @@ public class PuebloTest {
 		Grupo ejercitoNativo = new Grupo();
 		ejercitoNativo.reclutar(new Reralopes());
 		
-		listaDePueblos[0] = new Pueblo(ejercitoNativo);
+		listaDePueblos[0] = new PuebloPropio(ejercitoNativo);
 		listaDePueblos[1] = new PuebloAliado(new Reralopes());
 		
 		listaDePueblos[0].visitarPueblo(ejercitoNativo);

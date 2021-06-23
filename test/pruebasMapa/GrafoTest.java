@@ -1,4 +1,4 @@
-package pruebas;
+package pruebasMapa;
 
 import static org.junit.Assert.*;
 import org.junit.Test;
@@ -7,6 +7,7 @@ import java.util.ArrayDeque;
 import mapa.Grafo;
 import mapa.Mapa;
 import mapa.Pueblo;
+import mapa.PuebloPropio;
 import mapa.PuebloAliado;
 import mapa.PuebloEnemigo;
 import excepciones.DestinoInalcanzableException;
@@ -17,7 +18,7 @@ public class GrafoTest {
 	public void prueba001() throws DestinoInalcanzableException {
 		Pueblo[] listaDePueblos = new Pueblo[4];
 		
-		listaDePueblos[0] = new Pueblo(null);
+		listaDePueblos[0] = new PuebloPropio(null);
 		listaDePueblos[1] = new PuebloAliado(null);
 		listaDePueblos[2] = new PuebloEnemigo(null);
 		listaDePueblos[3] = new PuebloEnemigo(null);
@@ -41,7 +42,7 @@ public class GrafoTest {
 	public void prueba002() throws DestinoInalcanzableException {
 		Pueblo[] listaDePueblos = new Pueblo[11];
 		
-		listaDePueblos[0] = new Pueblo(null);
+		listaDePueblos[0] = new PuebloPropio(null);
 		listaDePueblos[1] = new PuebloAliado(null);
 		listaDePueblos[2] = new PuebloEnemigo(null);
 		listaDePueblos[3] = new PuebloAliado(null);
@@ -84,7 +85,7 @@ public class GrafoTest {
 	public void prueba003() throws DestinoInalcanzableException {
 		Pueblo[] listaDePueblos = new Pueblo[6];
 		
-		listaDePueblos[0] = new Pueblo(null);
+		listaDePueblos[0] = new PuebloPropio(null);
 		listaDePueblos[1] = new PuebloAliado(null);
 		listaDePueblos[2] = new PuebloAliado(null);
 		listaDePueblos[3] = new PuebloEnemigo(null);
@@ -112,7 +113,7 @@ public class GrafoTest {
 	public void prueba004() throws DestinoInalcanzableException {
 		Pueblo[] listaDePueblos = new Pueblo[6];
 		
-		listaDePueblos[0] = new Pueblo(null);
+		listaDePueblos[0] = new PuebloPropio(null);
 		listaDePueblos[1] = new PuebloEnemigo(null);
 		listaDePueblos[2] = new PuebloAliado(null);
 		listaDePueblos[3] = new PuebloAliado(null);
@@ -146,7 +147,7 @@ public class GrafoTest {
 	public void prueba005() throws DestinoInalcanzableException {
 		Pueblo[] listaDePueblos = new Pueblo[6];
 		
-		listaDePueblos[0] = new Pueblo(null);
+		listaDePueblos[0] = new PuebloPropio(null);
 		listaDePueblos[1] = new PuebloAliado(null);
 		listaDePueblos[2] = new PuebloEnemigo(null);
 		listaDePueblos[3] = new PuebloEnemigo(null);
@@ -180,7 +181,7 @@ public class GrafoTest {
 	public void prueba006() throws DestinoInalcanzableException {
 		Pueblo[] listaDePueblos = new Pueblo[6];
 		
-		listaDePueblos[0] = new Pueblo(null);
+		listaDePueblos[0] = new PuebloPropio(null);
 		listaDePueblos[1] = new PuebloAliado(null);
 		listaDePueblos[2] = new PuebloAliado(null);
 		listaDePueblos[3] = new PuebloEnemigo(null);
@@ -201,7 +202,7 @@ public class GrafoTest {
 	public void prueba007() throws DestinoInalcanzableException {
 		Pueblo[] listaDePueblos = new Pueblo[6];
 		
-		listaDePueblos[0] = new Pueblo(null);
+		listaDePueblos[0] = new PuebloPropio(null);
 		listaDePueblos[1] = new PuebloAliado(null);
 		listaDePueblos[2] = new PuebloAliado(null);
 		listaDePueblos[3] = new PuebloEnemigo(null);
@@ -222,7 +223,7 @@ public class GrafoTest {
 	public void prueba008() throws DestinoInalcanzableException {
 		Pueblo[] listaDePueblos = new Pueblo[6];
 		
-		listaDePueblos[0] = new Pueblo(null);
+		listaDePueblos[0] = new PuebloPropio(null);
 		listaDePueblos[1] = new PuebloAliado(null);
 		listaDePueblos[2] = new PuebloAliado(null);
 		listaDePueblos[3] = new PuebloEnemigo(null);
@@ -243,7 +244,7 @@ public class GrafoTest {
 	
 		Pueblo[] listaDePueblos = new Pueblo[11];
 		
-		listaDePueblos[0] = new Pueblo(null);
+		listaDePueblos[0] = new PuebloPropio(null);
 		listaDePueblos[1] = new PuebloEnemigo(null);
 		listaDePueblos[2] = new PuebloAliado(null);
 		listaDePueblos[3] = new PuebloAliado(null);
@@ -292,7 +293,7 @@ public class GrafoTest {
 	
 		Pueblo[] listaDePueblos = new Pueblo[5];
 		
-		listaDePueblos[0] = new Pueblo(null);
+		listaDePueblos[0] = new PuebloPropio(null);
 		listaDePueblos[1] = new PuebloAliado(null);
 		listaDePueblos[2] = new PuebloEnemigo(null);
 		listaDePueblos[3] = new PuebloAliado(null);
@@ -321,5 +322,7 @@ public class GrafoTest {
 		assertTrue(listaDePueblos[1] == trayectoAlternativo.pop());
 		assertTrue(listaDePueblos[4] == trayectoAlternativo.pop());
 		assertEquals(8, grafo.getDistanciaAlDestino());
+		
+		Mapa.resetearMapa();
 	}
 }
