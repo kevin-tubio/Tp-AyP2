@@ -41,7 +41,7 @@ public class NortaichianTest {
 	}
 
 	@Test
-	public void atacar() {
+	public void prueba001() {
 		try {
 			this.nortaichianEnRango.atacar(this.wrives);
 			this.nortaichianEnRango.atacar(this.nortaichianFueraRango);
@@ -54,7 +54,7 @@ public class NortaichianTest {
 	}
 
 	@Test
-	public void enfurecerYAtacar() {
+	public void prueba002() {
 		try {
 			this.wrives.atacar(this.nortaichianEnRango);
 			// Está enfurecido por lo cual su ataque se duplica
@@ -72,7 +72,7 @@ public class NortaichianTest {
 	}
 
 	@Test
-	public void descansarYAtacar() {
+	public void prueba003() {
 		try {
 			this.nortaichianEnRango.descansar();
 			this.nortaichianEnRango.atacar(this.nortaichianEnRango);
@@ -82,7 +82,7 @@ public class NortaichianTest {
 	}
 
 	@Test
-	public void recibirAtaqueYDescansar() {
+	public void prueba004() {
 		try {
 			this.nortaichianEnRango.atacar(this.nortaichianEnRango);
 			// Al descansar recupera su maxSalud
@@ -95,7 +95,7 @@ public class NortaichianTest {
 	}
 
 	@Test
-	public void recibirAtaque() {
+	public void prueba005() {
 		try {
 			this.wrives.atacar(this.nortaichianEnRango);
 		} catch (FueraRangoException | MeditandoException e) {
@@ -103,6 +103,13 @@ public class NortaichianTest {
 		}
 
 		assertEquals(Unidad.Estado.DESMAYADO, this.nortaichianEnRango.getEstado());
+	}
+
+	@Test
+	public void prueba006() {
+		this.nortaichianEnRango.descansar();
+		this.nortaichianEnRango.recibirAtaque(1);
+		this.nortaichianEnRango.recibirAtaque(1);
 	}
 
 }

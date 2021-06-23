@@ -40,7 +40,7 @@ public class WrivesTest {
 
 	/* Test sobre el método atacar y recibir ataque */
 	@Test
-	public void atacarYRecibirEnRango() {
+	public void prueba001() {
 		try {
 			this.wriveEnRango.atacar(this.wriveEnRango);
 		} catch (FueraRangoException | MeditandoException e) {
@@ -51,7 +51,7 @@ public class WrivesTest {
 	}
 
 	@Test
-	public void atacarFueraRango() {
+	public void prueba002() {
 		try {
 			this.wriveEnRango.atacar(this.wriveFueraRango);
 		} catch (FueraRangoException | MeditandoException e) {
@@ -62,7 +62,7 @@ public class WrivesTest {
 	}
 
 	@Test
-	public void atacarPersonajes() {
+	public void prueba003() {
 		try {
 			this.wriveEnRango.atacar(this.reralopes);
 			this.wriveEnRango.atacar(this.nortaichian);
@@ -78,7 +78,7 @@ public class WrivesTest {
 	}
 
 	@Test
-	public void descansarYAtacar() {
+	public void prueba004() {
 		this.wriveEnRango.descansar();
 
 		try {
@@ -89,7 +89,7 @@ public class WrivesTest {
 	}
 
 	@Test
-	public void atacarYDescansar() {
+	public void prueba005() {
 		try {
 			this.wriveEnRango.atacar(this.reralopes);
 		} catch (FueraRangoException | MeditandoException e) {
@@ -99,6 +99,22 @@ public class WrivesTest {
 		this.wriveEnRango.descansar();
 
 		assertEquals(158, this.wriveEnRango.getSalud());
+	}
+
+	@Test
+	public void prueba006() {
+		try {
+			this.wriveFueraRango.setPosicion(1);
+			this.wriveEnRango.atacar(this.wriveFueraRango);
+		} catch (FueraRangoException | MeditandoException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+
+	@Test
+	public void prueba007() {
+		this.wriveEnRango.setMeditado(true);
+		assertEquals(true, this.wriveEnRango.isMeditado());
 	}
 
 }
