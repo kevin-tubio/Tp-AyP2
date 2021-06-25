@@ -163,4 +163,7 @@ public abstract class Unidad extends Ejercito {
 		this.cantAtaques += cantidad;
 	}
 
+	public int getCantidad() {
+		return 1;
+	}
 }

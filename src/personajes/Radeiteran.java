@@ -22,7 +22,6 @@ public class Radeiteran extends Unidad {
 
 	@Override
 	public void descansar() {
-		System.out.println("Â¡Soy un Radaiteran y estoy descansando! No me molesten");
+		System.out.println("¡Soy un Radaiteran y estoy descansando! No me molesten");
 	}
-
 }

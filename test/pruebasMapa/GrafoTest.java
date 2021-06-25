@@ -8,6 +8,8 @@ import mapa.Grafo;
 import mapa.Mapa;
 import mapa.Pueblo;
 import mapa.PuebloPropio;
+import personajes.Grupo;
+import personajes.Wrives;
 import mapa.PuebloAliado;
 import mapa.PuebloEnemigo;
 import excepciones.DestinoInalcanzableException;
@@ -322,7 +324,138 @@ public class GrafoTest {
 		assertTrue(listaDePueblos[1] == trayectoAlternativo.pop());
 		assertTrue(listaDePueblos[4] == trayectoAlternativo.pop());
 		assertEquals(8, grafo.getDistanciaAlDestino());
-		
 		Mapa.resetearMapa();
+	}
+
+	@Test
+	public void prueba011() throws DestinoInalcanzableException {
+		Pueblo[] listaDePueblos = new Pueblo[5];
+
+		Grupo propio = crearEjercitoReralopes(50);
+		Grupo aliado1 = crearEjercitoRadeiteran(70);
+		Grupo aliado2 = crearEjercitoReralopes(50);
+		Grupo enemigo1 = crearEjercitoWrives(30);
+		Grupo enemigo2 = crearEjercitoNortaichian(50);
+
+		listaDePueblos[0] = new PuebloPropio(propio);
+		listaDePueblos[1] = new PuebloAliado(aliado1);
+		listaDePueblos[2] = new PuebloEnemigo(enemigo1);
+		listaDePueblos[3] = new PuebloAliado(aliado2);
+		listaDePueblos[4] = new PuebloEnemigo(enemigo2);
+
+		Grafo grafo = new Grafo(listaDePueblos);
+		grafo.agregarCamino(1, 2, 2);
+		grafo.agregarCamino(1, 3, 6);
+		grafo.agregarCamino(1, 4, 7);
+		grafo.agregarCamino(2, 4, 3);
+		grafo.agregarCamino(2, 5, 6);
+		grafo.agregarCamino(3, 5, 1);
+		grafo.agregarCamino(4, 5, 5);
+		grafo.definirDestino(1, 5);
+
+		ArrayDeque<Pueblo> trayectoAlternativo = grafo.calcularTrayectoAlternativo();
+		assertTrue(listaDePueblos[0] == trayectoAlternativo.pop());
+		assertTrue(listaDePueblos[1] == trayectoAlternativo.pop());
+		assertTrue(listaDePueblos[3] == trayectoAlternativo.pop());
+		assertTrue(listaDePueblos[4] == trayectoAlternativo.pop());
+		assertEquals(10, grafo.getDistanciaAlDestino());
+	}
+	
+	@Test
+	public void prueba012() throws DestinoInalcanzableException {
+		Pueblo[] listaDePueblos = new Pueblo[4];
+
+		Grupo propio = crearEjercitoWrives(100);
+		Grupo aliado1 = crearEjercitoReralopes(30);
+		Grupo enemigo1 = crearEjercitoNortaichian(400);
+		Grupo enemigo2 = crearEjercitoNortaichian(90);
+
+		Grafo grafo = new Grafo(listaDePueblos);
+		grafo.agregarCamino(1, 2, 10);
+		grafo.agregarCamino(1, 3, 5);
+		grafo.agregarCamino(2, 3, 5);
+		grafo.agregarCamino(3, 4, 7);
+		grafo.definirDestino(1, 4);
+
+		listaDePueblos[0] = new PuebloPropio(propio);
+		listaDePueblos[1] = new PuebloAliado(aliado1);
+		listaDePueblos[2] = new PuebloEnemigo(enemigo1);
+		listaDePueblos[3] = new PuebloEnemigo(enemigo2);
+
+		ArrayDeque<Pueblo> trayectoAlternativo = grafo.calcularTrayectoAlternativo();
+		assertTrue(listaDePueblos[0] == trayectoAlternativo.pop());
+		assertTrue(listaDePueblos[1] == trayectoAlternativo.pop());
+		assertTrue(listaDePueblos[2] == trayectoAlternativo.pop());
+		assertTrue(listaDePueblos[3] == trayectoAlternativo.pop());
+		assertEquals(22, grafo.getDistanciaAlDestino());
+	}
+	
+	@Test
+	public void prueba013() throws DestinoInalcanzableException {
+		Pueblo[] listaDePueblos = new Pueblo[5];
+
+		Grupo propio = crearEjercitoWrives(100);
+		Grupo aliado1 = crearEjercitoReralopes(30);
+		Grupo aliado2 = crearEjercitoNortaichian(400);
+		Grupo aliado3 = crearEjercitoRadeiteran(20);
+		Grupo enemigo1 = crearEjercitoNortaichian(90);
+
+		Grafo grafo = new Grafo(listaDePueblos);
+		grafo.agregarCamino(1, 2, 3);
+		grafo.agregarCamino(1, 3, 5);
+		grafo.agregarCamino(1, 4, 7);
+		grafo.agregarCamino(1, 5, 2);
+		grafo.agregarCamino(2, 3, 3);
+		grafo.agregarCamino(2, 5, 1);
+		grafo.agregarCamino(3, 4, 2);
+		grafo.agregarCamino(3, 5, 2);
+		grafo.agregarCamino(4, 5, 8);
+		grafo.definirDestino(1, 5);
+
+		listaDePueblos[0] = new PuebloPropio(propio);
+		listaDePueblos[1] = new PuebloAliado(aliado1);
+		listaDePueblos[2] = new PuebloAliado(aliado2);
+		listaDePueblos[3] = new PuebloAliado(aliado3);
+		listaDePueblos[4] = new PuebloEnemigo(enemigo1);
+
+		ArrayDeque<Pueblo> trayectoAlternativo = grafo.calcularTrayectoAlternativo();
+		assertTrue(listaDePueblos[0] == trayectoAlternativo.pop());
+		assertTrue(listaDePueblos[1] == trayectoAlternativo.pop());
+		assertTrue(listaDePueblos[2] == trayectoAlternativo.pop());
+		assertTrue(listaDePueblos[3] == trayectoAlternativo.pop());
+		assertTrue(listaDePueblos[4] == trayectoAlternativo.pop());
+		assertEquals(16, grafo.getDistanciaAlDestino());
+	}
+	
+	private Grupo crearEjercitoWrives(int numero) {
+		Grupo nuevo = new Grupo();
+		for(int i = 0; i < numero; i++) {
+			nuevo.reclutarPropio(new Wrives());
+		}
+		return nuevo;
+	}
+	
+	private Grupo crearEjercitoNortaichian(int numero) {
+		Grupo nuevo = new Grupo();
+		for(int i = 0; i < numero; i++) {
+			nuevo.reclutarPropio(new Wrives());
+		}
+		return nuevo;
+	}
+	
+	private Grupo crearEjercitoRadeiteran(int numero) {
+		Grupo nuevo = new Grupo();
+		for(int i = 0; i < numero; i++) {
+			nuevo.reclutarPropio(new Wrives());
+		}
+		return nuevo;
+	}
+	
+	private Grupo crearEjercitoReralopes(int numero) {
+		Grupo nuevo = new Grupo();
+		for(int i = 0; i < numero; i++) {
+			nuevo.reclutarPropio(new Wrives());
+		}
+		return nuevo;
 	}
 }

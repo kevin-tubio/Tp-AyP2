@@ -25,4 +25,5 @@ public abstract class Ejercito {
 
 	public abstract void setPosicion(int i);
 
+	public abstract int getCantidad();
 }

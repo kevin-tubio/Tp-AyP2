@@ -50,7 +50,7 @@ public class SimuladorTest {
 	public void Prueba004() {
 		Simulador simu = new Simulador();
 		try {
-			simu.simularConquistaAlternativa("archivoDeEntrada/valido/noFactible1.txt");
+			simu.simularConquistaAlternativa("archivoDeEntrada/valido/factible3.txt");
 			assertTrue(true);
 		} catch (EjercitoDesmayadoException | InterpretadorException e) {
 			fail();

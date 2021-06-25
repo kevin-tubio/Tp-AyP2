@@ -21,4 +21,11 @@ public abstract class Pueblo {
 	public Ejercito obtenerEjercitoNativo() {
 		return this.ejercitoNativo;
 	}
+	
+	public int censarPueblo() {
+		if(ejercitoNativo == null) {
+			return 0;
+		}
+		return this.ejercitoNativo.getCantidad();
+	}
 }

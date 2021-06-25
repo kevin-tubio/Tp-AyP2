@@ -3,6 +3,8 @@ package mapa;
 import java.util.PriorityQueue;
 import excepciones.DestinoInalcanzableException;
 import java.util.ArrayDeque;
+import java.util.Arrays;
+import java.util.Iterator;
 import java.util.LinkedList;
 
 public class Grafo {
@@ -54,44 +56,57 @@ public class Grafo {
 	
 	/**
 	 * pre : el pueblo destino es alcanzable ya que hay un camino que lo conecta directa o indirectamente con el pueblo de origen.
-	 * post: busca un camino por el cual llegar al destino pasando por la menor cantidad de pueblos posible y que el camino entre cada 
-	 * 		 pueblo sea el mas corto posible.
+	 * post: calcula el trayecto a recorrer priorizando los pueblos aliados.
 	 * @return
 	 * @throws DestinoInalcanzableException
 	 */
 	public ArrayDeque<Pueblo> calcularTrayectoAlternativo() throws DestinoInalcanzableException {
 		PriorityQueue<Camino> cola = new PriorityQueue<Camino>();
+		int[] cantidad = new int[pueblos.length];
 		int[] distancia = new int[pueblos.length];
 		int[] predecesor = new int[pueblos.length];
 		
-		inicializarDistancias(distancia);
+		inicializarDistancias(cantidad);
+		cantidad[origen] = obtenerCantidad(origen);
 		
 		cola.offer(new Camino(origen+1, origen+1, 0));
 		
 		while(!cola.isEmpty()) {
 			for(Camino adyacente : caminosAdyacentes[cola.poll().destino()]) {
-				if(distancia[adyacente.destino()] == Integer.MAX_VALUE) {
+				if(cantidad[adyacente.destino()] == Integer.MAX_VALUE) {
+	 				cantidad[adyacente.destino()] = cantidad[adyacente.origen()] + obtenerCantidad(adyacente.destino());
+	 				distancia[adyacente.destino()] = distancia[adyacente.origen()] + adyacente.trayectoEnDias();
+	 				predecesor[adyacente.destino()] = adyacente.origen()+1;
+					cola.offer(new Camino(adyacente.origen()+1, adyacente.destino()+1, cantidad[adyacente.destino()]));
+				}
+				else if(cantidad[adyacente.origen()] + obtenerCantidad(adyacente.destino()) < cantidad[adyacente.destino()]) {
+					cantidad[adyacente.destino()] = cantidad[adyacente.origen()] + obtenerCantidad(adyacente.destino());
 					distancia[adyacente.destino()] = distancia[adyacente.origen()] + adyacente.trayectoEnDias();
 					predecesor[adyacente.destino()] = adyacente.origen()+1;
-					cola.offer(adyacente);
 				}
 			}
 		}
 		
-		this.distanciaAlDestino = distancia[destino];
-		
 		return devolverTrayecto(predecesor);
 	}
 	
+	/**
+	 * post: devuelve la cantidad de habitantes de un pueblo.
+	 * @param origen
+	 * @return
+	 */
+	private int obtenerCantidad(int origen) {
+		int i = pueblos[origen].censarPueblo(); 
+		return (pueblos[origen].getClass().equals(PuebloEnemigo.class) ? i : -i);
+	}
+
 	/**
 	 * post: establece la distancia entre cada pueblo como infinita.
 	 * @param distancia
 	 * @return
 	 */
 	private int[] inicializarDistancias(int[] distancia) {
-		for(int i = 0; i < pueblos.length; i++) {
-			distancia[i] = Integer.MAX_VALUE;
-		}
+		Arrays.fill(distancia, Integer.MAX_VALUE);
 		distancia[origen] = 0;
 
 		return distancia;
@@ -110,26 +125,50 @@ public class Grafo {
 	}
 
 	/**
-	 * post: transforma un arreglo de pueblos predecesores y lo transforma 
-	 * 		 en una pila de pueblos segun el trayecto de la conquista.
-	 * 
+	 * post: transforma un arreglo de pueblos predecesores en una pila de pueblos segun el trayecto de la conquista.
 	 * @param predecesor
 	 * @return
 	 * @throws DestinoInalcanzableException
 	 */
 	private ArrayDeque<Pueblo> devolverTrayecto(int[] predecesor) throws DestinoInalcanzableException {
 		ArrayDeque<Pueblo> trayecto = new ArrayDeque<Pueblo>();
+		ArrayDeque<Integer> secuenciaDePueblos = new ArrayDeque<Integer>();
 		int aux = destino;
 		while(predecesor[aux]-1 != -1) {
+			secuenciaDePueblos.push(aux);
 			trayecto.push(pueblos[aux]);
 			aux = predecesor[aux]-1;
 		}
-
 		if(aux != origen) {
 			throw new DestinoInalcanzableException("No hay ningun camino desde el pueblo de origen al pueblo de destino");
 		}
+		secuenciaDePueblos.push(origen);
 		trayecto.push(pueblos[origen]);
+		
+		calcularDistancia(secuenciaDePueblos);
+		
 		return trayecto;
+	}
+	
+	/**
+	 * post: calcula la distancia en dias desde el pueblo de origen hasta el pueblo de distino segun la 'secuenciaDePueblos'. 
+	 * @param secuenciaDePueblos
+	 */
+	private void calcularDistancia(ArrayDeque<Integer> secuenciaDePueblos) {
+		int distancia = 0;
+		while(!secuenciaDePueblos.isEmpty()) {
+			Iterator<Camino> i = caminosAdyacentes[secuenciaDePueblos.pop()].iterator();
+			boolean buscandoDistancia = true;
+			while(!secuenciaDePueblos.isEmpty() && i.hasNext() && buscandoDistancia) {
+				Camino actual = i.next();
+				if(actual.destino() == secuenciaDePueblos.peek()) {
+					distancia += actual.trayectoEnDias();
+					buscandoDistancia = false;
+				}
+			}
+		}
+		
+		this.distanciaAlDestino = distancia;
 	}
 
 	/**
@@ -157,7 +196,7 @@ public class Grafo {
 
 		inicializarDistancias(distancia);
 		
-		caminosAEvaluar.add(new Camino(origen+1, origen+1, 0));
+		caminosAEvaluar.offer(new Camino(origen+1, origen+1, 0));
 
 		while(!caminosAEvaluar.isEmpty()) {
 			Camino camino = caminosAEvaluar.poll();
@@ -168,7 +207,7 @@ public class Grafo {
 					if(verificarSiCaminoEsMasCorto(adyacente, visitado, distancia)) {
 						distancia[adyacente.destino()] = distancia[adyacente.origen()] + adyacente.trayectoEnDias();
 						predecesor[adyacente.destino()] = adyacente.origen()+1;
-						caminosAEvaluar.add(new Camino(adyacente.destino()+1, adyacente.destino()+1, distancia[adyacente.destino()]));
+						caminosAEvaluar.offer(new Camino(adyacente.destino()+1, adyacente.destino()+1, distancia[adyacente.destino()]));
 					}
 				}
 			}
