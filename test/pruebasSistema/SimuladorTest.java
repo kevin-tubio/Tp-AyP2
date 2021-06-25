@@ -1,6 +1,8 @@
 package pruebasSistema;
 
 import static org.junit.Assert.*;
+
+import org.junit.After;
 import org.junit.Test;
 
 import excepciones.EjercitoDesmayadoException;
@@ -10,6 +12,11 @@ import sistema.Simulador;
 
 public class SimuladorTest {
 
+	@After
+	public void reset() {
+		Mapa.resetearMapa();
+	}
+	
 	@Test(expected = InterpretadorException.class)
 	public void Prueba001() throws EjercitoDesmayadoException, InterpretadorException {
 		Simulador simu = new Simulador();

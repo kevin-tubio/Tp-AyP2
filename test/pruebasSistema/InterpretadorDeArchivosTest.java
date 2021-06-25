@@ -14,7 +14,7 @@ import sistema.InterpretadorDeArchivos;
 public class InterpretadorDeArchivosTest {
 
 	@After
-	public void after() {
+	public void reset() {
 		Mapa.resetearMapa();
 	}
 	
